@@ -5,6 +5,8 @@ const { engine } = require ('express-handlebars');
 const app = express();
 const port = 3001;
 
+const route = require('./routes'); // đầy đủ là ./routes/index.js
+
 // add middleware để xử lí thông tin đươc gửi từ client
 app.use(express.urlencoded(
   {extended:true}
@@ -27,24 +29,8 @@ app.set('views', path.join(__dirname, 'resources/views'));
 
 // console.log('PATH', path.join(__dirname, 'resources/views'));
 
-app.get('/', (req, res) => {
-    return res.render('home');
-})
-
-app.get('/news', (req, res) => {
-    return res.render('news');
-})
-
-// app.get là đang tạo route cho method get
-app.get('/search', (req, res) => {
-  console.log(req.query);
-  return res.render('search');
-})
-
-app.post('/search', (req, res) => {
-  console.log(req.body);
-  return res.send('');
-})
+// routes init
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
