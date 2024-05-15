@@ -7,6 +7,10 @@ const port = 3001;
 
 const route = require('./routes'); // đầy đủ là ./routes/index.js
 
+const db = require("./config/db");
+// connect to DB
+db.connect();
+
 // add middleware để xử lí thông tin đươc gửi từ client
 app.use(express.urlencoded({ extended: true })); // data được gửi dưới dạng form
 app.use(express.json()); // data được gửi bằng file json?
@@ -24,12 +28,12 @@ app.engine(
         extname: '.hbs',
     }),
 );
-app.set("view engine", '.hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'resources','views'));
 
 // routes init
 route(app);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`);
+    console.log(`App listening on port http://localhost:${port}`);
 });
