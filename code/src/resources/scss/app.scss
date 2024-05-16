@@ -7,3 +7,24 @@ h1 {
 h2 {
   color: $h2-color;
 }
+
+.card-course-item {
+  margin-top: 16px;
+}
+
+/* app.css */
+.sidebar {
+  width: 200px; /* Đặt chiều rộng cố định cho sidebar */
+  height: 100vh; /* Chiều cao 100% của viewport */
+  position: fixed; /* Cố định vị trí */
+  top: 0;
+  left: 0;
+  background-color: #343a40; /* Màu nền */
+  padding: 1rem; /* Padding đều */
+}
+
+.content {
+  margin-left: 200px; /* Tạo khoảng cách bên trái để không bị đè lên bởi sidebar */
+  padding: 1rem; /* Padding đều */
+}
+

@@ -3,15 +3,16 @@ const thu_muc_cau_hoi = require("../models/Thu_muc_cau_hoi");
 class SiteController {
 
     // [GET] /
-  
-    async home(req, res) {
-        try {
-            const thu_muc_cau_hoi_s = await thu_muc_cau_hoi.find({});
-            res.json(thu_muc_cau_hoi_s);
-        } catch (err) {
-            console.error(err);
-            res.status(400).json({ error: 'ERROR!' });
-        }
+    home(req, res, next) {
+        // thu_muc_cau_hoi.find({})
+        //     .then(thu_muc_cau_hoi_s => res.json(thu_muc_cau_hoi_s))
+        //     .catch(next);
+        thu_muc_cau_hoi.find({})
+            .then(thu_muc_cau_hoi_s => {
+                thu_muc_cau_hoi_s = thu_muc_cau_hoi_s.map(thu_muc_cau_hoi => thu_muc_cau_hoi.toObject())
+                res.render('home', {thu_muc_cau_hoi_s})
+            })
+            .catch(next);
     }
 
     // [GET] /search
