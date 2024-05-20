@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Folder and Question List</title>
+    <style>
+        #folderList, #questionList {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .folder, .question, .back-button {
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ddd;
+        }
+        .folder:hover, .question:hover, .back-button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="folderList">
+        <!-- Folders will be dynamically loaded here -->
+    </div>
+    <div id="questionList" style="display: none;">
+        <!-- Questions will be dynamically loaded here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFolders();
+        });
+
+        function loadFolders() {
+            // Simulate fetching the folder list (replace with actual API call)
+            const folders = ['Folder 1', 'Folder 2', 'Folder 3'];
+            const folderList = document.getElementById('folderList');
+
+            folders.forEach(folder => {
+                const folderElement = document.createElement('div');
+                folderElement.textContent = folder;
+                folderElement.className = 'folder';
+                folderElement.addEventListener('click', () => loadQuestions(folder));
+                folderList.appendChild(folderElement);
+            });
+        }
+
+        function loadQuestions(folder) {
+            // Show loading indicator
+            const questionList = document.getElementById('questionList');
+            questionList.innerHTML = 'Loading...';
+
+            // Simulate an API call to fetch questions
+            setTimeout(() => {
+                const questions = [`Question 1 from ${folder}`, `Question 2 from ${folder}`];
+
+                // Clear the loading indicator and display questions
+                questionList.innerHTML = '';
+
+                // Add a back button to return to the folder list
+                const backButton = document.createElement('div');
+                backButton.textContent = 'Back to Folders';
+                backButton.className = 'back-button';
+                backButton.addEventListener('click', showFolderList);
+                questionList.appendChild(backButton);
+
+                // Add the questions
+                questions.forEach(question => {
+                    const questionElement = document.createElement('div');
+                    questionElement.textContent = question;
+                    questionElement.className = 'question';
+                    questionList.appendChild(questionElement);
+                });
+
+                // Show question list and hide folder list
+                questionList.style.display = 'block';
+                document.getElementById('folderList').style.display = 'none';
+            }, 1000); // Simulated delay
+        }
+
+        function showFolderList() {
+            // Hide question list and show folder list
+            document.getElementById('questionList').style.display = 'none';
+            document.getElementById('folderList').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
