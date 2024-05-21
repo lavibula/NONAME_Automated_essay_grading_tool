@@ -31,6 +31,9 @@ app.engine(
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources','views'));
 
+// app.get('/user-profile', (req, res) => {
+//     return res.render('user_profile');
+// })
 // routes init
 route(app);
 
