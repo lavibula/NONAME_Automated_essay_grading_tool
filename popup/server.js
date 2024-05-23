@@ -74,7 +74,12 @@ app.get('/success',(red,res) =>{
     'password': 'lol123'
   })
 })
-
+app.get('/update_profile',(req,res) => {
+  res.render('updateprofile',
+    {'style': 'updateprofile.css'
+    }
+  )
+})
 app.listen(8080,() =>{
   console.log('Server starting at port ',8080)
 });
