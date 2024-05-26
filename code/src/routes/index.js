@@ -1,13 +1,17 @@
 const newsRouter = require('./news');
+const testRouter = require('./test');
 const siteRouter = require('./site');
-const user_profile_Router = require('./user_profile');
+const userprofileRouter = require('./user_profile');
+const questionBankRouter = require('./question_bank');
 
 function route(app) {
-    app.get('/user-profile', (req, res) => {
-        return res.render('user_profile');
-    })
+    // app.get('/user-profile', (req, res) => {
+    //     return res.render('user_profile');
+    // })
+    app.use('/test', testRouter);
     app.use('/news', newsRouter);
-    app.use('/user-profile', user_profile_Router);
+    app.use('/user-profile', userprofileRouter);
+    app.use('/thu-muc-cau-hoi', questionBankRouter);
     app.use('/', siteRouter);
 }
 

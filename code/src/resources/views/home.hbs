@@ -43,17 +43,21 @@
                         <div class="row g-2 align-items-center">
 
                             <div class="col-md-2 text-center ms-3">
-                                <img src="{{this.avt}}" class="card-img-top rounded-0" alt="{{this.name}}" style="width: 100%; height: auto;">
+                                <a href="/thu-muc-cau-hoi/{{this.slug}}">
+                                    <img src="{{this.avt}}" class="card-img-top rounded-0" alt="{{this.name}}" style="width: 100%; height: auto;">
+                                </a>
                             </div>
                             <div class="col-md-5">
                                 <div class="card-body">
-                                <h5 class="card-title">{{this.name}}</h5>
-                                    <p class="card-text">
-                                        <p>Môn học: {{this.mon_hoc}}</p>
-                                    </p>
-                                    <p class="card-text">
-                                        Số lượng câu hỏi: {{this.number_of_question}}
-                                    </p>
+                                <a href="/thu-muc-cau-hoi/{{this.slug}}" style="text-decoration: none;">
+                                    <h5 class="card-title">{{this.name}}</h5>
+                                </a>
+                                <p class="card-text">
+                                    <p>Môn học: {{this.mon_hoc}}</p>
+                                </p>
+                                <p class="card-text">
+                                    Số lượng câu hỏi: {{this.number_of_question}}
+                                </p>
                                 
                             </div>
                             </div>
@@ -79,42 +83,3 @@
     </div>
     
 </div>
-
-{{!-- 
-<div class="row">
-        {{#each thu_muc_cau_hoi_s}}
-    <div class="col-12">
-        <div class="card mb-6 card-course-item">
-            <div class="row g-2 align-items-center">
-                <div class="col-md-2 text-center">
-                    <img src="{{this.avt}}" class="card-img-top rounded-0" alt="{{this.name}}" style="width: 80%; height: auto;">
-                </div>
-                <div class="col-md-7">
-                    <div class="card-body">
-                    <h5 class="card-title">{{this.name}}</h5>
-                        <p class="card-text">
-                            <p>Môn học: {{this.mon_hoc}}</p>
-                        </p>
-                        <p class="card-text">
-                            Số lượng câu hỏi: {{this.number_of_question}}
-                        </p>
-                        
-                </div>
-                </div>
-                <div class="col-md-2 text-end">
-                    <div class="d-flex justify-content-between align-self-end">
-                        <button class="btn btn-primary ms-4">Chỉnh sửa</button>
-                    </div>
-                </div>
-
-                <div class="col-md-1 text-end">
-                    <div class="d-flex justify-content-between align-self-end">
-                        <button class="btn btn-secondary me-4">Xóa</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {{/each}}
-</div> --}}
