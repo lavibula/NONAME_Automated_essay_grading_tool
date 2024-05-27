@@ -35,6 +35,43 @@ app.set('views', path.join(__dirname, 'resources','views'));
 //     return res.render('user_profile');
 // })
 // routes init
+// app.post('/search', (req, res, next) => {
+//     // console.log(req.body);
+//     var username = req.body.username;
+//     var password = req.body.password;
+//     console.log(username, password);
+
+//     //check & render home
+
+//     res.render('home');
+// })
+
+app.post('/search', (req, res, next) => {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log(username, password);
+
+    // Fake user data for example purposes
+    const user = {
+        username: 'testuser',
+        password: 'password123'
+    };
+
+    // Check username and password
+    if (username === user.username && password === user.password) {
+        // If credentials are valid, render the home page
+        res.render('home', { title: 'Home' });
+    } else {
+        // If credentials are invalid, re-render the login page with an error message
+        // res.render('search', { 
+        //     title: 'Đăng Nhập', 
+        //     error: 'Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.' 
+        // });
+        // res.render('login', { title: 'Đăng Nhập', noSidebar: true });
+        res.send('Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.');
+    }
+})
+
 route(app);
 
 app.listen(port, () => {
