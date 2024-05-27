@@ -24,7 +24,10 @@ h2 {
   /* Uniform padding */
   color: #064050;
   /* Text color */ }
-
+  .text-left {
+    font-weight: bold;
+    text-align: left;
+}
 .sidebar h4 {
   margin-bottom: 0;
   color: #064050;
@@ -167,3 +170,6 @@ body {
 .btn-secondary:hover {
   background-color: #868a8c;
   /* Secondary button hover color */ }
+
+
+
