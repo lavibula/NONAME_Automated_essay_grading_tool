@@ -11,7 +11,7 @@
 .left-section {
     flex: 1;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #e6f7ff;
     border-radius: 8px;
     margin-right: 50px;
     height: 450px;
@@ -22,67 +22,53 @@
     position: sticky;
     top: 20px;
 }
-
 .input-group {
     margin-bottom: 15px;
 }
 
 .input-group label {
     display: block;
-    font-size: 14px;
+    font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s;
-}
-
-.input-group input:focus {
-    border-color: #4CAF50;
-    outline: none;
+    border-radius: 5px;
 }
 
 .button-group {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.btn.save,
-.btn.cancel {
+.button-group .btn {
     padding: 10px 20px;
-    margin-right: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
-    width: 40%;
 }
 
-.btn.save {
-    background-color: #4CAF50;
-    color: #fff;
+.button-group .btn.save {
+    background-color: #00BFFF; /* Deep Sky Blue background */
+    color: #FFFFFF; /* White text */
 }
 
-.btn.save:hover {
-    background-color: #45a049;
+.button-group .btn.save:hover {
+    background-color: #009ACD; /* Darker shade of blue for hover effect */
 }
 
-.btn.cancel {
-    background-color: #f44336;
-    color: #fff;
+.button-group .btn.cancel {
+    background-color: #f44336; /* Red background */
+    color: #FFFFFF; /* White text */
 }
 
-.btn.cancel:hover {
-    background-color: #e53935;
+.button-group .btn.cancel:hover {
+    background-color: #d32f2f; /* Darker shade of red for hover effect */
 }
-
 /* Right Section Styles */
 .right-section {
     flex: 2;
@@ -160,15 +146,17 @@
 
     a.cribtn, .cribtn {
     display: inline-block;
-    color: #343a40;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;
+    background-color: #0039a6;
+    border-radius: 3px;
     }
 
     a.cribtn:hover, .criterias:hover .cribtn {
-    background-color: #91C0E7;
+    background-color: #002147;
     color: white;
     border-radius: 3px;
     }
@@ -256,11 +244,4 @@
     padding: 5px 10px;
     margin-right: 5px;
     margin-bottom: 5px;
-}
-
-.selected-criteria-item::after {
-    content: " x";
-    cursor: pointer;
-    color: red;
-    margin-left: 5px;
 }
