@@ -11,8 +11,11 @@
 <body>
     <div class="app d-flex">
         <!-- Include Sidebar Partial -->
-        {{> sidebar}}
-
+        {{#if useStudentSidebar}}
+            {{> liststudent}}
+        {{else}}
+            {{> sidebar}}
+        {{/if}}
         <div class="content flex-grow-1">
             {{> header}}
             <div class="container">

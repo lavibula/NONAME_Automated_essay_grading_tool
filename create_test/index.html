@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #e3f2fd;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.student-list {
+    margin: 20px 0;
+}
+
+.student-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.student-name {
+    color: #1976d2;
+}
+
+.student-score {
+    background-color: #ffeb3b;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.complete-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.complete-button:hover {
+    background-color: #1565c0;
+}
+
+.main-content {
+    width: 75%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.student-name-header {
+    font-size: 24px;
+    color: #1976d2;
+}
+
+.student-score-header {
+    font-size: 24px;
+    background-color: #ffeb3b;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.content h3 {
+    margin-top: 0;
+}
+
+.content p {
+    line-height: 1.6;
+    color: #333;
+    background-color: #e3f2fd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Học sinh</h2>
+            <div class="student-list">
+                <div class="student-item">
+                    <span class="student-name">Nguyen Thanh Long</span>
+                    <span class="student-score">9.0</span>
+                </div>
+                <!-- Repeat above block for each student -->
+            </div>
+            <button class="complete-button">Hoàn Thành</button>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <span class="student-name-header">Nguyen Thanh Long</span>
+                <span class="student-score-header">9.0</span>
+            </div>
+            <div class="content">
+                <h3>viết 1 đoạn văn</h3>
+                <p>
+                    Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vướng mắt nữa.
+                </p>
+                <!-- Repeat above paragraph block for more text -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => populateQuestions(data.questions))
             .catch(error => console.error('Error fetching questions:', error));
     }
-    
+
     // Function to add question from fetched questions
     function populateQuestions(data) {
         const questionList = document.getElementById('questionList');

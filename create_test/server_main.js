@@ -33,15 +33,37 @@ for (let i=0;i<2;i++){
           ]
     })
 }
-
+let student=[];
+for (let i=0;i<30;i++){
+    student.push({
+        name: 'Nguyen Thanh Long',
+        score: 9.0
+    })
+}
+let essay=[];
+for (let i=0;i<5;i++){
+    essay.push({
+        question:'viết 1 đoạn văn',
+        content:' Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vướng mắt nữa.Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vướng mắt nữa.Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vướng mắt nữa.Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vướng mắt nữa.',
+        score: 9.0,
+        automate: 9
+    })
+}
 app.get('/',(req,res) =>{
     res.render('home',{
         style: 'home.css',
-        questions
-
+        questions,
+        
     })
 })
-
+app.get('/mark',(req,res) =>{
+    res.render('manualmark',{
+    style: 'manualmark.css',
+    useStudentSidebar: true,
+    student,
+    essay
+    })
+})
 app.listen(8080,() =>{
     console.log('Server starting at port ',8080)
   });

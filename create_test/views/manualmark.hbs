@@ -1,0 +1,35 @@
+<div class="header">
+    <div class="header-left">
+        <span class="student-name-header">Nguyen Thanh Long</span>
+        <span class="student-score-header">9.0</span>
+    </div>
+    <div class="header-right">
+        
+        <span class="automated-name-header">Automate score</span>
+        <span class="automated-score-header">9.0</span>
+        <button class="save-essay-result">Lưu</button>
+    </div>
+    
+</div>
+<div class="main-content">
+    {{#each essay}}
+    <div class="essay-box">
+        <h3 class="question-name">{{question}}</h3>
+        <hr>
+        <p class="essay-content">{{content}}</p>
+        <hr>
+        <div class="score-region">
+            <div class="score-box">
+                <label for="essay-score-input" class="essay-score-label">Score:</label>
+                <input type="text" id="essay-score-input" class="essay-score-input" value="{{score}}">
+            </div>
+            <div class="score-box">
+                <span class="essay-auto-label">Automated Score:</span>
+                <span class="essay-auto-score">{{automate}}</span>
+            </div>
+            
+        </div>
+        
+    </div>
+    {{/each}}
+</div>
