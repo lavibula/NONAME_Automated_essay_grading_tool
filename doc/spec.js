@@ -5,8 +5,8 @@ var spec = {
         version: "1.0",
         title: "Tên dự án"
     },
-    host: "localhost:3002",
-    basePath: "/api/v1",
+    host: "localhost:3000",
+    basePath: "/",
     tags: [
         {
             name: "examResult",
