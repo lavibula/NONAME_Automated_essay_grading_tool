@@ -1,0 +1,247 @@
+/* General Styles */
+.container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+/* Left Section Styles */
+.left-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #e6f7ff;
+    border-radius: 8px;
+    margin-right: 50px;
+    height: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-group .btn.save {
+    background-color: #00BFFF; /* Deep Sky Blue background */
+    color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.save:hover {
+    background-color: #009ACD; /* Darker shade of blue for hover effect */
+}
+
+.button-group .btn.cancel {
+    background-color: #a9a9a9; /* Red background */
+    color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.cancel:hover {
+    background-color: #7e5e60; /* Darker shade of red for hover effect */
+}
+/* Right Section Styles */
+.right-section {
+    flex: 2;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow-y: auto;
+    width: 400px;
+    height: fit-content; /* Adjust for padding */
+    min-height: calc(100vh - 80px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* Style for the question header */
+.question-header {
+    background-color: #f8f9fa; /* Light gray background */
+    border: 1px solid #dee2e6; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the box */
+    margin-bottom: 20px; /* Space below the question header */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+}
+
+/* Style for the question number */
+.question-header{
+    font-size: 15px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    color: #343a40; /* Dark text color */
+    margin-right: 10px; /* Space to the right of the question number */
+    display: flex; /* Flex container */
+    align-items: center; /* Center the text vertically */
+
+}
+
+
+
+/* Optional: Adding some hover effects for better interaction */
+.question-header:hover {
+    background-color: #e9ecef; /* Slightly darker background on hover */
+    border-color: #ced4da; /* Slightly darker border on hover */
+}
+
+/* Optional: Adding responsive design */
+@media (max-width: 768px) {
+    .question-header {
+        padding: 8px; /* Reduce padding on smaller screens */
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: flex-start; /* Align items to the start on smaller screens */
+    }
+}
+
+
+.question-info p {
+    margin: 5px 0;
+}
+
+.question-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+/*criteria choice*/
+    li.criterias {
+    float: left;
+    }
+
+    a.cribtn, .cribtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #0039a6;
+    border-radius: 3px;
+    }
+
+    a.cribtn:hover, .criterias:hover .cribtn {
+    background-color: #002147;
+    color: white;
+    border-radius: 3px;
+    }
+
+    li.criterias {
+    display: inline-block;
+    }
+
+    .criterias-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+
+    .criterias-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    }
+
+    .criterias-content a:hover {background-color: #f1f1f1;}
+
+    .criterias:hover .criterias-content {
+    display: block;
+    }
+
+
+    
+.question-actions .btn-up,
+.question-actions .btn-down,
+.question-actions .btn-delete {
+    background-color: #e7e7e7;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 10px;
+    margin-left: 10px;
+    transition: background 0.3s;
+}
+
+.question-actions .btn-up:hover,
+.question-actions .btn-down:hover,
+.question-actions .btn-delete:hover {
+    background-color: #d0d0d0;
+}
+
+.question-add {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.question-add:hover {
+    background-color: #e0e0e0;
+}
+
+
+.selected-criteria {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.selected-criteria-item {
+    display: inline-block;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}

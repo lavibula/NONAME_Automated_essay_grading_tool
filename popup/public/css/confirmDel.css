@@ -1,0 +1,78 @@
+/* Style for the confirmation pop-up */
+#confirmDel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+  }
+  
+  #confirmDel h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  #confirmDel hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+  }
+  
+  #confirmDel p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0 20px;
+  }
+  
+  #confirmDel .button-group {
+    display: flex;
+    justify-content: space-around;
+  
+  }
+  
+  #confirmDel .confirm-button,
+  #confirmDel .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  #confirmDel .confirm-button {
+    background-color: #286387;
+    color: white;
+  }
+  
+  #confirmDel .cancel-button {
+    background-color: #6d6d6d;
+    color: white;
+  }
+  
+  /* Add some global styles to ensure proper layout */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  /* Optional: Style for dimming background when pop-up is active */
+  body.popup-active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  

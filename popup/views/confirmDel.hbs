@@ -1,0 +1,28 @@
+<div class="confirmation-popup" id="confirmDel">
+  <h2>XÁC NHẬN</h2>
+  <hr>
+  <p>Bạn có đồng ý xóa vĩnh viễn {{objectName}}?</p>
+  <div class="button-group">
+      <button class="confirm-button" onclick="confirmDelete()">Đồng ý</button>
+      <button class="cancel-button" onclick="closePopup()">Hủy</button>
+  </div>
+</div>
+
+<button onclick="openPopup()">Mở cửa sổ</button>
+
+<script>
+  function openPopup() {
+    document.getElementById("confirmDel").style.display = "block";
+    document.body.classList.add("popup-active");
+  }
+
+  function closePopup() {
+    document.getElementById("confirmDel").style.display = "none";
+    document.body.classList.remove("popup-active");
+  }
+
+  function confirmDelete() {
+    alert('Delete confirmed!');
+    closePopup();
+  }
+</script>
