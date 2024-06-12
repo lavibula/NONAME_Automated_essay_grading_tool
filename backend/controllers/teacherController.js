@@ -48,9 +48,8 @@ class TeacherController {
 
   async gradeEssay(req, res) {
     try {
-      const { essayId, score } = req.body;
       const teacherId = req.user.user_id; // Lấy ID của giáo viên từ token
-      const examResult = await teacherService.gradeEssay(essayId, teacherId, score);
+      const examResult = await teacherService.gradeEssay(req.params.id, teacherId);
       res.status(200).json(examResult);
       res.status(200).json({ message: 'Essay graded successfully' });
     } catch (err) {

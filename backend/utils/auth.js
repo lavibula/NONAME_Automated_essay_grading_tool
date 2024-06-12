@@ -9,8 +9,7 @@ const authMiddleware = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.secret);
     req.user = decoded;
-
-    // Kiểm tra quyền truy cập dựa trên role của user
+    console.log(req.user.role);
     if (req.user.role === 'Admin') {
       next();
     } else if (req.user.role === 'Group Leader' && (req.path.startsWith('/question-banks') || req.path.startsWith('/questions'))) {

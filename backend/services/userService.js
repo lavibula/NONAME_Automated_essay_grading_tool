@@ -39,11 +39,11 @@ const deleteUser = async (userId) => {
 const login = async (username, password) => {
   const user = await User.getByUsername(username);
   if (!user) {
-    throw new Error('Invalid username or password');
+    throw new Error('Invalid username');
   }
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    throw new Error('Invalid username or password');
+    throw new Error('Invalid password');
   }
   const token = jwt.sign({ user_id: user.userId, role: user.role }, config.secret, { expiresIn: '1h' });
   return token;
