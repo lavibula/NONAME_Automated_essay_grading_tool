@@ -49,19 +49,46 @@ for (let i=0;i<5;i++){
         automate: 9
     })
 }
-app.get('/',(req,res) =>{
-    res.render('home',{
-        style: 'home.css',
+
+
+
+
+
+app.get('/mylibrary',(req,res)=>{
+    res.render('teacher',{
+        style: 'teacher.css'
+    })
+})
+app.get('/createtest',(req,res) =>{
+    res.render('createtest',{
+        style: '/teacher/createtest.css',
         questions,
         
     })
 })
-app.get('/mark',(req,res) =>{
+app.get('/grading',(req,res)=>{
+    res.render('autograde',{
+        style: 'sohm/autograde.css'
+    })
+})
+app.get('/manualmark',(req,res) =>{
     res.render('manualmark',{
-    style: 'manualmark.css',
+    style: 'teacher/manualmark.css',
     useStudentSidebar: true,
     student,
     essay
+    })
+})
+app.get('/user-profile',(req,res) =>{
+    res.render('user_profile',{
+    style: 'user_profile.css',
+    
+    })
+})
+app.get('/createquestion',(req,res) =>{
+    res.render('createquestion',{
+    style: 'sohm/createquestion.css',
+    
     })
 })
 app.listen(8080,() =>{

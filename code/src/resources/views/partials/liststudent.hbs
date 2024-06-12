@@ -9,5 +9,10 @@
         <hr>
         {{/each}}
     </div>
-    <button class="complete-button">Hoàn Thành</button>
+    <button class="complete-all-button" onclick="redirectToGrading()">Hoàn Thành</button>
 </div>
+<script>
+function redirectToGrading() {
+  window.location.href = "/grading"; // Replace with your actual URL
+}
+</script>

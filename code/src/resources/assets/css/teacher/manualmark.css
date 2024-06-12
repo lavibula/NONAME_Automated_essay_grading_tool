@@ -72,7 +72,7 @@
     display: inline-block;
 }
 
-.complete-button {
+.complete-all-button {
     background-color: #1c2bc8;
     border: none;
     color: white;
@@ -88,12 +88,12 @@
     align-self: center;
 }
 
-.complete-button:hover {
+.complete-all-button:hover {
     background-color: #1b24a4;
     transform: scale(1.05);
 }
 
-.complete-button:active {
+.complete-all-button:active {
     background-color: #080d47;
     transform: scale(0.95);
 }
