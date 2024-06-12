@@ -9,50 +9,50 @@ var spec = {
     basePath: "/",
     tags: [
         {
-            name: "examResult",
+            name: "exam-results",
             description: "Các API về kết quả bài thi"
         },
         {
-            name: "essay",
+            name: "essays",
             description: "Các API về bài thi"
         },
         {
-            name: "examResultCriteria",
+            name: "exam-result-criterias",
             description: "Các API về tiêu chí đánh giá kết quả bài thi"
         },
         {
-            name: "exam",
+            name: "exams",
             description: "Các API về đề thi"
         },
         {
-            name: "groupLeader",
+            name: "group-leaders",
             description: "Các API về nhóm trưởng"
         },
         {
-            name: "questionBank",
+            name: "questions-banks",
             description: "Các API về ngân hàng câu hỏi"
         },
         {
-            name: "question",
+            name: "questions",
             description: "Các API về câu hỏi"
         },
         {
-            name: "student",
+            name: "students",
             description: "Các API về sinh viên"
         },
         {
-            name: "teacher",
+            name: "teachers",
             description: "Các API về giáo viên"
         },
     ],
     schemes: ["http"],
     paths: {
-        "/examResult/": {
+        "/exam-results/": {
             post: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Tạo kết quả bài thi",
                 description: "",
-                operationId: "createExamResult",
+                operationId: "createexam-results",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -75,12 +75,12 @@ var spec = {
                 ]
             }
         },
-        "/examResult/{id}": {
+        "/exam-results/{id}": {
             get: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Lấy kết quả bài thi theo id",
                 description: "",
-                operationId: "getExamResultById",
+                operationId: "getexam-resultsById",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -103,10 +103,10 @@ var spec = {
                 ]
             },
             put: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Cập nhật kết quả bài thi",
                 description: "",
-                operationId: "updateExamResult",
+                operationId: "updateexam-results",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -138,10 +138,10 @@ var spec = {
                 ]
             },
             delete: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Xóa kết quả bài thi",
                 description: "",
-                operationId: "deleteExamResult",
+                operationId: "deleteexam-results",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -164,12 +164,12 @@ var spec = {
                 ]
             }
         },
-        "/examResult/essays/{id}": {
+        "/exam-results/essays/{id}": {
             get: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Lấy kết quả bài thi theo id bài thi",
                 description: "",
-                operationId: "getExamResultsByEssayId",
+                operationId: "getexam-resultssByEssayId",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -192,9 +192,9 @@ var spec = {
                 ]
             }
         },
-        "/examResult/essays/{id}/score": {
+        "/exam-results/essays/{id}/score": {
             get: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Tính điểm tổng",
                 description: "",
                 operationId: "calculateOverallScore",
@@ -220,12 +220,12 @@ var spec = {
                 ]
             }
         },
-        "/examResult/essays/{id}/details": {
+        "/exam-results/essays/{id}/details": {
             get: {
-                tags: ["examResult"],
+                tags: ["exam-results"],
                 summary: "Lấy chi tiết kết quả bài thi",
                 description: "",
-                operationId: "getExamResultDetails",
+                operationId: "getexam-resultsDetails",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -248,9 +248,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/": {
+        "/essays/": {
             post: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Tạo bài thi",
                 description: "",
                 operationId: "createEssay",
@@ -276,9 +276,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/{id}": {
+        "/essays/{id}": {
             get: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Lấy bài thi theo id",
                 description: "",
                 operationId: "getEssayById",
@@ -304,9 +304,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/exams/{id}": {
+        "/essays/exams/{id}": {
             get: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Lấy danh sách bài thi theo id của bài thi",
                 description: "",
                 operationId: "getEssaysByExamId",
@@ -330,9 +330,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/students/{id}": {
+        "/essays/studentss/{id}": {
             get: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Lấy danh sách bài thi theo id của sinh viên",
                 description: "",
                 operationId: "getEssaysByStudentId",
@@ -356,9 +356,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/{id}": {
+        "/essays/{id}": {
             put: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Cập nhật bài thi",
                 description: "",
                 operationId: "updateEssay",
@@ -389,9 +389,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/{id}": {
+        "/essays/{id}": {
             delete: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Xóa bài thi",
                 description: "",
                 operationId: "deleteEssay",
@@ -415,9 +415,9 @@ var spec = {
                 ]
             }
         },
-        "/essay/students/{studentId}/exams/{examId}": {
+        "/essays/studentss/{studentsId}/exams/{examId}": {
             get: {
-                tags: ["essay"],
+                tags: ["essays"],
                 summary: "Lấy danh sách bài thi theo id của sinh viên và id của bài thi",
                 description: "",
                 operationId: "getEssaysByStudentAndExamId",
@@ -426,7 +426,7 @@ var spec = {
                 parameters: [
                     {
                         "in": "path",
-                        "name": "studentId",
+                        "name": "studentsId",
                         "required": "true",
                         "schema": { "type": "string" },
                         "description": "ID của sinh viên"
@@ -448,12 +448,12 @@ var spec = {
                 ]
             }
         },
-        "/examResultCriteria/": {
+        "/exam-result-criterias/": {
             post: {
-                tags: ["examResultCriteria"],
+                tags: ["exam-result-criterias"],
                 summary: "Tạo tiêu chí đánh giá kết quả bài thi",
                 description: "",
-                operationId: "createExamResultCriteria",
+                operationId: "createexam-result-criterias",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -474,10 +474,10 @@ var spec = {
                 },
             },
             get: {
-                tags: ["examResultCriteria"],
+                tags: ["exam-result-criterias"],
                 summary: "Lấy tiêu chí đánh giá kết quả bài thi theo id",
                 description: "",
-                operationId: "getExamResultCriteriaById",
+                operationId: "getexam-result-criteriasById",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -496,12 +496,12 @@ var spec = {
                 },
             },
         },
-        "/examResultCriteria/results/{id}": {
+        "/exam-result-criterias/results/{id}": {
             get: {
-                tags: ["examResultCriteria"],
+                tags: ["exam-result-criterias"],
                 summary: "Lấy danh sách tiêu chí đánh giá kết quả bài thi theo id kết quả bài thi",
                 description: "",
-                operationId: "getExamResultCriteriasByResultId",
+                operationId: "getexam-result-criteriassByResultId",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -520,12 +520,12 @@ var spec = {
                 },
             }
         },
-        "/examResultCriteria/{id}": {
+        "/exam-result-criterias/{id}": {
             put: {
-                tags: ["examResultCriteria"],
+                tags: ["exam-result-criterias"],
                 summary: "Cập nhật tiêu chí đánh giá kết quả bài thi",
                 description: "",
-                operationId: "updateExamResultCriteria",
+                operationId: "updateexam-result-criterias",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -553,10 +553,10 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["examResultCriteria"],
+                tags: ["exam-result-criterias"],
                 summary: "Xóa tiêu chí đánh giá kết quả bài thi",
                 description: "",
-                operationId: "deleteExamResultCriteria",
+                operationId: "deleteexam-result-criterias",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -575,9 +575,9 @@ var spec = {
                 },
             }
         },
-        "/exam/": {
+        "/exams/": {
             post: {
-                tags: ["exam"],
+                tags: ["exams"],
                 summary: "Tạo đề thi",
                 description: "",
                 operationId: "createExam",
@@ -601,7 +601,7 @@ var spec = {
                 },
             },
             get: {
-                tags: ["exam"],
+                tags: ["exams"],
                 summary: "Lấy thông tin đề thi",
                 description: "",
                 operationId: "getExamById",
@@ -626,7 +626,7 @@ var spec = {
                 },
             },
             put: {
-                tags: ["exam"],
+                tags: ["exams"],
                 summary: "Cập nhật thông tin đề thi",
                 description: "",
                 operationId: "updateExam",
@@ -660,7 +660,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["exam"],
+                tags: ["exams"],
                 summary: "Xóa đề thi",
                 description: "",
                 operationId: "deleteExam",
@@ -685,9 +685,9 @@ var spec = {
                 },
             }
         },
-        "/groupLeader/question-banks/": {
+        "/group-leaders/questions-banks/": {
             post: {
-                tags: ["groupLeader"],
+                tags: ["group-leaders"],
                 summary: "Tạo ngân hàng câu hỏi",
                 description: "",
                 operationId: "createQuestionBank",
@@ -711,7 +711,7 @@ var spec = {
                 },
             },
             get: {
-                tags: ["groupLeader"],
+                tags: ["group-leaders"],
                 summary: "Lấy thông tin ngân hàng câu hỏi",
                 description: "",
                 operationId: "getQuestionBankById",
@@ -733,7 +733,7 @@ var spec = {
                 },
             },
             put: {
-                tags: ["groupLeader"],
+                tags: ["group-leaders"],
                 summary: "Cập nhật ngân hàng câu hỏi",
                 description: "",
                 operationId: "updateQuestionBank",
@@ -755,7 +755,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["groupLeader"],
+                tags: ["group-leaders"],
                 summary: "Xóa ngân hàng câu hỏi",
                 description: "",
                 operationId: "deleteQuestionBank",
@@ -777,9 +777,9 @@ var spec = {
                 },
             }
         },
-        "/questionBank/": {
+        "/questions-banks/": {
             post: {
-                tags: ["questionBank"],
+                tags: ["questions-banks"],
                 summary: "Tạo ngân hàng câu hỏi",
                 description: "",
                 operationId: "createQuestionBank",
@@ -803,7 +803,7 @@ var spec = {
                 },
             },
             get: {
-                tags: ["questionBank"],
+                tags: ["questions-banks"],
                 summary: "Lấy thông tin ngân hàng câu hỏi",
                 description: "",
                 operationId: "getQuestionBankById",
@@ -825,7 +825,7 @@ var spec = {
                 },
             },
             put: {
-                tags: ["questionBank"],
+                tags: ["questions-banks"],
                 summary: "Cập nhật ngân hàng câu hỏi",
                 description: "",
                 operationId: "updateQuestionBank",
@@ -847,7 +847,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["questionBank"],
+                tags: ["questions-banks"],
                 summary: "Xóa ngân hàng câu hỏi",
                 description: "",
                 operationId: "deleteQuestionBank",
@@ -869,9 +869,9 @@ var spec = {
                 },
             }
         },
-        "/question/": {
+        "/questions/": {
             post: {
-                tags: ["question"],
+                tags: ["questions"],
                 summary: "Tạo câu hỏi",
                 description: "",
                 operationId: "createQuestion",
@@ -895,7 +895,7 @@ var spec = {
                 },
             },
             get: {
-                tags: ["question"],
+                tags: ["questions"],
                 summary: "Lấy thông tin câu hỏi",
                 description: "",
                 operationId: "getQuestionById",
@@ -917,7 +917,7 @@ var spec = {
                 },
             },
             put: {
-                tags: ["question"],
+                tags: ["questions"],
                 summary: "Cập nhật câu hỏi",
                 description: "",
                 operationId: "updateQuestion",
@@ -948,7 +948,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["question"],
+                tags: ["questions"],
                 summary: "Xóa câu hỏi",
                 description: "",
                 operationId: "deleteQuestion",
@@ -970,9 +970,9 @@ var spec = {
                 },
             },
         },
-        "/student/essays/": {
+        "/students/essays/": {
             post: {
-                tags: ["student"],
+                tags: ["students"],
                 summary: "Nộp bài thi",
                 description: "",
                 operationId: "submitEssay",
@@ -996,12 +996,12 @@ var spec = {
                 },
             },
         },
-        "/student/exams/{id}/results": {
+        "/students/exams/{id}/results": {
             get: {
-                tags: ["student"],
+                tags: ["students"],
                 summary: "Lấy kết quả bài thi",
                 description: "",
-                operationId: "getExamResults",
+                operationId: "getexam-resultss",
                 consumes: ["application/json"],
                 produces: ["application/json"],
                 parameters: [
@@ -1020,9 +1020,9 @@ var spec = {
                 },
             },
         },
-        "/teacher/exams/": {
+        "/teachers/exams/": {
             post: {
-                tags: ["teacher"],
+                tags: ["teachers"],
                 summary: "Tạo bài thi",
                 description: "",
                 operationId: "createExam",
@@ -1046,9 +1046,9 @@ var spec = {
                 },
             },
         },
-        "/teacher/exams/{id}": {
+        "/teachers/exams/{id}": {
             get: {
-                tags: ["teacher"],
+                tags: ["teachers"],
                 summary: "Lấy thông tin bài thi",
                 description: "",
                 operationId: "getExamById",
@@ -1070,7 +1070,7 @@ var spec = {
                 },
             },
             put: {
-                tags: ["teacher"],
+                tags: ["teachers"],
                 summary: "Cập nhật thông tin bài thi",
                 description: "",
                 operationId: "updateExam",
@@ -1101,7 +1101,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["teacher"],
+                tags: ["teachers"],
                 summary: "Xóa bài thi",
                 description: "",
                 operationId: "deleteExam",
@@ -1123,9 +1123,9 @@ var spec = {
                 },
             },
         },
-        "/teacher/essays/{id}/grade": {
+        "/teachers/essays/{id}/grade": {
             post: {
-                tags: ["teacher"],
+                tags: ["teachers"],
                 summary: "Đánh giá bài thi",
                 description: "",
                 operationId: "gradeEssay",
@@ -1156,9 +1156,9 @@ var spec = {
                 },
             },
         },
-        "/user/": {
+        "/users/": {
             post: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Tạo người dùng",
                 description: "",
                 operationId: "createUser",
@@ -1182,7 +1182,7 @@ var spec = {
                 },
             },
             get: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Lấy thông tin người dùng",
                 description: "",
                 operationId: "getUserById",
@@ -1203,9 +1203,9 @@ var spec = {
                 },
             },
         },
-        "/user/name/{name}": {
+        "/users/name/{name}": {
             get: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Lấy thông tin người dùng",
                 description: "",
                 operationId: "getByUsername",
@@ -1226,9 +1226,9 @@ var spec = {
                 },
             },
         },
-        "/user/{id}": {
+        "/users/{id}": {
             put: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Cập nhật thông tin người dùng",
                 description: "",
                 operationId: "updateUser",
@@ -1259,7 +1259,7 @@ var spec = {
                 },
             },
             delete: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Xóa người dùng",
                 description: "",
                 operationId: "deleteUser",
@@ -1280,9 +1280,9 @@ var spec = {
                 },
             },
         },
-        "/user/login": {
+        "/users/login": {
             post: {
-                tags: ["user"],
+                tags: ["users"],
                 summary: "Đăng nhập",
                 description: "",
                 operationId: "loginUser",
