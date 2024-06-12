@@ -1,0 +1,93 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Tìm kiếm trong thư viện của tôi " aria-label="Tìm kiếm">
+            <button class="btn " type="button">Tìm kiếm</button>
+        </div>
+    </div>
+</div>
+
+{{!-- <div class="row">
+    <div class="col-12 text-end">
+        <button class="btn btn-tao text-center">Tạo thư mục</button>
+    </div>
+</div> --}}
+<div class="row">
+
+
+    <div class="col-md-3 left-section">
+        <p></p>
+        <h4>Thư viện của tôi</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Đề thi sắp diễn ra</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Đề thi đã tham gia</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-9 right-section">
+        <div class="container mt-4">
+            <div class="row">
+                {{!-- {{#each thu_muc_cau_hoi_s}} --}}
+                {{!-- {{#eachInRange 4}} --}}
+                <div class="col-12">
+                    <div class="card mb-6 card-course-item">
+                        <div class="row g-2 align-items-center">
+
+                            <div class="col-md-2 text-center ms-3">
+                                {{!-- <a href="/thu-muc-cau-hoi/{{this.slug}}"> --}}
+                                <img src="/img/image.jpg" class="card-img-top rounded-0" alt="Thư mục câu hỏi A" style="width: 100%; height: auto;">
+                                {{!-- </a> --}}
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="card-body">
+                                {{!-- <a href="/thu-muc-cau-hoi/{{this.slug}}" style="text-decoration: none;"> --}}
+                                    <h5 class="card-title">Đề thi giữa kỳ ABC</h5>
+                                {{!-- </a> --}}
+                                <p class="card-text">
+                                    Môn học: Toán
+                                    <br>
+                                    Số câu hỏi: 3
+                                    {{!-- <br>
+                                    Thời lượng: 90 phút --}}
+                                    {{!-- <br>
+                                    Số người tham gia: 40 --}}
+                                    <br>
+                                    Thời gian: 15h 20/05/2024
+                                </p>
+                                {{!-- <p class="card-text">
+                                    Số lượng câu hỏi: 3
+                                </p> --}}
+                                
+                            </div>
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <div class="d-flex justify-content-between align-self-end">
+                                    <button class="btn btn-primary ms-5">Chỉnh sửa</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1 text-end">
+                                <div class="d-flex justify-content-between align-self-end">
+                                    <button class="btn btn-secondary ms-2">Xóa</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {{!-- {{/each}} --}}
+                {{!-- {{/eachInRange}} --}}
+            
+            
+            
+            </div>
+
+        </div>
+    </div>
+    
+</div>
