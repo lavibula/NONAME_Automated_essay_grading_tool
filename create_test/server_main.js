@@ -50,7 +50,7 @@ for (let i=0;i<5;i++){
     })
 }
 app.get('/',(req,res) =>{
-    res.render('home',{
+    res.render('createtest',{
         style: 'home.css',
         questions,
         
