@@ -56,6 +56,13 @@ app.get('/student', (req, res) => {
     );
 });
 
+app.get('/teacher', (req, res) => {
+    return res.render('teacher',
+        {'style': 'teacher.css'
+        }
+    );
+});
+
 app.get('/admin', (req, res) => {
     return res.render('admin',
         {'style': 'admin.css'
