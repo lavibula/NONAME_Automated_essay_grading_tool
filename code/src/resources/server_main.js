@@ -49,14 +49,19 @@ for (let i=0;i<5;i++){
         automate: 9
     })
 }
+let noSidebar=true;
 
 
-
-
+app.get('/',(req,res)=>{
+    res.render('login',{
+        style:'login.css',
+        noSidebar
+    })
+})
 
 app.get('/mylibrary',(req,res)=>{
-    res.render('teacher',{
-        style: 'teacher.css'
+    res.render('mylibraryteacher',{
+        style: 'mylibraryteacher.css'
     })
 })
 app.get('/createtest',(req,res) =>{
