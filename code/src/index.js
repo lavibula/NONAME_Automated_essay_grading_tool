@@ -34,6 +34,63 @@ app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
+function authMiddleware(req, res, next){
+    const username = req.body.username;
+    const password = req.body.password;
+    console.log(username, password);
+
+    // Fake user data for example purposes
+    const user = {
+        username: 'testuser',
+        password: 'password123'
+    };
+
+    // Check username and password
+    if (username === user.username && password === user.password) {
+        // If credentials are valid, render the home page
+            // res.render('student', 
+            //     { title: 'student',
+            //     'style': 'login.css'
+            //     });
+        next()
+    } else {
+        // If credentials are invalid, re-render the login page with an error message
+        // res.send('Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.');
+        res.render('login_invalid',
+            {
+                'style': 'login.css',
+                noSidebar:true,
+            }
+        );
+
+    }
+}
+
+app.get('/login', (req, res, next) => {
+    res.render('login',
+        {'style': 'login.css',
+            noSidebar:true,
+        }
+    );
+});
+
+app.post('/login', (req, res, next) => {
+    res.redirect('/student')
+    // res.render('login',
+    //     {'style': 'login.css',
+    //         noSidebar:true,
+    //     }
+    // );
+});
+
+app.get('/student', authMiddleware, (req, res) => {
+    return res.render('student',
+        {
+            'style': 'student.css'
+        }
+    );
+});
+
 // Route handlers
 app.get('/user-profile', (req, res) => {
     return res.render('user_profile',
@@ -42,19 +99,14 @@ app.get('/user-profile', (req, res) => {
     );
 }); 
 
-app.get('/group-leader', (req, res) => {
+app.get('/group-leader', authMiddleware, (req, res) => {
     return res.render('groupLeader',
         {'style': 'group_leader.css'
         }
     );
 });
 
-app.get('/student', (req, res) => {
-    return res.render('student',
-        {'style': 'student.css'
-        }
-    );
-});
+
 
 app.get('/teacher', (req, res) => {
     return res.render('teacher',
@@ -70,47 +122,37 @@ app.get('/admin', (req, res) => {
     );
 });
 
-app.get('/login', (req, res, next) => {
-    res.render('login',
-        {'style': 'login.css',
-            noSidebar:true,
-        }
-    );
-
-});
-
-app.post('/login', (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    console.log(username, password);
-
-    // Fake user data for example purposes
-    const user = {
-        username: 'testuser',
-        password: 'password123'
-    };
-
-    // Check username and password
-    if (username === user.username && password === user.password) {
-        // If credentials are valid, render the home page
-        res.render('student', 
-            { title: 'student',
-            'style': 'login.css'
-            });
-    } else {
-        // If credentials are invalid, re-render the login page with an error message
-        // res.send('Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.');
-        res.render('login_invalid',
-            {
-                'style': 'login.css'
-            }
-        );
-
-    }
-});
 
 
 // Start the server
 app.listen(port, () => {
     console.log(`App listening on port http://localhost:${port}`);
 });
+
+// const express = require('express')
+// const app = express() 
+
+// app.use(logger);
+
+// app.get('/', (req, res) => {
+//     res.send('Home Page')
+// })
+
+// app.get('/users', 
+//     checkAuth,
+//     function (req, res, next) {
+//         res.send('Users Page')
+// })
+// function checkAuth(req, res, next) {
+//     if (req.query.auth === 'true'){
+//         next()
+//     }
+//     else{
+//         res.send("NOT AUTH")
+//     }
+// }
+// function logger(req, res, next) { 
+//     console.log('Log')
+//     next()
+// }
+// app.listen(3002)
