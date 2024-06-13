@@ -8,8 +8,7 @@ class Question {
   }
 
   static async create(question) {
-    const query = `INSERT INTO Question (bank_id, question_content) VALUES ($1, $2) 
-                    RETURNING "question_id", "bank_id", "question_content"`;
+    const query = `INSERT INTO Question (bank_id, question_content) VALUES ($1, $2) RETURNING "question_id", "bank_id", "question_content"`;
     const values = [question.bankId, question.questionContent];
     const result = await db.query(query, values);
     return new Question(

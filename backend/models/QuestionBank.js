@@ -9,8 +9,7 @@ class QuestionBank {
   }
 
   static async create(questionBank) {
-    const query = `INSERT INTO QuestionBank (bank_name, description, created_by) 
-                    VALUES ($1, $2, $3) RETURNING "bank_name", "description", "created_by"`;
+    const query = `INSERT INTO QuestionBank (bank_name, description, created_by) VALUES ($1, $2, $3) RETURNING "bank_id", "bank_name", "description", "created_by"`;
     const values = [questionBank.bankName, questionBank.description, questionBank.createdBy];
     const result = await db.query(query, values);
     return new QuestionBank(

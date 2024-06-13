@@ -1,34 +1,25 @@
 const db = require('../config/database');
 
 class CriteriaDetail {
-  constructor(detailId, questionId, criteriaId, wordCount, phrase, threshold) {
+  constructor(detailId, questionId, criteriaId, wordcount, containPhrase, threshold) {
     this.detailId = detailId;
     this.questionId = questionId;
     this.criteriaId = criteriaId;
-    this.phrase = phrase;
+    this.wordcount = wordcount;
+    this.containPhrase = containPhrase;
     this.threshold = threshold;
-    this.wordCount = wordCount;
   }
 
-  static async create(examCriteria) {
-    const query =
-      `INSERT INTO CriteriaDetail (questionId, criteriaId, wordCount, phrase, threshold) 
-      VALUES ($1, $2, $3, $4, $5) 
-      RETURNING "detailId", "questionId", "criteriaId", "wordCount", "phrase", "threshold"`;
-    const values = [
-      examCriteria.questionId,
-      examCriteria.criteriaId,
-      examCriteria.wordCount,
-      examCriteria.phrase,
-      examCriteria.threshold
-    ];
+  static async create(criteriaDetail) {
+    const query = `INSERT INTO CriteriaDetail (question_id, criteria_id, wordcount, contain_phrase, threshold) VALUES ($1, $2, $3, $4, $5) RETURNING "detail_id", "question_id", "criteria_id", "wordcount", "contain_phrase", "threshold"`;
+    const values = [criteriaDetail.questionId, criteriaDetail.criteriaId, criteriaDetail.wordcount, criteriaDetail.containPhrase, criteriaDetail.threshold];
     const result = await db.query(query, values);
     return new CriteriaDetail(
       result.rows[0].detail_id,
       result.rows[0].question_id,
       result.rows[0].criteria_id,
-      result.rows[0].wordCount,
-      result.rows[0].phrase,
+      result.rows[0].wordcount,
+      result.rows[0].contain_phrase,
       result.rows[0].threshold
     );
   }
@@ -42,9 +33,9 @@ class CriteriaDetail {
         result.rows[0].detail_id,
         result.rows[0].question_id,
         result.rows[0].criteria_id,
-        result.rows[0].phrase,
-        result.rows[0].threshold,
-        result.rows[0].wordCount,
+        result.rows[0].wordcount,
+        result.rows[0].contain_phrase,
+        result.rows[0].threshold
       );
     }
     return null;
@@ -58,42 +49,30 @@ class CriteriaDetail {
       row.detail_id,
       row.question_id,
       row.criteria_id,
-      row.wordCount,
-      row.phrase,
+      row.wordcount,
+      row.contain_phrase,
       row.threshold
     ));
   }
 
   static async update(detailId, criteriaDetail) {
-    const query = 'UPDATE CriteriaDetail SET "question_id" = $1, "criteria_id" = $2, "phrase" = $3, "threshold" = $4, "wordCount" = $5 WHERE "detail_id" = $7 RETURNING *';
-    const values = [
-      criteriaDetail.questionId,
-      criteriaDetail.criteriaId,
-      criteriaDetail.phrase,
-      criteriaDetail.threshold,
-      criteriaDetail.wordCount,
-      detailId
-    ];
+    const query = 'UPDATE CriteriaDetail SET "question_id" = $1, "criteria_id" = $2, "wordcount" = $3, "contain_phrase" = $4, "threshold" = $5 WHERE "detail_id" = $6 RETURNING *';
+    const values = [criteriaDetail.questionId, criteriaDetail.criteriaId, criteriaDetail.wordcount, criteriaDetail.containPhrase, criteriaDetail.threshold, detailId];
     const result = await db.query(query, values);
     if (result.rows.length > 0) {
       return new CriteriaDetail(
         result.rows[0].detail_id,
         result.rows[0].question_id,
         result.rows[0].criteria_id,
-        result.rows[0].phrase,
-        result.rows[0].threshold,
-        result.rows[0].wordCount,
+        result.rows[0].wordcount,
+        result.rows[0].contain_phrase,
+        result.rows[0].threshold
       );
     }
     return null;
   }
 
 
-  static async deleteByQuestionId(questionId) {
-    const query = 'DELETE FROM CriteriaDetail WHERE "question_id" = $1';
-    const values = [questionId];
-    await db.query(query, values);
-  }
 }
 
 module.exports = CriteriaDetail;

@@ -17,8 +17,8 @@ class TeacherService {
     await Teacher.deleteExam(examId);
   }
 
-  async gradeEssay(essayId, teacherId) {
-    return await Teacher.gradeEssay(essayId, teacherId);
+  async gradeScore(examId, studentId) {
+    return await Teacher.gradeScore(examId, studentId);
   }
 }
 

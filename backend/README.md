@@ -10,6 +10,4 @@
 + Kiểm tra sự xuất hiện của từ khóa.
 + Kiểm tra số lượng từ khóa xuất hiện.
 + Kiểm tra độ dài bài luận.
-- Hệ thống tự động tính điểm dựa trên các tiêu chí và mức điểm tương ứng.
-- Chấm điểm tự động:
-+ Hệ thống có thể tự động chấm điểm bài luận dựa trên các quy tắc được cài đặt trước.
+- Hệ thống tự động tính điểm dựa trên các tiêu chí tương ứng.
