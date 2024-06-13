@@ -277,6 +277,6 @@ INSERT INTO ExamQuestion (exam_id, question_id, max_score) VALUES
 
 INSERT INTO Essay (examquestion_id, student_id, essay_content, submit_time) VALUES
 ('EQ00001', 'U00005', 'I went to school every day.', NOW()),
-('EQ00001', 'U00005', 'The present perfect tense is used to describe an action that started in the past and continues to the present.', NOW()),
-('EQ00002', 'U00006', 'Chí Phèo là một nhân vật có số phận bi thảm, bị xã hội đẩy vào con đường tội lỗi.', NOW()),
-('EQ00002', 'U00006', 'Bài thơ "Đoàn thuyền đánh cá" của Huy Cận có những nét đặc sắc về nghệ thuật...', NOW()); 
+('EQ00002', 'U00005', 'The present perfect tense is used to describe an action that started in the past and continues to the present.', NOW()),
+('EQ00003', 'U00006', 'Chí Phèo là một nhân vật có số phận bi thảm, bị xã hội đẩy vào con đường tội lỗi.', NOW()),
+('EQ00004', 'U00006', 'Bài thơ "Đoàn thuyền đánh cá" của Huy Cận có những nét đặc sắc về nghệ thuật...', NOW()); 

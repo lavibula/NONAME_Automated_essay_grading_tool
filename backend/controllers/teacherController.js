@@ -51,7 +51,6 @@ class TeacherController {
       const examId = req.params.examId;
       const studentId = req.params.studentId;
       const examResult = await teacherService.gradeScore(examId, studentId);
-      res.status(200).json(examResult);
       res.status(200).json({ message: 'Essay graded successfully' });
     } catch (err) {
       res.status(400).json({ error: err.message });

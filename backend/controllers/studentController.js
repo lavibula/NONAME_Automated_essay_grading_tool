@@ -16,6 +16,7 @@ class StudentController {
       const studentId = req.user.user_id; // Lấy ID của học sinh từ token
       const examId = req.params.id;
       const examResults = await studentService.getExamResults(studentId, examId);
+      console.log(studentId);
       res.status(200).json(examResults);
     } catch (err) {
       res.status(500).json({ error: err.message });

@@ -12,12 +12,6 @@ class Teacher extends User {
   static async createExam(examData) {
     const createdExam = await Exam.create(examData);
 
-    const examQuestions = examData.questions.map((question) => ({
-      examId: createdExam.examId,
-      questionId: question.question_id,
-    }));
-    await Promise.all(examQuestions.map(examQuestion => ExamQuestion.create(examQuestion)));
-
     return createdExam;
   }
 

@@ -1,5 +1,6 @@
 const User = require('./User');
 const Essay = require('./Essay');
+const ExamResult = require('./ExamResult');
 
 class Student extends User {
   static async submitEssay(essayData) {

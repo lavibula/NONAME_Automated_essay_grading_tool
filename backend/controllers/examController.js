@@ -5,7 +5,6 @@ class ExamController {
   async createExam(req, res) {
     try {
       const exam = await examService.createExam(req.body);
-      res.status(201).json(exam);
       res.status(201).json({ message: 'Exam created successfully' });
     } catch (err) {
       res.status(400).json({ error: err.message });
