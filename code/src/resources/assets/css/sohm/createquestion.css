@@ -21,7 +21,7 @@
 }
 
 .main-content {
-  width: 70%; /* Adjust the width as needed */
+  width: 100%; /* Adjust the width as needed */
   padding: 20px;
   background-color: #ffffff; /* Background color for the main content */
 }

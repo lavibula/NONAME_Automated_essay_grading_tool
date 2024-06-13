@@ -64,6 +64,11 @@ app.get('/mylibrary',(req,res)=>{
         style: 'mylibraryteacher.css'
     })
 })
+app.get('/mylibraryleader',(req,res)=>{
+    res.render('mylibraryleader',{
+        style: 'mylibraryleader.css'
+    })
+})
 app.get('/createtest',(req,res) =>{
     res.render('createtest',{
         style: '/teacher/createtest.css',
