@@ -11,7 +11,7 @@
 .left-section {
     flex: 1;
     padding: 20px;
-    background-color: #e6f7ff;
+    background-color: #CFEFFF;
     border-radius: 8px;
     margin-right: 50px;
     height: 450px;
@@ -53,12 +53,12 @@
 }
 
 .button-group .btn.save {
-    background-color: #00BFFF; /* Deep Sky Blue background */
+    background-color: #007FFF; /* Deep Sky Blue background */
     color: #FFFFFF; /* White text */
 }
 
 .button-group .btn.save:hover {
-    background-color: #009ACD; /* Darker shade of blue for hover effect */
+    background-color: #0066b2; /* Darker shade of blue for hover effect */
 }
 
 .button-group .btn.cancel {
@@ -73,7 +73,7 @@
 .right-section {
     flex: 2;
     padding: 20px;
-    background-color: #fff;
+    background-color: #CFEFFF;
     border-radius: 8px;
     overflow-y: auto;
     width: 400px;
@@ -151,12 +151,12 @@
     padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;
-    background-color: #0039a6;
+    background-color: #318CE7;
     border-radius: 3px;
     }
 
     a.cribtn:hover, .criterias:hover .cribtn {
-    background-color: #002147;
+    background-color: #0000FF;
     color: white;
     border-radius: 3px;
     }
