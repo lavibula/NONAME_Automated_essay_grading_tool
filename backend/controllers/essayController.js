@@ -4,7 +4,11 @@ const authMiddleware = require('../utils/auth');
 class EssayController {
   async createEssay(req, res) {
     try {
-      const essay = await essayService.createEssay(req.body);
+      const essayData = {
+        ...req.body,
+        studentId: req.user.user_id // Ensure studentId is taken from the authenticated user
+      };
+      const essay = await essayService.createEssay(essayData);
       res.status(201).json(essay);
     } catch (err) {
       res.status(400).json({ error: err.message });

@@ -24,19 +24,6 @@ class TeacherController {
     }
   }
 
-  async updateExam(req, res) {
-    try {
-      const updatedExam = await teacherService.updateExam(req.params.id, req.body);
-      if (updatedExam) {
-        res.status(200).json(updatedExam);
-      } else {
-        res.status(404).json({ error: 'Exam not found' });
-      }
-    } catch (err) {
-      res.status(400).json({ error: err.message });
-    }
-  }
-
   async deleteExam(req, res) {
     try {
       await teacherService.deleteExam(req.params.id);
@@ -52,6 +39,17 @@ class TeacherController {
       const studentId = req.params.studentId;
       const examResult = await teacherService.gradeScore(examId, studentId);
       res.status(200).json({ message: 'Essay graded successfully' });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  }
+  async addQuestionToExam(req, res) {
+    try {
+      const examId = req.params.examId;
+      const questionId = req.body.questionId;
+      const maxScore = req.body.maxScore;
+      await teacherService.addQuestionToExam(examId, questionId, maxScore);
+      res.status(200).json({ message: 'Question added to exam successfully' });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

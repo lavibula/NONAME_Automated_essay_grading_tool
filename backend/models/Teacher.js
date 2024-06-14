@@ -14,7 +14,14 @@ class Teacher extends User {
 
     return createdExam;
   }
-
+  static async addQuestionToExam(examId, questionId, max_score) {
+    const examQuestion = {
+      examId: examId,
+      questionId: questionId,
+      maxScore: max_score
+    };
+    await ExamQuestion.create(examQuestion);
+  }
   static async getExamById(examId) {
     const exam = await Exam.getById(examId);
     if (exam) {
@@ -23,20 +30,6 @@ class Teacher extends User {
       exam.questions = questions;
     }
     return exam;
-  }
-
-  static async updateExam(examId, examData) {
-    await ExamQuestion.deleteByExamId(examId);
-
-    const updatedExam = await Exam.update(examId, examData);
-
-    const examQuestions = examData.questions.map((question) => ({
-      examId: examId,
-      questionId: question.question_id,
-    }));
-    await Promise.all(examQuestions.map(examQuestion => ExamQuestion.create(examQuestion)));
-
-    return updatedExam;
   }
 
   static async deleteExam(examId) {

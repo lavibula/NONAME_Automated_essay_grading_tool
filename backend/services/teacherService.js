@@ -9,16 +9,16 @@ class TeacherService {
     return await Teacher.getExamById(examId);
   }
 
-  async updateExam(examId, examData) {
-    return await Teacher.updateExam(examId, examData);
-  }
-
   async deleteExam(examId) {
     await Teacher.deleteExam(examId);
   }
 
   async gradeScore(examId, studentId) {
     return await Teacher.gradeScore(examId, studentId);
+  }
+
+  async addQuestionToExam(examId, questionId, maxScore){
+    return await Teacher.addQuestionToExam(examId, questionId, maxScore);
   }
 }
 

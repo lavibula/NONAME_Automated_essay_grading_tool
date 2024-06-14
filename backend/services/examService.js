@@ -1,7 +1,11 @@
 const Exam = require('../models/Exam');
 
 class ExamService {
-  async createExam(exam) {
+  async createExam(examData, userId) {
+    const exam = {
+      ...examData,
+      createdBy: userId // Set createdBy from the authenticated user
+    };
     return await Exam.create(exam);
   }
 
@@ -9,17 +13,11 @@ class ExamService {
     return await Exam.getById(id);
   }
 
-  async updateExam(id, exam) {
-    // Kiểm tra xem user có quyền sửa đề thi hay không
+  async deleteExam(id, userId) {
     const existingExam = await Exam.getById(id);
-    if (!existingExam || existingExam.createdBy !== req.user.user_id) { // req.user được truyền từ middleware
-      throw new Error('You do not have permission to update this exam');
+    if (!existingExam || existingExam.createdBy !== userId) {
+      throw new Error('You do not have permission to delete this exam');
     }
-
-    return await Exam.update(id, exam);
-  }
-
-  async deleteExam(id) {
     await Exam.delete(id);
   }
   async calculateScoreForEssay(essayId) {

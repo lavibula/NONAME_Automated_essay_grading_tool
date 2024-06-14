@@ -14,8 +14,9 @@ class Essay {
   }
 
   static async create(essay) {
+    const submitTime = new Date();
     const query = `INSERT INTO Essay (examquestion_id, student_id, essay_content, submit_time) VALUES ($1, $2, $3, $4) RETURNING "essay_id", "examquestion_id", "student_id", "essay_content", "submit_time"`;
-    const values = [essay.examquestionId, essay.studentId, essay.essayContent, essay.submitTime];
+    const values = [essay.examquestionId, essay.studentId, essay.essayContent, submitTime];
     const result = await db.query(query, values);
     return new Essay(
       result.rows[0].essay_id,

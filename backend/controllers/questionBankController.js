@@ -4,7 +4,8 @@ const authMiddleware = require('../utils/auth');
 class QuestionBankController {
   async createQuestionBank(req, res) {
     try {
-      const questionBank = await questionBankService.createQuestionBank(req.body);
+      const { userId } = req.user; // Extract userId from the authenticated user
+      const questionBank = await questionBankService.createQuestionBank(req.body, userId);
       res.status(201).json(questionBank);
     } catch (err) {
       res.status(400).json({ error: err.message });
