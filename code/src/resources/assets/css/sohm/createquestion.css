@@ -44,27 +44,92 @@
   color: #064050; /* Text color */
 }
 
-/*MAIN CONTENT*/
-.content {
-  margin-left: 240px; /* Space for the sidebar */
-  padding: 1rem;
-}
 
-.card-course-item {
-  margin-top: 16px;
-}
 
 .container {
-  /* display: flex; */
-  flex-direction: row; /* Arrange the child elements in a row */
-  width: 1700px;
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
+
+/* Left Section Styles */
+.left-section {
+  flex: 1;
+  padding: 20px;
+  background-color: #CFEFFF;
+  border-radius: 8px;
+  margin-right: 50px;
+  height: 260px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 20px;
+}
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-group .btn.save {
+  background-color: #007FFF; /* Deep Sky Blue background */
+  color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.save:hover {
+  background-color: #0066b2; /* Darker shade of blue for hover effect */
+}
+
+.button-group .btn.cancel {
+  background-color: #a9a9a9; /* Red background */
+  color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.cancel:hover {
+  background-color: #7e5e60; /* Darker shade of red for hover effect */
+}
+
+
 
 
 .main-content {
-  width: 90%; /* Adjust the width as needed */
-  padding: 20px;
-  background-color: #ccf1ff; /* Background color for the main content */
+  flex: 2;
+    padding: 20px;
+    background-color: #CFEFFF;
+    border-radius: 8px;
+    overflow-y: auto;
+    width: 400px;
+    height: fit-content; /* Adjust for padding */
+    min-height: calc(100vh - 80px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .main-content h2 {
@@ -76,7 +141,7 @@
   border: 1px solid #b2bec3; /* Question card border color */
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #ccf1ff; /* Question card background color */
+  background-color: #f9f9f9; /* Question card background color */
   border-radius: 8px; /* Add rounded corners to the card */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
 }
@@ -86,7 +151,7 @@
   color: #2980b9; /* Question heading color */
 }
 
-.content {
+.content-question {
   margin-top: 10px;
 }
 
@@ -177,4 +242,22 @@ button:hover {
   align-self: center;
   z-index: 1000; /* Ensure it's above other elements */
   text-align: center; /* Center the text inside the notification */
+}
+.question-add {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.question-add:hover {
+  background-color: #e0e0e0;
 }

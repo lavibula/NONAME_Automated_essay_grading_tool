@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #E6E7E8;
+    background-color: #CFEFFF;
     padding: 1rem;
     color: #064050;
     display: flex;
@@ -45,7 +45,7 @@
 .student-item {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #B2FFFF;
+    background-color: #f9f9f9;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
@@ -101,7 +101,7 @@
 
 .header {
     width: calc(100% - 250px); /* Subtract sidebar width */
-    background-color: #E6E7E8;
+    background-color: #CFEFFF;
     padding: 1rem;
     display: flex;
     justify-content: space-between;

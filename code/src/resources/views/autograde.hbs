@@ -12,7 +12,7 @@
                 {{#each students}}
                 <tr>
                     <td><a href="/essays/student/{{this.id}}/exam/{{this.examId}}">{{this.name}}</a></td>
-                    <td>SBD: {{this.sbd}}</td>
+                    <td>{{this.sbd}}</td>
                     <td>{{this.diem}}</td>
                 </tr>
                 {{/each}}
@@ -20,18 +20,19 @@
         </table>
     </div>
     <div class="info-box">
-        <h3>Đề thi cuối kỳ</h3>
+        <h3>{{title}}</h3>
         <ul>
-            <li>2 câu hỏi</li>
-            <li>Physic</li>
-            <li>90 phút</li>
-            <li>16h-20/5/2024</li>
-            <li>40</li>
+            <li>Số câu hỏi: {{numberquestion}}</li>
+            <li>Môn học: {{subject}}</li>
+            <li>Thời gian thi: {{time}}</li>
+            <li>Ngày thi: {{date}}</li>
+            <li>Sĩ số: {{numberstudent}}</li>
         </ul>
         <button class="button" id="auto-grade">Chấm tự động</button>
         <h4>Nhận xét:</h4>
         <textarea></textarea>
-        <a class="button" href="/manualmark">Hoàn Thành</button>
+        <button class="button" onclick="location.href='/manualmark'">Hoàn Thành</button>
+
     </div>
 </div>
 

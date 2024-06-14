@@ -1,11 +1,27 @@
 <div class="container">
+    <div class="left-section">
+        <div class="input-group">
+            <label for="title">Tên thư mục:</label>
+            <input type="text" id="title" >
+
+        </div>
+        <div class="input-group">
+            <label for="term">Môn học:</label>
+            <input type="text" id="term" >
+
+        </div>
+
+        <div class="button-group">
+            <button class="btn save">Lưu</button>
+            <button class="btn cancel">Hủy</button>
+        </div>
+    </div>
     <div class="main-content">
-        <h2>Thư mục câu hỏi A</h2>
         <div id="questions-container">
             {{#each questions}}
             <div class="question">
                 <h3>câu hỏi</h3>
-                <div class="content">
+                <div class="content-question">
                     <label for="content-{{@index}}">Nội dung</label>
                     <input type="text" id="content-{{@index}}" value="{{this.content}}">
                 </div>
@@ -24,7 +40,7 @@
             </div>
             {{/each}}
         </div>
-        <button id="add-question">Thêm câu hỏi</button>
+        <button class="question-add" id="add-question">+</button>
     </div>
 </div>
 
@@ -72,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const questionHtml = `
             <div class="question">
                 <h3>Câu hỏi ${questionCount}</h3>  <!-- Thay đổi tiêu đề câu hỏi -->
-                <div class="content">
+                <div class="content-question">
                     <label for="content-${questionCount}">Nội dung</label>
                     <input type="text" id="content-${questionCount}" value="">
                 </div>

@@ -77,11 +77,38 @@ app.get('/createtest',(req,res) =>{
         
     })
 })
-app.get('/grading',(req,res)=>{
-    res.render('autograde',{
-        style: 'sohm/autograde.css'
-    })
-})
+app.get('/grading', (req, res) => {
+    const students = [];
+    const baseID = 100;
+    const baseSBD = 1000;
+    
+    for (let i = 1; i <= 40; i++) {
+        students.push({
+            id: baseID + i,
+            examId: baseID + i,
+            name: `Student ${i}`,
+            sbd: `SBD${baseSBD + i}`,
+            diem: Math.random() * (10 - 5) + 5 // Random score between 5 and 10
+        });
+    }
+
+    const data = {
+        students: students,
+        title: "Kết quả thi môn Toán",
+        numberquestion: 50,
+        subject: "Toán",
+        time: "90 phút",
+        date: "15/06/2024",
+        numberstudent: 40
+    };
+
+    // Render the template with the data
+    res.render('autograde', {
+        style: 'sohm/autograde.css',
+        ...data
+    });
+});
+
 app.get('/manualmark',(req,res) =>{
     res.render('manualmark',{
     style: 'teacher/manualmark.css',
