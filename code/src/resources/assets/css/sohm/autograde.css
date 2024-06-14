@@ -1,9 +1,4 @@
-body {
-  font-family: sans-serif;
-  background-color: #e0f2f7;
-  margin: 0;
-  padding: 0;
-}
+
 
 .container {
   display: flex;
@@ -11,18 +6,21 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  width: 7500px;
 }
 
 .table-container {
-  background-color: #fff;
+  background-color: #ccf1ff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 800px;
-  width: 700px;
+  width: 6700px;
+  margin-left: -15%;
+  margin-top:-200px
 }
 
 table {
+  background-color: #ccf1ff;
   width: 100%;
   border-collapse: collapse;
 }
@@ -34,23 +32,22 @@ th, td {
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #ccf1ff;
   font-weight: bold;
 }
 
 td {
-  background-color: #f9f9f9;
+  background-color: #ccf1ff;
 }
 
 .info-box {
-  background-color: #fff;
+  background-color: #ccf1ff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-left: 20px;
-  max-width: 400px;
-  width: 100%;
-  margin-top:-670px;
+  width: 150%;
+  margin-top:-350px;
 }
 .info-box h3 {
   margin-top: 0;
@@ -68,7 +65,7 @@ td {
 .info-box .button {
   width: 100%;
   margin-bottom: 10px;
-  background-color: #4CAF50;
+  background-color: #427ba1;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -78,21 +75,22 @@ td {
 }
 
 .info-box .button:hover {
-  background-color: #45a049;
+  background-color: #427ba1;
 }
 
 .info-box textarea {
   width: 100%;
   height: 100px;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #a1e0f9;
+  background-color:#ccf1ff ;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
 a {
   text-decoration: none;
-  color: blue;
+  color: #427ba1;
 }
 
 a:hover {
@@ -116,5 +114,5 @@ a:hover {
 
 .pagination .current {
   background-color: #4CAF50;
-  color: white;
+  color: #a1e0f9;
 }
