@@ -1,12 +1,68 @@
-.container {
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px; /* Set the width for the sidebar */
+  height: 100vh; /* Full height */
+  position: fixed; /* Fix the position */
+  top: 0;
+  left: 0;
+  background-color: #CFEFFF; /* Background color */
+  padding: 1rem; /* Uniform padding */
+  color: #064050; /* Text color */
+}
+
+.sidebar h4 {
+  margin-bottom: 0;
+  color: #064050; /* Text color */
+}
+
+.sidebar p {
+  margin-top: 0;
+  font-size: 0.9rem;
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile {
+  margin-top: 1rem;
+  border-top: 1px solid #95C8D8; /* Top border */
+  padding-top: 1rem; /* Padding above profile section */
   display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items horizontally */
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile h6 {
+  margin: 0;
+  font-size: 1rem;
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile .custom-badge {
+  font-size: 0.8rem;
+  background-color: #A1E0F9; /* New background color */
+  color: #064050; /* Text color */
+}
+
+/*MAIN CONTENT*/
+.content {
+  margin-left: 240px; /* Space for the sidebar */
+  padding: 1rem;
+}
+
+.card-course-item {
+  margin-top: 16px;
+}
+
+.container {
+  /* display: flex; */
   flex-direction: row; /* Arrange the child elements in a row */
-  width: 2750px;
+  width: 1700px;
 }
 
 
 .main-content {
-  width: 100%; /* Adjust the width as needed */
+  width: 90%; /* Adjust the width as needed */
   padding: 20px;
   background-color: #ccf1ff; /* Background color for the main content */
 }

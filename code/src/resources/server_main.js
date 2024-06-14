@@ -2,7 +2,7 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const app = express();
-
+const port = 3002;
 app.use(express.static('assets'));
 
 
@@ -64,6 +64,7 @@ app.get('/mylibrary',(req,res)=>{
         style: 'mylibraryteacher.css'
     })
 })
+
 app.get('/mylibraryleader',(req,res)=>{
     res.render('mylibraryleader',{
         style: 'mylibraryleader.css'
@@ -95,12 +96,16 @@ app.get('/user-profile',(req,res) =>{
     
     })
 })
+
 app.get('/createquestion',(req,res) =>{
-    res.render('createquestion',{
-    style: 'sohm/createquestion.css',
-    
-    })
+    res.render('createquestion',
+        {
+        style: 'sohm/createquestion.css',
+        }
+    )
 })
-app.listen(8080,() =>{
-    console.log('Server starting at port ',8080)
-  });
+
+// Start the server
+app.listen(port, () => {
+    console.log(`App listening on port http://localhost:${port}`);
+});
