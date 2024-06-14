@@ -1,11 +1,11 @@
 var spec = {
     swagger: "2.0",
     info: {
-        description: "Các thông tin mô tả về dự án và API",
+        description: "Thích chấm điểm tự động ahiihi",
         version: "1.0",
-        title: "Tên dự án"
+        title: "Automated Grading Essay API"
     },
-    host: "localhost:8080",
+    host: "localhost:3000",
     basePath: "/",
     tags: [
         {

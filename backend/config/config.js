@@ -1,5 +1,5 @@
 module.exports = {
-    port: process.env.PORT || 8080,
+    port: process.env.PORT || 3000,
     database: {
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'postgres',
