@@ -1,6 +1,6 @@
 <div class="login-container">
     <div class="login-box">
-        <form id="loginForm">
+        <form id="loginForm" method = "post">
             <h2 style="color: #064050">Đăng Nhập</h2>
             <p id="errorMessage" style="color: rgb(113, 2, 2); display: none;">Tên tài khoản hoặc mật khẩu không đúng.</p>
             <div class="form-group">
@@ -20,52 +20,4 @@
     </div>
 </div>
 
-
-<script>
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    fetch('popup/login.json', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username, password: password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Assuming the server responds with { success: true, userId: ..., role: ... }
-            console.log(`User ID: ${data.userId}, Role: ${data.role}`);
-            switch(data.role) {
-                case 'teacher':
-                    window.location.href = '/mylibraryteacher';
-                    break;
-                case 'student':
-                    window.location.href = '/mylibrarystudent';
-                    break;
-                case 'admin':
-                    window.location.href = '/mylibraryadmin';
-                    break;
-                case 'leader':
-                    window.location.href = '/mylibraryleader';
-                    break;
-                default:
-                    console.error('Unknown role:', data.role);
-            }
-        } else {
-            // Show error message
-            document.getElementById('errorMessage').style.display = 'block';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Show error message
-        document.getElementById('errorMessage').style.display = 'block';
-    });
-});
-</script>
 

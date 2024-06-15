@@ -48,6 +48,11 @@ app.get('/',(req,res)=>{
   })
 })
 
+app.post('/', (req, res) => {
+  const { username, password } = req.body;
+  console.log("loginnnn: ",username, password );
+});
+
 app.use('/users', userRoutes);
 app.use('/group-leaders', groupLeaderRoutes);
 app.use('/teachers', teacherRoutes);

@@ -64,6 +64,15 @@ app.get('/',(req,res)=>{
     })
 })
 
+app.post('/',(req,res)=>{
+    // res.render('login',{
+    //     style:'login.css',
+    //     noSidebar
+    // })
+    const { username, password } = req.body;
+    console.log("loginnnn: ",username, password );
+})
+
 app.get('/mylibraryteacher',(req,res)=>{
     res.render('mylibraryteacher',{
         style: 'mylibraryteacher.css'

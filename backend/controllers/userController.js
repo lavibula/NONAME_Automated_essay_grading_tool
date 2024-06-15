@@ -40,6 +40,7 @@ class UserController {
   async loginUser(req, res) {
     try {
       const { username, password } = req.body;
+      console.log('logined', username, password);
       const token = await userService.login(username, password);
       // res.status(200).json({ token });
       res.render('login');

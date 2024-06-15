@@ -3,7 +3,7 @@ module.exports = {
     database: {
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASSWORD || 'tuandat12',
+      password: process.env.DB_PASSWORD || 'Bkl21053',
       database: process.env.DB_NAME || 'grade_scoredb',
     },
     secret: 'hihi',
