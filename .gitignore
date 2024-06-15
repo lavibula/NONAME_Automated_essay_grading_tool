@@ -1,8 +1,2 @@
 # Ignore .vscode directory
 .vscode/
-
-# Ignore node_modules directory
-node_modules/
-
-# Ignore backend config file
-backend/config/config.js
