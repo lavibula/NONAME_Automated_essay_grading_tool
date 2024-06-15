@@ -3,7 +3,10 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 const app = express();
 const port = 3002;
+
 app.use(express.static('assets'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 // Thiết lập Handlebars
@@ -148,6 +151,31 @@ app.get('/attendexam',(req,res) =>{
         }
     )
 })
+
+// app.post('/attendexam',(req,res) =>{
+//     const { bailam } = req.body;
+//     console.log(bailam);
+//     // const bailam = req.body.bailam;
+//     // // Xử lý dữ liệu textToCorrect ở đây (ví dụ: lưu vào database, xử lý ngữ pháp,...)
+//     // console.log(`Received text to correct: ${bailam}`);
+
+//     res.render('mylibrarystudent',
+//         {
+//         style: 'mylibrarystudent.css',
+//         }
+//     )
+// })
+app.post('/attendexam', (req, res) => {
+    // Log nội dung các bài làm
+    const { bailam1, bailam2, bailam3 } = req.body;
+    console.log("Bài làm 1:", bailam1);
+    console.log("Bài làm 2:", bailam2);
+    console.log("Bài làm 3:", bailam3);
+
+    // Bạn có thể thêm xử lý thêm (lưu vào cơ sở dữ liệu, v.v.)
+
+    res.send("Bài làm đã được gửi và log thành công.");
+});
 
 // Start the server
 app.listen(port, () => {

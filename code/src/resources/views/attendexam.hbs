@@ -1,33 +1,88 @@
-{{!-- <div class="container"> --}}
-    <header class="header">
-        <div class="time-remaining">Thời gian còn lại: 15 phút</div>
-        <div class="settings-icon">
-            {{!-- <img src="settings-icon.png" alt="Settings"> --}}
+
+<header class="header">
+    <div class="time-remaining">Thời gian còn lại: 15 phút</div>
+</header>
+<form id="examForm" class="main-content" method="post" action="/attendexam">
+    <div class="exam-info">
+        <h2>Đề thi giữa kì ABC</h2>
+        <p>Số câu hỏi: 50</p>
+        <p>Môn học: Toán</p>
+        <p>Thời gian thi: 90 phút</p>
+        <p>Ngày thi: 15/06/2024</p>
+        {{!-- <div class="question-buttons">
+            <button type="button" class="question-btn">Câu 1</button>
+            <button type="button" class="question-btn">Câu 2</button>
+            <button type="button" class="question-btn">Câu 3</button>
+        </div> --}}
+        <div class="question-buttons">
+            <button type="button" class="question-btn" data-question="1" data-content="Nội dung câu hỏi 1">Câu 1</button>
+            <button type="button" class="question-btn" data-question="2" data-content="Nội dung câu hỏi 2">Câu 2</button>
+            <button type="button" class="question-btn" data-question="3" data-content="Nội dung câu hỏi 3">Câu 3</button>
         </div>
-    </header>
-    <div class="main-content">
-        <div class="exam-info">
-            <h2>Đề thi giữa kì ABC</h2>
-            <p>Số câu hỏi: 50</p>
-            <p>Môn học: Toán</p>
-            <p>Thời gian thi: 90 phút</p>
-            <p>Ngày thi: 15/06/2024</p>
-            <div class="question-buttons">
-                <button class="question-btn">Câu 1</button>
-                <button class="question-btn">Câu 2</button>
-                <button class="question-btn">Câu 3</button>
-            </div>
-            <button class="finish-btn">Hoàn thành</button>
+
+        <button type="submit" id="submitButton" class="finish-btn">Hoàn thành</button>
+    </div>
+
+    <div class="question-answer-section">
+        <div class="question">
+            <h3>Câu 1</h3>
+            <p>Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. Nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng.</p>
         </div>
-        <div class="question-answer-section">
-            <div class="question">
-                <h3>Câu 1</h3>
-                <p>Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng.</p>
-            </div>
-            <div class="answer">
-                <h3>Bài làm</h3>
-                <p>Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng. Mảnh vườn này có thể làm chủ nhân của nó êm ấm một thời gian dài, nhất là khi lớp rào bao quanh không còn làm họ vuông mất nữa. Nhưng hễ có một cơn dông tố nổi lên là cây cối sẽ bị bật khỏi đất, hoa sẽ nát và mảnh vườn sẽ xấu xí hơn bất kì một nơi hoang dại nào. Con người không thể hạnh phúc với một hạnh phúc mong manh như thế. Con người cần một đại dương mênh mông bì bão táp làm nổi sóng hung dữ là phẳng lặng lẽ và trong sáng như trước. Số phận cầu những cái tuyệt đối cá nhân không bộc lộ ra khỏi bản thân, chẳng có gì đáng thèm muốn.</p>
-            </div>
+        <div class="answer">
+            <h3>Bài làm</h3>
+            <textarea id="bailam" name="bailam" class="textbox"></textarea>
         </div>
     </div>
-{{!-- </div> --}}
+</form>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const questionButtons = document.querySelectorAll('.question-btn');
+            const questionSection = document.querySelector('.question');
+            const textarea = document.querySelector('#bailam');
+
+            // Biến lưu trữ nội dung của mỗi bài làm
+            let answers = {
+                bailam1: '',
+                bailam2: '',
+                bailam3: ''
+            };
+
+            questionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Lưu nội dung hiện tại của textarea vào biến tương ứng
+                    const currentQuestion = document.querySelector('.question h3').textContent;
+                    const questionNumber = currentQuestion.split(' ')[1];
+                    answers[`bailam${questionNumber}`] = textarea.value;
+
+                    // Cập nhật nội dung câu hỏi và textarea dựa trên nút được nhấn
+                    const questionContent = this.getAttribute('data-content');
+                    const questionTitle = `Câu ${this.getAttribute('data-question')}`;
+                    
+                    questionSection.innerHTML = `
+                        <h3>${questionTitle}</h3>
+                        <p>${questionContent}</p>
+                    `;
+                    textarea.value = answers[`bailam${this.getAttribute('data-question')}`];
+                });
+            });
+
+            document.getElementById('examForm').addEventListener('submit', function (event) {
+                // Lưu nội dung hiện tại của textarea vào biến tương ứng trước khi submit
+                const currentQuestion = document.querySelector('.question h3').textContent;
+                const questionNumber = currentQuestion.split(' ')[1];
+                answers[`bailam${questionNumber}`] = textarea.value;
+
+                // Chuyển các bài làm thành các trường ẩn trong form để gửi đi
+                for (let key in answers) {
+                    if (answers.hasOwnProperty(key)) {
+                        let hiddenField = document.createElement('input');
+                        hiddenField.type = 'hidden';
+                        hiddenField.name = key;
+                        hiddenField.value = answers[key];
+                        this.appendChild(hiddenField);
+                    }
+                }
+            });
+        });
+    </script>
