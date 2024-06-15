@@ -140,6 +140,15 @@ app.get('/mylibrarystudent',(req,res) =>{
     )
 })
 
+app.get('/attendexam',(req,res) =>{
+    res.render('attendexam',
+        {
+        style: 'attendexam.css',
+        noSidebar,
+        }
+    )
+})
+
 // Start the server
 app.listen(port, () => {
     console.log(`App listening on port http://localhost:${port}`);
