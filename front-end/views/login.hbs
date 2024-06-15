@@ -28,15 +28,23 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    fetch('popup/login.json', {
+    fetch('/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username: username, password: password })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log(response);  // Logs the Response object
+        if (response.ok) {
+            return response.json();  // Parses the body text as JSON
+        } else {
+            throw new Error('Something went wrong on api server!');
+        }
+    })
     .then(data => {
+        console.log(data);
         if (data.success) {
             // Assuming the server responds with { success: true, userId: ..., role: ... }
             console.log(`User ID: ${data.userId}, Role: ${data.role}`);
