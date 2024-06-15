@@ -5,7 +5,8 @@
   "main": "backend/app.js",
   "scripts": {
     "start": "nodemon backend/app.js",
-    "test": "jest"
+    "test": "jest",
+    "ui_test": "nodemon server_main.js"
   },
   "keywords": [],
   "author": "",
