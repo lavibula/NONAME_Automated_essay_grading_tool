@@ -11,13 +11,13 @@ const authMiddleware = (req, res, next) => {
     req.user = decoded;
     console.log(req.user.role);
     if (req.user.role === 'Admin') {
-      next();
-    } else if (req.user.role === 'Group Leader' && (req.path.startsWith('/question-banks') || req.path.startsWith('/questions'))) {
-      next();
+      return res.status(200).json({ role: 'Admin' });
+   } else if (req.user.role === 'Group Leader' && (req.path.startsWith('/question-banks') || req.path.startsWith('/questions'))) {
+      return res.status(200).json({ role: 'Group Leader' });
     } else if (req.user.role === 'Teacher' && (req.path.startsWith('/exams') || req.path.startsWith('/essays') || req.path.startsWith('/exam-results'))) {
-      next();
+      return res.status(200).json({ role: 'Teacher' });
     } else if (req.user.role === 'Student' && (req.path.startsWith('/essays') || req.path.startsWith('/exams'))) {
-      next();
+      return res.status(200).json({ role: 'Student' });
     } else {
       return res.status(403).json({ message: 'Forbidden' });
     }
