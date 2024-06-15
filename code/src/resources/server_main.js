@@ -174,7 +174,11 @@ app.post('/attendexam', (req, res) => {
 
     // Bạn có thể thêm xử lý thêm (lưu vào cơ sở dữ liệu, v.v.)
 
-    res.send("Bài làm đã được gửi và log thành công.");
+    res.render('mylibrarystudent',
+        {
+        style: 'mylibrarystudent.css',
+        }
+    )
 });
 
 // Start the server
