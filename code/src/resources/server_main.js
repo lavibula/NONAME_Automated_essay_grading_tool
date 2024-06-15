@@ -59,7 +59,7 @@ app.get('/',(req,res)=>{
     })
 })
 
-app.get('/mylibrary',(req,res)=>{
+app.get('/mylibraryteacher',(req,res)=>{
     res.render('mylibraryteacher',{
         style: 'mylibraryteacher.css'
     })
@@ -128,6 +128,14 @@ app.get('/createquestion',(req,res) =>{
     res.render('createquestion',
         {
         style: 'sohm/createquestion.css',
+        }
+    )
+})
+
+app.get('/mylibrarystudent',(req,res) =>{
+    res.render('mylibrarystudent',
+        {
+        style: 'mylibrarystudent.css',
         }
     )
 })

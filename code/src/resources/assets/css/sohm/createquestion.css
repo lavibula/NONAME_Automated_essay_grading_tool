@@ -49,7 +49,7 @@
 .container {
   display: flex;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   justify-content: space-between;
 }
@@ -57,9 +57,9 @@
 /* Left Section Styles */
 .left-section {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   background-color: #CFEFFF;
-  border-radius: 8px;
+  border-radius: 5px;
   margin-right: 50px;
   height: 260px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -100,12 +100,12 @@
 }
 
 .button-group .btn.save {
-  background-color: #007FFF; /* Deep Sky Blue background */
+  background-color: #437ba1; /* Deep Sky Blue background */
   color: #FFFFFF; /* White text */
 }
 
 .button-group .btn.save:hover {
-  background-color: #0066b2; /* Darker shade of blue for hover effect */
+  background-color: #1e6477; /* Darker shade of blue for hover effect */
 }
 
 .button-group .btn.cancel {
@@ -204,10 +204,8 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9; /* Button hover background color */
+  background-color: #154564; /* Button hover background color */
 }
-
-
 
 .modal {
   display: none;
@@ -215,17 +213,18 @@ button:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px; /* Adjust the width to make it smaller */
+  width: 350px; /* Adjust the width to make it smaller */
   height: auto;
   background-color: #ecf0f1; /* Modal background color */
-  z-index: 1000; /* Ensure it's above other elements */
+  z-index: 1; /*Ensure it's above other elements*/
+  border-radius: 5px;
 }
 
 .modal-content {
   background: #ccf1ff;
   padding: 10px; /* Reduce padding to make it more compact */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  border-radius: 5px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add a subtle shadow for depth */
 }
 
 .notification {
