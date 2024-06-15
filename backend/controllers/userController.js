@@ -41,7 +41,6 @@ class UserController {
     try {
       const { username, password } = req.body;
       const token = await userService.login(username, password);
-      console.log(token);
       res.status(200).json({ token });
     } catch (err) {
       res.status(401).json({ error: err.message });
