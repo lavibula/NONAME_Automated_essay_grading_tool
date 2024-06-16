@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon backend/app.js",
     "test": "jest",
-    "ui_test": "nodemon server_main.js"
+    "ui_test": "nodemon server_main.js",
+    "dev": "nodemon --watch backend --watch frontend/views -e js,hbs,mjs,cjs,json backend/app.js"
   },
   "keywords": [],
   "author": "",

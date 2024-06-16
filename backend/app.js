@@ -17,7 +17,7 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 
 console.log("dirname",__dirname);
-const dir = "D:\\20232\\software engine\\NONAME_Automated_essay_grading_tool";
+const dir = "D:\\Empty\\NONAME_Automated_essay_grading_tool";
 const app = express();
 app.use(express.static(path.join(dir, 'front-end', 'assets')));
 
@@ -27,7 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(errorHandler.handle);
 
-
+ 
 app.engine('.hbs', engine({
   defaultLayout: 'main',
   layoutsDir: path.join(dir, 'front-end', 'views', 'layouts'),
