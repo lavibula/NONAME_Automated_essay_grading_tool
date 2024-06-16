@@ -9,4 +9,5 @@ router.get('/exams/:id', authMiddleware, teacherController.getExamById);
 router.delete('/exams/:id', authMiddleware, teacherController.deleteExam);
 router.post('/essays/grade-score/:examId/:studentId', authMiddleware, teacherController.gradeScore);
 router.post('/exams/:examId/questions', authMiddleware, teacherController.addQuestionToExam);
+router.get('/exams', authMiddleware, teacherController.getAllExams);
 module.exports = router;

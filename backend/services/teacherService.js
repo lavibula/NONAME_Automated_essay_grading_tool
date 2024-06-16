@@ -20,6 +20,10 @@ class TeacherService {
   async addQuestionToExam(examId, questionId, maxScore){
     return await Teacher.addQuestionToExam(examId, questionId, maxScore);
   }
+
+  async getAllExams() {
+    return await Teacher.getAllExams();
+  }
 }
 
 module.exports = new TeacherService();

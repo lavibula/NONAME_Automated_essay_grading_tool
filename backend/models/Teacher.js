@@ -83,6 +83,11 @@ class Teacher extends User {
     }
     return 0;
   }
+
+  static async getAllExams() {
+    const exams = await Exam.getAll();
+    return exams;
+  }
 }
 
 module.exports = Teacher;
