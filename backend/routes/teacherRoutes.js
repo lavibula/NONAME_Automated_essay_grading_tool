@@ -12,4 +12,5 @@ router.post('/exams/:examId/questions', authMiddleware, teacherController.addQue
 router.get('/exams', authMiddleware, teacherController.getAllExams);
 router.get('/questionBank/:questionBankId/questions', authMiddleware, teacherController.getQuestionsByQuestionBankId); // get all questions from bank_id
 router.get('/question-banks', authMiddleware, teacherController.getAllQuestionBanks); // get all bank_id
+router.get('/question-banks/:id', authMiddleware, teacherController.getAllStudentsByExamId); // get all student
 module.exports = router;

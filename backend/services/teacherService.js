@@ -37,6 +37,10 @@ class TeacherService {
     const questionBanks = await QuestionBank.getAll();
     return questionBanks;
   }
+  static async getAllStudentsByExamId(examId) {
+    const students = await Teacher.getAllStudentsByExamId(examId);
+    return students;
+  }
 }
 
 module.exports = new TeacherService();
