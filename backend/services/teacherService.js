@@ -2,7 +2,6 @@ const Teacher = require('../models/Teacher');
 const Question = require('../models/Question');
 const QuestionBank = require('../models/QuestionBank');
 
-
 class TeacherService {
   async createExam(examData) {
     return await Teacher.createExam(examData);
@@ -20,7 +19,7 @@ class TeacherService {
     return await Teacher.gradeScore(examId, studentId);
   }
 
-  async addQuestionToExam(examId, questionId, maxScore){
+  async addQuestionToExam(examId, questionId, maxScore) {
     return await Teacher.addQuestionToExam(examId, questionId, maxScore);
   }
 
@@ -28,16 +27,17 @@ class TeacherService {
     return await Teacher.getAllExams();
   }
 
-  static async getQuestionsByQuestionBankId(questionBankId) {
+  async getQuestionsByQuestionBankId(questionBankId) {
     const questions = await Question.getByQuestionBankId(questionBankId);
     return questions;
   }
 
-  static async getAllQuestionBanks() {
+  async getAllQuestionBanks() {
     const questionBanks = await QuestionBank.getAll();
     return questionBanks;
   }
-  static async getAllStudentsByExamId(examId) {
+
+  async getAllStudentsByExamId(examId) {
     const students = await Teacher.getAllStudentsByExamId(examId);
     return students;
   }
@@ -56,6 +56,14 @@ class TeacherService {
     }
 
     console.log(`Automatic grading completed for exam ${examId}.`);
+  }
+
+  async getResultByExamId(examId) {
+    return await Teacher.getResultByExamId(examId);
+  }
+
+  async getResultByStudentId(studentId) {
+    return await Teacher.getResultByStudentId(studentId);
   }
 }
 

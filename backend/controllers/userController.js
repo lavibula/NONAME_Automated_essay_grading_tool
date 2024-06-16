@@ -71,7 +71,7 @@ class UserController {
 
   async getCurrentUser(req, res) {
     try {
-      const userId = req.user.id; 
+      const userId = req.user.user_id; 
       const user = await userService.getUserById(userId);
       if (user) {
         res.status(200).json(user);
@@ -82,13 +82,14 @@ class UserController {
       res.status(500).json({ error: err.message });
     }
   }
+
   async getAllUsers(req, res) {
     try {
-      const user = await userService.getAllUsers();
-      if (user) {
-        res.status(200).json(user);
+      const users = await userService.getAllUsers();
+      if (users.length > 0) {
+        res.status(200).json(users);
       } else {
-        res.status(404).json({ error: 'User not found' });
+        res.status(404).json({ error: 'No users found' });
       }
     } catch (err) {
       res.status(500).json({ error: err.message });

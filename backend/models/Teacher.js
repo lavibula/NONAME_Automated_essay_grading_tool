@@ -93,8 +93,22 @@ class Teacher extends User {
   static async getAllStudentsByExamId(examId) {
     const query = `SELECT DISTINCT(e.student_id)
                     FROM ExamQuestion eq
-                    JOIN Essay e ON eq.examquestion_id = e.examquestion_id WHERE "exam_id" = $1`;
+                    JOIN Essay e ON eq.examquestion_id = e.examquestion_id WHERE exam_id = $1`;
     const values = [examId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
+
+  static async getResultByExamId(examId) {
+    const query = `SELECT * FROM ExamResult WHERE exam_id = $1`;
+    const values = [examId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
+
+  static async getResultByStudentId(studentId) {
+    const query = `SELECT * FROM ExamResult WHERE student_id = $1`;
+    const values = [studentId];
     const result = await db.query(query, values);
     return result.rows;
   }

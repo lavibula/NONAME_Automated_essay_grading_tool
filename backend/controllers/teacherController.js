@@ -116,7 +116,8 @@ class TeacherController {
 
   async getAllStudentsByExamId(req, res) {
     try {
-      const { examId } = req.params;
+      const examId = req.params.id;
+      console.log(`Received examId: ${examId}`);
       const student = await teacherService.getAllStudentsByExamId(examId);
       res.status(200).json(student);
     } catch (err) {
@@ -127,8 +128,33 @@ class TeacherController {
   async autoGradeAllStudents(req, res) {
     try {
       const { examId } = req.params;
-      await teacherService.autoGradeAllStudents(examId);
-      res.status(200).json({ message: 'Automatic grading initiated successfully' });
+      const gradingLog = await teacherService.autoGradeAllStudents(examId);
+      const results = await teacherService.getResultByExamId(examId);
+      res.status(200).json({
+        message: 'Automatic grading completed successfully.',
+        log: gradingLog,
+        results: results
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getResultByExamId(req, res) {
+    try {
+      const examId = req.params.examId;
+      const results = await teacherService.getResultByExamId(examId);
+      res.status(200).json(results);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getResultByStudentId(req, res) {
+    try {
+      const studentId = req.params.studentId;
+      const results = await teacherService.getResultByStudentId(studentId);
+      res.status(200).json(results);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
