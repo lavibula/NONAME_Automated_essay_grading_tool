@@ -4,7 +4,8 @@ const authMiddleware = require('../utils/auth');
 class StudentController {
   async mylibrarystudent(req,res){
     res.render('mylibrarystudent',{
-      style: 'mylibrarystudent.css'
+      style: 'mylibrarystudent.css',
+      role: 'Học sinh'
     })
   }
   async submitEssay(req, res) {
