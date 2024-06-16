@@ -12,7 +12,7 @@ router.post('/teachers/exams/:examId/questions', authMiddleware, teacherControll
 router.get('/teachers/exams', authMiddleware, teacherController.getAllExams);
 router.get('/teachers/questionBank/:questionBankId/questions', authMiddleware, teacherController.getQuestionsByQuestionBankId); // get all questions from bank_id
 router.get('/teachers/questionBanks', authMiddleware, teacherController.getAllQuestionBanks); // get all bank_id
-router.get('/teachers/questionBanks/:id', authMiddleware, teacherController.getAllStudentsByExamId); // get all student
+router.get('/teachers/exams-enroll/:id', authMiddleware, teacherController.getAllStudentsByExamId);
 router.post('/teachers/exams/grade-all-students/:examId', authMiddleware, teacherController.autoGradeAllStudents); //automatically grade all students by exam_id
 router.get('/teachers/exam-results/:examId', authMiddleware, teacherController.getResultByExamId);
 router.get('/teachers/student-results/:studentId', authMiddleware, teacherController.getResultByStudentId);

@@ -11,10 +11,10 @@ router.put('/admin/users/:id', authMiddleware, userController.updateUser);
 router.delete('/admin/users/:id', authMiddleware, userController.deleteUser);
 router.get('/admin/users', authMiddleware, userController.getAllUsers);
 //get user hiện tại
-router.get('/users/me', authMiddleware, userController.getCurrentUser);
-router.get('/users/name/:name', userController.getByUsername);
+router.get('/users/me', authMiddleware, userController.getCurrentUser); //done
+router.get('/users/name/:name', userController.getByUsername); //done
 
 // Route cho login, không cần authMiddleware
-router.post('/users/login', userController.loginUser); 
+router.post('/users/login', userController.loginUser);  //done
 
 module.exports = router;
