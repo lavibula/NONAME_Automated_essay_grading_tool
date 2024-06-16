@@ -9,10 +9,7 @@ const authMiddleware = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.secret);
     req.user = decoded;
-    console.log(`User role: ${req.user.role}`);
-    console.log(decoded);
     const path = req.path;
-    console.log(req.user.user_id);
     if (req.user.role === 'Admin') {
       next();
     } else if (req.user.role === 'Group Leader' && path.startsWith('/group-leaders') || path.startsWith('/users')) {
