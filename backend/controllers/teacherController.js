@@ -2,14 +2,33 @@ const teacherService = require('../services/teacherService');
 const authMiddleware = require('../utils/auth');
 
 class TeacherController {
-  async mylibrary(req,res){
+  async mylibrarypublic(req,res){
     const exams = await teacherService.getAllExams();
     res.render('mylibraryteacher',{
       style: 'mylibraryteacher.css',
       role: 'Giáo viên',
-      exam
+      thu_muc_cau_hoi_s: exams
+    })
+  }async mylibrarygrading(req,res){
+    const exams = await teacherService.getAllExams();
+    res.render('listofgrading',{
+      style: 'mylibraryteacher.css',
+      role: 'Giáo viên',
+      thu_muc_cau_hoi_s: exams
     })
   }
+  async createtestui(req,res){
+    res.render('createtest',{
+      style: 'teacher/createtest.css',
+      role:'Giáo viên',
+    })
+  }
+  async gradingui(req,res){
+    res.render('autograde',{
+      style: 'sohm/autograde.css'
+    })
+  }
+
   async createExam(req, res) {
     try {
       const exam = await teacherService.createExam(req.body);

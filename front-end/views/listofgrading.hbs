@@ -60,15 +60,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-md-3 text-end">
-                                <div class="d-flex justify-content-between align-self-end">
-                                    <button class="btn btn-primary ms-5">Chỉnh sửa</button>
-                                </div>
-                            </div>
 
                             <div class="col-md-1 text-end">
                                 <div class="d-flex justify-content-between align-self-end">
-                                    <button class="btn btn-secondary ms-2">Xóa</button>
+                                <button class="btn btn-secondary ms-2 exam-button" data-exam-id="{{this.exam_id}}">Chấm bài</button>
+
                                 </div>
                             </div>
 
@@ -83,6 +79,43 @@
     
 </div>
 <script>
-    const token=window.localStorage.getItem('token');
-    console.log(token);
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.exam-button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const examId = this.getAttribute('data-exam-id');
+                const token = window.localStorage.getItem('token');  // Retrieve the token from local storage
+
+                if (!token) {
+                    console.error('No token found, please log in');
+                    return;
+                }
+
+                // Use the token in the fetch request
+                fetch(`/essays/exams/${examId}`, {
+                    method: 'GET', // or 'POST' if you're posting data
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();  // Handle the response data
+                    }
+                    throw new Error('Something went wrong with the server!');
+                })
+                .then(data => {
+                    console.log(examId);
+                    console.log('Success:', data);
+                    //window.location.href = `/essays/exams/${examId}`;  // Redirect to the desired page
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    });
+
 </script>

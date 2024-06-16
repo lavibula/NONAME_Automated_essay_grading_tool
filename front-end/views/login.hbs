@@ -44,9 +44,10 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         }
     })
     .then(data => {
-        console.log(data);
-        localStorage.setItem('token', data.token);
-        window.location.href ='/teachers/mylibrary'
+        window.localStorage.setItem('token', data.token);
+        
+        
+        window.location.href ='/teachers/mylibrary/publictest';
     })
     .catch(error => {
         console.error('Error:', error);

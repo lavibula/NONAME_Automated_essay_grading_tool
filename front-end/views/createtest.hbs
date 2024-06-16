@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Function to load modal content dynamically
     function loadModalContent() {
-        fetch('popup/folderpopup.hbs')
+        fetch('/popup/folderpopup.hbs')
             .then(response => response.text())
             .then(data => {
                 const modalContainer = document.getElementById('modal-container');
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to fetch folders from the server
     function fetchFolder() {
-        fetch('popup/pesudo_api.json')  // Replace with your actual endpoint
+        fetch('/popup/pesudo_api.json')  // Replace with your actual endpoint
             .then(response => response.json())
             .then(data => populateFolders(data))
             .catch(error => console.error('Error fetching folders:', error));
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Implement logic to load and display questions from the selected folder
         console.log('Loading questions from folder:', folder);
-        fetch('popup/questionpopup.hbs')
+        fetch('/popup/questionpopup.hbs')
             .then(response => response.text())
             .then(data => {
                 const modalContainer = document.getElementById('modal-container');
@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Function to fetch question in a specific folder
     function fetchQuestions() {
-        fetch('popup/pesudo_api2.json')  // Replace with your actual endpoint
+        fetch('/popup/pesudo_api2.json')  // Replace with your actual endpoint
             .then(response => response.json())
             .then(data => populateQuestions(data.questions))
             .catch(error => console.error('Error fetching questions:', error));
