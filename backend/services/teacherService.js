@@ -57,6 +57,14 @@ class TeacherService {
 
     console.log(`Automatic grading completed for exam ${examId}.`);
   }
+
+  async getResultByExamId(examId) {
+    return await Teacher.getResultByExamId(examId);
+  }
+
+  async getResultByStudentId(studentId) {
+    return await Teacher.getResultByStudentId(studentId);
+  }
 }
 
 module.exports = new TeacherService();

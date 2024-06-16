@@ -106,6 +106,26 @@ class TeacherController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async getResultByExamId(req, res) {
+    try {
+      const examId = req.params.examId;
+      const results = await teacherService.getResultByExamId(examId);
+      res.status(200).json(results);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getResultByStudentId(req, res) {
+    try {
+      const studentId = req.params.studentId;
+      const results = await teacherService.getResultByStudentId(studentId);
+      res.status(200).json(results);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new TeacherController();

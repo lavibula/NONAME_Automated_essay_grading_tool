@@ -4,7 +4,7 @@ const authMiddleware = require('../utils/auth');
 
 const router = express.Router();
 
-router.post('/essays', authMiddleware, studentController.submitEssay);
-router.get('/exams/:id/results', authMiddleware, studentController.getExamResults);
+router.post('/students/essays', authMiddleware, studentController.submitEssay);
+router.get('/students/exams/:id/results', authMiddleware, studentController.getExamResults);
 
 module.exports = router;

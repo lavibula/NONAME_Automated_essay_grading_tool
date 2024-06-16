@@ -98,6 +98,20 @@ class Teacher extends User {
     const result = await db.query(query, values);
     return result.rows;
   }
+
+  static async getResultByExamId(examId) {
+    const query = `SELECT * FROM ExamResult WHERE exam_id = $1`;
+    const values = [examId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
+
+  static async getResultByStudentId(studentId) {
+    const query = `SELECT * FROM ExamResult WHERE student_id = $1`;
+    const values = [studentId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
 }
 
 module.exports = Teacher;
