@@ -2,6 +2,14 @@ const teacherService = require('../services/teacherService');
 const authMiddleware = require('../utils/auth');
 
 class TeacherController {
+  async mylibrary(req,res){
+    const exams = await teacherService.getAllExams();
+    res.render('mylibraryteacher',{
+      style: 'mylibraryteacher.css',
+      role: 'Giáo viên',
+      exam
+    })
+  }
   async createExam(req, res) {
     try {
       const exam = await teacherService.createExam(req.body);

@@ -48,6 +48,12 @@ app.get('/',(req,res)=>{
   })
 })
 
+app.get('/mylibraryteacher',(req,res)=>{
+  res.render('mylibraryteacher',{
+      style: 'mylibraryteacher.css'
+  })
+})
+
 app.use('/users', userRoutes);
 app.use('/group-leaders', groupLeaderRoutes);
 app.use('/teachers', teacherRoutes);

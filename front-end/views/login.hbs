@@ -45,29 +45,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     })
     .then(data => {
         console.log(data);
-        if (data.success) {
-            // Assuming the server responds with { success: true, userId: ..., role: ... }
-            console.log(`User ID: ${data.userId}, Role: ${data.role}`);
-            switch(data.role) {
-                case 'teacher':
-                    window.location.href = '/mylibraryteacher';
-                    break;
-                case 'student':
-                    window.location.href = '/mylibrarystudent';
-                    break;
-                case 'admin':
-                    window.location.href = '/mylibraryadmin';
-                    break;
-                case 'leader':
-                    window.location.href = '/mylibraryleader';
-                    break;
-                default:
-                    console.error('Unknown role:', data.role);
-            }
-        } else {
-            // Show error message
-            document.getElementById('errorMessage').style.display = 'block';
-        }
+        localStorage.setItem('token', data.token);
+        window.location.href ='/teachers/mylibrary'
     })
     .catch(error => {
         console.error('Error:', error);
@@ -75,5 +54,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         document.getElementById('errorMessage').style.display = 'block';
     });
 });
+
 </script>
 
