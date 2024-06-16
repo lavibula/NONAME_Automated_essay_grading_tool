@@ -4,26 +4,25 @@ const config = require('../config/config');
 const authMiddleware = (req, res, next) => {
   const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
   try {
     const decoded = jwt.verify(token, config.secret);
     req.user = decoded;
-    const path = req.path;
+    console.log(req.user.role);
     if (req.user.role === 'Admin') {
-      next();
-    } else if (req.user.role === 'Group Leader' && path.startsWith('/group-leaders') || path.startsWith('/users')) {
-      next();
-    } else if (req.user.role === 'Teacher' && path.startsWith('/teachers') || path.startsWith('/users')) {
-      next();
-    } else if (req.user.role === 'Student' && path.startsWith('/students') || path.startsWith('/users')) {
-      next();
+      return res.status(200).json({ role: 'Admin' });
+   } else if (req.user.role === 'Group Leader') {
+      return res.status(200).json({ role: 'Group Leader' });
+    } else if (req.user.role === 'Teacher' ) {
+      return res.status(200).json({ role: 'Teacher' });
+    } else if (req.user.role === 'Student' ) {
+      return res.status(200).json({ role: 'Student' });
     } else {
-      return res.status(403).json({ message: 'Forbidden: You do not have permission to access this resource' });
+      return res.status(403).json({ message: 'Forbidden' });
     }
   } catch (err) {
-    console.error('Authentication error:', err.message);
-    return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 

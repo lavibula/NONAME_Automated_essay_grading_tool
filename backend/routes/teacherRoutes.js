@@ -16,8 +16,8 @@ router.get('/teachers/exams-enroll/:id', authMiddleware, teacherController.getAl
 router.post('/teachers/exams/grade-all-students/:examId', authMiddleware, teacherController.autoGradeAllStudents); //automatically grade all students by exam_id
 router.get('/teachers/exam-results/:examId', authMiddleware, teacherController.getResultByExamId);
 router.get('/teachers/student-results/:studentId', authMiddleware, teacherController.getResultByStudentId);
-router.get('/mylibrary/publictest',teacherController.mylibrarypublic);
-router.get('/mylibrary/listofgrading',teacherController.mylibrarygrading);
-router.get('/createtest',teacherController.createtestui);
-router.get('/grading',teacherController.gradingui);
+router.get('/teachers/mylibrary/publictest',teacherController.mylibrarypublic);
+router.get('/teachers/mylibrary/listofgrading',teacherController.mylibrarygrading);
+router.get('/teachers/createtest',teacherController.createtestui);
+router.get('/teachers/grading',teacherController.gradingui);
 module.exports = router;
