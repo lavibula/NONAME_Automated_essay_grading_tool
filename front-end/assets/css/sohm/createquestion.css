@@ -1,0 +1,262 @@
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px; /* Set the width for the sidebar */
+  height: 100vh; /* Full height */
+  position: fixed; /* Fix the position */
+  top: 0;
+  left: 0;
+  background-color: #CFEFFF; /* Background color */
+  padding: 1rem; /* Uniform padding */
+  color: #064050; /* Text color */
+}
+
+.sidebar h4 {
+  margin-bottom: 0;
+  color: #064050; /* Text color */
+}
+
+.sidebar p {
+  margin-top: 0;
+  font-size: 0.9rem;
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile {
+  margin-top: 1rem;
+  border-top: 1px solid #95C8D8; /* Top border */
+  padding-top: 1rem; /* Padding above profile section */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items horizontally */
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile h6 {
+  margin: 0;
+  font-size: 1rem;
+  color: #064050; /* Text color */
+}
+
+.sidebar .profile .custom-badge {
+  font-size: 0.8rem;
+  background-color: #A1E0F9; /* New background color */
+  color: #064050; /* Text color */
+}
+
+
+
+.container {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+/* Left Section Styles */
+.left-section {
+  flex: 1;
+  padding: 10px;
+  background-color: #CFEFFF;
+  border-radius: 5px;
+  margin-right: 50px;
+  height: 260px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 20px;
+}
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-group .btn.save {
+  background-color: #437ba1; /* Deep Sky Blue background */
+  color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.save:hover {
+  background-color: #1e6477; /* Darker shade of blue for hover effect */
+}
+
+.button-group .btn.cancel {
+  background-color: #a9a9a9; /* Red background */
+  color: #FFFFFF; /* White text */
+}
+
+.button-group .btn.cancel:hover {
+  background-color: #7e5e60; /* Darker shade of red for hover effect */
+}
+
+
+
+
+.main-content {
+  flex: 2;
+    padding: 20px;
+    background-color: #CFEFFF;
+    border-radius: 8px;
+    overflow-y: auto;
+    width: 400px;
+    height: fit-content; /* Adjust for padding */
+    min-height: calc(100vh - 80px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h2 {
+  color: #2c3e50; /* Heading color for the main content */
+  text-align: center;
+}
+
+.question {
+  border: 1px solid #b2bec3; /* Question card border color */
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9; /* Question card background color */
+  border-radius: 8px; /* Add rounded corners to the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.question h3 {
+  margin-top: 0;
+  color: #2980b9; /* Question heading color */
+}
+
+.content-question {
+  margin-top: 10px;
+}
+
+.content label {
+  display: block;
+  margin-bottom: 5px;
+  color: #2c3e50; /* Label color */
+}
+
+.content input[type="text"] {
+  width: 100%;
+  background-color: #A1E0F9;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.criteria {
+  margin-top: 10px;
+}
+
+.criteria .criterion {
+  margin-bottom: 10px;
+}
+
+.criteria label {
+  display: block;
+  margin-bottom: 5px;
+  color: #2c3e50; /* Label color */
+}
+
+.criterion-input {
+  width: 100%;
+  background-color: #A1E0F9;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #437ba1; /* Button background color */
+  color: white; /* Button text color */
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: #154564; /* Button hover background color */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px; /* Adjust the width to make it smaller */
+  height: auto;
+  background-color: #ecf0f1; /* Modal background color */
+  z-index: 1; /*Ensure it's above other elements*/
+  border-radius: 5px;
+}
+
+.modal-content {
+  background: #ccf1ff;
+  padding: 10px; /* Reduce padding to make it more compact */
+  border-radius: 5px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add a subtle shadow for depth */
+}
+
+.notification {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 200px; /* Adjust the width as needed */
+  background: #427ba1; /* Notification background color */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  align-self: center;
+  z-index: 1000; /* Ensure it's above other elements */
+  text-align: center; /* Center the text inside the notification */
+}
+.question-add {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.question-add:hover {
+  background-color: #e0e0e0;
+}

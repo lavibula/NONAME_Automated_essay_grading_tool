@@ -1,0 +1,18 @@
+<div class="studentsidebar">
+    <h2>Học sinh</h2>
+    <div class="student-list">
+        {{#each student}}
+        <div class="student-item">
+            <span class="student-name">{{name}}</span>
+            <span class="student-score">{{score}}</span>
+        </div>
+        <hr>
+        {{/each}}
+    </div>
+    <button class="complete-all-button" onclick="redirectToGrading()">Hoàn Thành</button>
+</div>
+<script>
+function redirectToGrading() {
+  window.location.href = "/grading"; // Replace with your actual URL
+}
+</script>
