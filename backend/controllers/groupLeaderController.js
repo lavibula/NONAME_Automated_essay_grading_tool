@@ -1,7 +1,19 @@
-const groupLeaderService = require('../services/groupLeaderService');
+const groupLeaderService= require('../services/groupLeaderService');
 const authMiddleware = require('../utils/auth');
 
 class GroupLeaderController {
+  async mylibrarypublic(req,res){
+    res.render('mylibraryleader',{
+      style: 'mylibraryleader.css',
+      role: 'Nhóm trưởng'
+    })
+  }
+  async createquestion(req,res){
+    res.render('createquestion',{
+      style: 'sohm/createquestion.css',
+      role:'Nhóm trưởng'
+    })
+  }
   async createQuestionBank(req, res) {
     try {
       const questionBank = await groupLeaderService.createQuestionBank(req.body);
