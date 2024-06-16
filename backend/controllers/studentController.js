@@ -8,6 +8,12 @@ class StudentController {
       role: 'Học sinh'
     })
   }
+  async attendexam(req,res){
+    res.render('attendexam',{
+      style: 'attendexam.css',
+      role:'Học sinh'
+    })
+  }
   async submitEssay(req, res) {
     try {
       const essay = await studentService.submitEssay(req.body);
