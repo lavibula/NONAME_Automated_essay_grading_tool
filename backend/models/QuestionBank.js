@@ -55,6 +55,12 @@ class QuestionBank {
     const values = [bankId];
     await db.query(query, values);
   }
+
+  static async getAll() {
+    const query = 'SELECT * FROM QuestionBank';
+    const result = await db.query(query);
+    return result.rows;
+  }
 }
 
 module.exports = QuestionBank;
