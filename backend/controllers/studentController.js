@@ -2,6 +2,11 @@ const studentService = require('../services/studentService');
 const authMiddleware = require('../utils/auth');
 
 class StudentController {
+  async mylibrarystudent(req,res){
+    res.render('mylibrarystudent',{
+      style: 'mylibrarystudent.css'
+    })
+  }
   async submitEssay(req, res) {
     try {
       const essay = await studentService.submitEssay(req.body);

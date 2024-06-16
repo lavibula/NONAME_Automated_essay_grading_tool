@@ -12,11 +12,11 @@ const authMiddleware = (req, res, next) => {
     console.log(req.user.role);
     if (req.user.role === 'Admin') {
       return res.status(200).json({ role: 'Admin' });
-   } else if (req.user.role === 'Group Leader' && (req.path.startsWith('/question-banks') || req.path.startsWith('/questions'))) {
+   } else if (req.user.role === 'Group Leader') {
       return res.status(200).json({ role: 'Group Leader' });
-    } else if (req.user.role === 'Teacher' && (req.path.startsWith('/exams') || req.path.startsWith('/essays') || req.path.startsWith('/exam-results'))) {
+    } else if (req.user.role === 'Teacher' ) {
       return res.status(200).json({ role: 'Teacher' });
-    } else if (req.user.role === 'Student' && (req.path.startsWith('/essays') || req.path.startsWith('/exams'))) {
+    } else if (req.user.role === 'Student' ) {
       return res.status(200).json({ role: 'Student' });
     } else {
       return res.status(403).json({ message: 'Forbidden' });
