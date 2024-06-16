@@ -1,4 +1,7 @@
 const Teacher = require('../models/Teacher');
+const Question = require('../models/Question');
+const QuestionBank = require('../models/QuestionBank');
+
 
 class TeacherService {
   async createExam(examData) {
@@ -19,6 +22,20 @@ class TeacherService {
 
   async addQuestionToExam(examId, questionId, maxScore){
     return await Teacher.addQuestionToExam(examId, questionId, maxScore);
+  }
+
+  async getAllExams() {
+    return await Teacher.getAllExams();
+  }
+
+  static async getQuestionsByQuestionBankId(questionBankId) {
+    const questions = await Question.getByQuestionBankId(questionBankId);
+    return questions;
+  }
+
+  static async getAllQuestionBanks() {
+    const questionBanks = await QuestionBank.getAll();
+    return questionBanks;
   }
 }
 

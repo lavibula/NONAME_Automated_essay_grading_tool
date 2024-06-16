@@ -54,6 +54,38 @@ class TeacherController {
       res.status(400).json({ error: err.message });
     }
   }
+
+  async getAllExams(req, res) {
+    try {
+      const exams = await teacherService.getAllExams();
+      res.status(200).json(exams);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getQuestionsByQuestionBankId(req, res) {
+    try {
+      const { questionBankId } = req.params;
+      const questions = await teacherService.getQuestionsByQuestionBankId(questionBankId);
+      if (questions) {
+        res.status(200).json(questions);
+      } else {
+        res.status(404).json({ error: 'No questions found for this question bank' });
+      }
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getAllQuestionBanks(req, res) {
+    try {
+      const questionBanks = await teacherService.getAllQuestionBanks();
+      res.status(200).json(questionBanks);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new TeacherController();
