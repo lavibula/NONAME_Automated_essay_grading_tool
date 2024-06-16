@@ -54,6 +54,15 @@ class TeacherController {
       res.status(400).json({ error: err.message });
     }
   }
+
+  async getAllExams(req, res) {
+    try {
+      const exams = await teacherService.getAllExams();
+      res.status(200).json(exams);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new TeacherController();
