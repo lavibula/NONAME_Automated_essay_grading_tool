@@ -10,14 +10,8 @@ async function testGradeScore() {
 
   // Chấm điểm tổng kết cho học sinh
   const examId = 'E00001';
-  const studentId = 'U00005';
-  const gradedResult = await Teacher.gradeScore(examId, studentId);
-  console.log(gradedResult);
-
-  // Kiểm tra điểm được lưu vào ExamResult
-  const examResult = await ExamResult.getByStudentAndExamId(studentId, examId);
-  console.log(examResult);
-  console.log('--- End Test gradeScore ---');
+  const student = await Teacher.getAllStudentsByExamId(examId);
+  console.log(student);
 }
 
 // --- Run tests ---

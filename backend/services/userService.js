@@ -62,6 +62,7 @@ const changePassword = async (userId, oldPassword, newPassword) => {
   await User.update(userId, user);
 };
 
+
 module.exports = {
   getAllUsers,
   getUserById,

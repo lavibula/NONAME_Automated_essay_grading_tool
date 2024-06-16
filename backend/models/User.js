@@ -93,6 +93,12 @@ class User {
     const values = [userId];
     await db.query(query, values);
   }
+
+  static async getAll() {
+    const query = 'SELECT * FROM Users';
+    const result = await db.query(query);
+    return result.rows;
+  }
 }
 
 module.exports = User;
