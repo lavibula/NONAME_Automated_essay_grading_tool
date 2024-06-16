@@ -60,5 +60,5 @@ app.use('/exam-results', examResultRoutes);
 app.use('/exam-result-criterias', examResultCriteriaRoutes);
 
 app.listen(config.port, () => {
-  console.log(`Server is listening on port ${config.port}`);
+  console.log(`Server is listening on port http://localhost:${config.port}`);
 });

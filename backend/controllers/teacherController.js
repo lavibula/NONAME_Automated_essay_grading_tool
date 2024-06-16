@@ -58,7 +58,11 @@ class TeacherController {
   async getAllExams(req, res) {
     try {
       const exams = await teacherService.getAllExams();
-      res.status(200).json(exams);
+      // res.status(200).json(exams);
+      res.status(200).res.render('mylibraryteacher',{
+        style: 'mylibraryteacher.css',
+        exams: exams,
+    });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
