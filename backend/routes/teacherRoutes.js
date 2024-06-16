@@ -10,4 +10,6 @@ router.delete('/exams/:id', authMiddleware, teacherController.deleteExam);
 router.post('/essays/grade-score/:examId/:studentId', authMiddleware, teacherController.gradeScore);
 router.post('/exams/:examId/questions', authMiddleware, teacherController.addQuestionToExam);
 router.get('/exams', authMiddleware, teacherController.getAllExams);
+router.get('/questionBank/:questionBankId/questions', authMiddleware, teacherController.getQuestionsByQuestionBankId); // get all questions from bank_id
+router.get('/question-banks', authMiddleware, teacherController.getAllQuestionBanks); // get all bank_id
 module.exports = router;
