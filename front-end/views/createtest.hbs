@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script>
+const token=window.localStorage.getItem('token');
 document.addEventListener("DOMContentLoaded", function() {
     // Function to load modal content dynamically
     function loadModalContent() {
@@ -156,13 +157,35 @@ document.addEventListener("DOMContentLoaded", function() {
         modalContainer.innerHTML = '';
     }
 
-// Function to fetch folders from the server
+    // Function to fetch folders from the server
     function fetchFolder() {
-        fetch('/popup/pesudo_api.json')  // Replace with your actual endpoint
-            .then(response => response.json())
-            .then(data => populateFolders(data))
-            .catch(error => console.error('Error fetching folders:', error));
+        const token = localStorage.getItem('token');  // Retrieve the token from local storage
+
+        // Check if the token exists
+        if (!token) {
+            console.error('No token found, please log in');
+            return;  // Optionally, redirect to login page or handle accordingly
+        }
+
+        fetch('/teachers/question-banks', {
+            method: 'GET',  // This is the default method, but it's good to be explicit
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Include the token in the Authorization header
+                'Content-Type': 'application/json'  // Ensuring the server knows the format being sent
+            }
+        })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response.json();  // Only parse JSON if the request was successful
+            } else {
+                throw new Error('Failed to fetch data');
+            }
+        })
+        .then(data => populateFolders(data))
+        .catch(error => console.error('Error fetching folders:', error));
     }
+
 
     // Function to populate folders in the modal
         function populateFolders(folders) {
