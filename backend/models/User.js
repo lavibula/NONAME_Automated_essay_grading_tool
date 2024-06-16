@@ -21,6 +21,7 @@ class User {
     return new User(
       result.rows[0].user_id,
       result.rows[0].username,
+      result.rows[0].password,
       result.rows[0].role,
       result.rows[0].fullName,
       result.rows[0].birthday,
@@ -36,6 +37,7 @@ class User {
       return new User(
         result.rows[0].user_id,
         result.rows[0].username,
+        result.rows[0].password,
         result.rows[0].role,
         result.rows[0].fullName,
         result.rows[0].birthday,
@@ -53,6 +55,7 @@ class User {
       return new User(
         result.rows[0].user_id,
         result.rows[0].username,
+        result.rows[0].password,
         result.rows[0].role,
         result.rows[0].fullName,
         result.rows[0].birthday,
@@ -75,6 +78,7 @@ class User {
       return new User(
         result.rows[0].user_id,
         result.rows[0].username,
+        result.rows[0].password,
         result.rows[0].role,
         result.rows[0].fullName,
         result.rows[0].birthday,
