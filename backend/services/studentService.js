@@ -8,6 +8,9 @@ class StudentService {
   async getExamResults(studentId, examId) {
     return await Student.getExamResults(studentId, examId);
   }
+  async getAllExams(studentId) {
+    return await Student.getAllExams(studentId);
+  }
 }
 
 module.exports = new StudentService();

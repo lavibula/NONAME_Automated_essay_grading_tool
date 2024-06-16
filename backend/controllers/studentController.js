@@ -22,6 +22,16 @@ class StudentController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async getAllExams(req, res) {
+    try {
+      const studentId = req.user.user_id; 
+      const exams = await studentService.getAllExams(studentId);
+      res.status(200).json(exams);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new StudentController();

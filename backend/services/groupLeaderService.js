@@ -16,6 +16,9 @@ class GroupLeaderService {
   async deleteQuestionBank(bankId) {
     await QuestionBank.delete(bankId);
   }
+  async getAllQuestionBanks() {
+    return await QuestionBank.getAll();
+  }
 }
 
 module.exports = new GroupLeaderService();

@@ -8,5 +8,6 @@ router.post('/group-leaders/question-banks', authMiddleware, groupLeaderControll
 router.get('/group-leaders/question-banks/:id', authMiddleware, groupLeaderController.getQuestionBankById);
 router.put('/group-leaders/question-banks/:id', authMiddleware, groupLeaderController.updateQuestionBank);
 router.delete('/group-leaders/question-banks/:id', authMiddleware, groupLeaderController.deleteQuestionBank);
+router.get('/group-leaders/question-banks', authMiddleware, groupLeaderController.getAllQuestionBanks);
 
 module.exports = router;

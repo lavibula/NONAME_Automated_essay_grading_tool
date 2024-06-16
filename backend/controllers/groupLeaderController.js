@@ -45,6 +45,15 @@ class GroupLeaderController {
       res.status(404).json({ error: err.message });
     }
   }
+
+  async getAllQuestionBanks(req, res) {
+    try {
+      const questionBanks = await groupLeaderService.getAllQuestionBanks();
+      res.status(200).json(questionBanks);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new GroupLeaderController();
