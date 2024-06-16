@@ -71,7 +71,7 @@ class UserController {
 
   async getCurrentUser(req, res) {
     try {
-      const userId = req.user.id; 
+      const userId = req.user.user_id; 
       const user = await userService.getUserById(userId);
       if (user) {
         res.status(200).json(user);
