@@ -96,6 +96,16 @@ class TeacherController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async autoGradeAllStudents(req, res) {
+    try {
+      const { examId } = req.params;
+      await teacherService.autoGradeAllStudents(examId);
+      res.status(200).json({ message: 'Automatic grading initiated successfully' });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new TeacherController();

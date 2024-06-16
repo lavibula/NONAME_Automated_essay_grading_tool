@@ -13,4 +13,5 @@ router.get('/exams', authMiddleware, teacherController.getAllExams);
 router.get('/questionBank/:questionBankId/questions', authMiddleware, teacherController.getQuestionsByQuestionBankId); // get all questions from bank_id
 router.get('/question-banks', authMiddleware, teacherController.getAllQuestionBanks); // get all bank_id
 router.get('/question-banks/:id', authMiddleware, teacherController.getAllStudentsByExamId); // get all student
+router.post('/exams/grade-all-students/:examId', authMiddleware, teacherController.autoGradeAllStudents); //automatically grade all students by exam_id
 module.exports = router;
