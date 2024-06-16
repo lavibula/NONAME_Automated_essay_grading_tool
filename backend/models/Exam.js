@@ -56,7 +56,11 @@ class Exam {
     await db.query(query, values);
   }
 
-
+  static async getAll() {
+    const query = 'SELECT * FROM Exam'; 
+    const result = await db.query(query);
+    return result.rows;
+  }
 }
 
 module.exports = Exam;

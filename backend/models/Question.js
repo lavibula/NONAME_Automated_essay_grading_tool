@@ -51,6 +51,13 @@ class Question {
     const values = [questionId];
     await db.query(query, values);
   }
+
+  static async getByQuestionBankId(questionBankId) {
+    const query = 'SELECT * FROM Question WHERE "bank_id" = $1';
+    const values = [questionBankId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
 }
 
 module.exports = Question;
