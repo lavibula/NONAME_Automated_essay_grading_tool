@@ -13,12 +13,11 @@ class Exam {
 
   static async create(exam) {
     const query = `
-      INSERT INTO Exam (exam_id, exam_title, description, duration, created_by, start_time, end_time)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO Exam (exam_title, description, duration, created_by, start_time, end_time)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING exam_id, exam_title, description, duration, created_by, start_time, end_time
     `;
     const values = [
-      exam.examId,
       exam.examTitle,
       exam.description,
       exam.duration,
