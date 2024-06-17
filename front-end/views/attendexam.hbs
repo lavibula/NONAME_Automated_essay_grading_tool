@@ -1,0 +1,115 @@
+<header class="header">
+    <div class="time-remaining">Thời gian còn lại: 15 phút</div>
+</header>
+<form id="examForm" class="main-content">
+    <div class="exam-info">
+        <h2>{{exam.examTitle}}</h2>
+        <p>Mô tả: {{exam.description}}</p>
+        <p>Thời gian thi: 90 phút</p>
+        <p>Ngày thi: 20/06/2024</p>
+        <div class="question-buttons">
+            {{#each exam.questions}}
+            <button type="button" class="question-btn" data-question-id="{{this.questionId}}" data-question="{{@index}}" data-content="{{this.questionContent}}">
+                Câu {{incrementIndex @index}}
+            </button>
+            {{/each}}
+        </div>
+        
+            <button type="button" id="saveButton" class="finish-btn">Lưu</button>
+            <a href="../mylibrary">
+                <button type="button" id="completeButton" class="finish-btn">Hoàn thành</button>
+
+            </a>
+
+    </div>
+
+    <div class="question-answer-section">
+        <div class="question">
+            <h3>Câu 1</h3>
+            <p>{{exam.questions.[0].questionContent}}</p>
+        </div>
+        <div class="answer">
+            <h3>Bài làm</h3>
+            <textarea id="bailam" name="bailam" class="textbox"></textarea>
+        </div>
+    </div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const questionButtons = document.querySelectorAll('.question-btn');
+    const questionSection = document.querySelector('.question');
+    const textarea = document.querySelector('#bailam');
+    const saveButton = document.getElementById('saveButton');
+    const completeButton = document.getElementById('completeButton');
+    const examForm = document.getElementById('examForm');
+
+    // Function to increment index by 1
+    function incrementIndex(index) {
+        return parseInt(index) + 1;
+    }
+
+    // Biến lưu trữ nội dung của mỗi bài làm
+    let answers = {};
+    let currentQuestionId = null;
+    let currentQuestionNumber = 1;
+
+    questionButtons.forEach(button => {
+        const questionIndex = button.getAttribute('data-question');
+        const questionNumber = incrementIndex(questionIndex);
+        button.textContent = `Câu ${questionNumber}`;
+
+        button.addEventListener('click', function () {
+            // Lưu nội dung hiện tại của textarea vào biến tương ứng
+            const currentQuestion = document.querySelector('.question h3').textContent;
+            currentQuestionNumber = currentQuestion.split(' ')[1];
+            currentQuestionId = button.getAttribute('data-question-id');
+            answers[`bailam${currentQuestionNumber}`] = textarea.value;
+
+            // Cập nhật nội dung câu hỏi và textarea dựa trên nút được nhấn
+            const questionContent = this.getAttribute('data-content');
+            const questionTitle = `Câu ${questionNumber}`;
+
+            questionSection.innerHTML = `
+                <h3>${questionTitle}</h3>
+                <p>${questionContent}</p>
+            `;
+            textarea.value = answers[`bailam${questionNumber}`] || '';
+        });
+    });
+
+    saveButton.addEventListener('click', function () {
+        // Save the current answer
+        answers[`bailam${currentQuestionNumber}`] = textarea.value;
+
+        // Submit the individual question
+        const formData = {
+            examquestionId: currentQuestionId.replace('Q', 'EQ'),
+            studentId: 'U00005', // Replace with the actual student ID from session or context
+            essayContent: answers[`bailam${currentQuestionNumber}`],
+            submitTime: new Date().toISOString()
+        };
+
+        fetch(`/students/essays/${currentQuestionId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Question saved successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error saving question:', error);
+        });
+    });
+
+    
+
+    examForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+    });
+});
+</script>

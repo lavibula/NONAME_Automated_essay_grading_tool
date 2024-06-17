@@ -1,0 +1,263 @@
+
+<style>
+    /* Modal container */
+#question-choice-modal,
+#question-folder-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    max-height: 80vh;
+    padding: 20px;
+    background-color: #e0f7fa;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+
+    overflow: hidden; /* Ensure the modal content doesn't overflow */
+    z-index: 1000;
+
+  }
+  
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* Modal title */
+.modal-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* Close button */
+.close-button {
+  background-color: #6CB4EE; /* Green */
+  border: none;
+  color: #333;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 1px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.close-button:hover {
+  color: white;
+  background-color: #437ba1; /* Darker green */
+}
+.close-button:active{
+  background-color: #437ba1;
+}
+  .search-container { /* Added container for search bar */
+    display: flex;
+    justify-content: center; /* Center the search bar horizontally */
+    margin-bottom: 15px;
+  }
+  
+  .search-bar {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #bdbdbd;
+    width: 80%; 
+  }
+  /* Folder list container */
+  #folderList {
+    flex: 1;
+    overflow-y: auto; /* Make the folder list scrollable */
+    padding-right: 5px; /* Optional: add padding to avoid scrollbar overlap */
+    max-height: calc(80vh - 150px); /* Adjust based on header and search container height */
+}
+
+  /* Individual folder item */
+  .folder {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px; /* Add space between folder items */
+  }
+  
+  .folder-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .folder-info {
+    flex: 1;
+  }
+  
+  .folder-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .folder-details {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* Folder actions */
+  .folder-actions {
+    display: flex;
+    gap: 5px;
+  }
+    
+/* Back button */
+.back-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: #333;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 1px;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+  
+  .back-button:hover {
+    background-color: #C4DFDF; /* Darker green */
+  }
+  
+  .back-button:active {
+    background-color: #656565;
+  }
+  
+
+  /* ... previous CSS ... */
+
+  #questionList {
+    flex: 1;
+    overflow-y: auto; /* Make the question list scrollable */
+    padding-right: 5px; /* Optional: add padding to avoid scrollbar overlap */
+    max-height: calc(80vh - 150px); /* Adjust based on header and search container height */
+    min-height: calc(80vh - 150px);
+  }
+/* Container for the question elements */
+.question-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Question icon */
+.quesiton-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #ccc; /* Placeholder color */
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/* Question info container */
+.quesiton-info {
+  flex-grow: 1;
+}
+
+/* Question name/title */
+.quesiton-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Question content */
+.question-content {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.content-full {
+  display: none;
+}
+
+.criteria-container {
+  display: none;
+}
+
+.question-container.expanded .criteria-container,
+.question-container.expanded .content-full {
+  display: block;
+}
+
+.question-container.expanded .content-short {
+  display: none;
+}
+
+/* Criteria list */
+.criteria-list label {
+  display: block;
+  margin-top: 5px;
+}
+
+/* Select button */
+.select-button {
+  background-color: #6CB4EE; 
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.select-button:hover {
+  background-color: #007FFF; 
+}
+
+.select-button:active {
+  background-color: #002D62;
+}
+
+</style>
+
+
+<div id="question-choice-modal" >
+    <div class="modal-header">
+      <button class="back-button"><</button>
+      <span class="modal-title">{{name}}</span>
+      <button class="close-button">×</button>
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Tìm kiếm câu hỏi..." class="search-bar">
+    </div>
+    <div id="questionList">
+        
+    </div>
+</div>

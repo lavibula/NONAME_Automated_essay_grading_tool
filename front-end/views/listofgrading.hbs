@@ -1,0 +1,100 @@
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Tìm kiếm trong thư viện của tôi " aria-label="Tìm kiếm">
+            <button class="btn " type="button">Tìm kiếm</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-end">
+        <button class="btn btn-tao text-center" onclick="location.href='/teachers/createtest';">Tạo đề thi</button>
+
+    </div>
+</div>
+
+<div class="row">
+
+
+    <div class="col-md-3 left-section">
+        <p></p>
+        <h4>Thư viện của tôi</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/teachers/mylibrary/publictest">Đề thi đã công bố</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Đề thi nháp</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/teachers/mylibrary/listofgrading">Chấm điểm</a>
+            </li>
+        </ul>
+        </div>
+    <div class="col-md-9 right-section">
+        <div class="container mt-4">
+            <div class="row">
+                {{#each thu_muc_cau_hoi_s}}
+                <div class="col-12">
+                    <div class="card mb-6 card-course-item">
+                        <div class="row g-2 align-items-center">
+
+                            <div class="col-md-2 text-center ms-3">
+                                <a href="/thu-muc-cau-hoi/{{this.slug}}">
+                                    <img src="/img/image.jpg" class="card-img-top rounded-0" alt="Thư mục câu hỏi A" style="width: 100%; height: auto;">
+                                </a>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="card-body">
+                                    <a href="/thu-muc-cau-hoi/{{this.slug}}" style="text-decoration: none;">
+                                        <h5 class="card-title">{{this.exam_title}}</h5>
+                                    </a>
+                                    <p class="card-text">
+                                        Môn học: Văn học
+                                        <br>
+                                        Mô tả: {{this.description}}
+                                        <br>
+                                        Tác giả: {{this.created_by}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1 text-end">
+                                <div class="d-flex justify-content-between align-self-end">
+                                <button class="btn btn-secondary ms-2 exam-button" data-exam-id="{{this.exam_id}}">Chấm bài</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.exam-button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const examId = this.getAttribute('data-exam-id');
+                const token = window.localStorage.getItem('token');  // Retrieve the token from local storage
+     
+                if (!token) {
+                    console.error('No token found, please log in');
+                    return;
+                }
+                window.location.href = `/teachers/grading/${examId}`;
+                
+            });
+        });
+    });
+
+</script>

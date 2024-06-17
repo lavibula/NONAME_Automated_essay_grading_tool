@@ -1,0 +1,71 @@
+<div class="container" data-exam-id="{{exam.examId}}">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Họ và tên</th>
+                    <th>SBD</th>
+                    <th>Điểm</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each students}}
+                <tr id="{{this.student_id}}">
+                <td>
+                    <a href="/essays/student/{{this.student_id}}/exam/{{examId}}">{{this.student_id}}</a>
+                </td>
+                <td class="studenId">{{this.student_id}}</td>
+                <td class="score">{{this.diem}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="info-box">
+        <h3>{{exam.examTitle}}</h3>
+        <ul>
+            <li>Mô tả: {{exam.description}}</li>
+            <li>Tác giả: {{exam.createdBy}}</li>
+            <li>Số câu hỏi: {{numberOfQuestions}}</li>
+        </ul>
+        <button class="button" id="auto-grade">Chấm tự động</button>
+        <h4>Nhận xét:</h4>
+        <textarea></textarea>
+        <button class="button" onclick="location.href='/teachers/mylibrary/listofgrading'">Hoàn Thành</button>
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('auto-grade').addEventListener('click', function() {
+        const container = document.querySelector('.container');
+        const examId = container.getAttribute('data-exam-id');
+        const token = window.localStorage.getItem('token');
+        fetch(`/teachers/exams/grade-all-students/${examId}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response=>{
+            if (response.ok) {
+                return response.json();  // Parses the body text as JSON
+            } else {
+                throw new Error('API call exception!');
+            }
+        })
+        .then(data => {
+            console.log(data.results);
+            data.results.forEach((studentResult) => {
+                const studentRow = document.getElementById(studentResult.student_id);
+                if (studentRow) {
+                    // Assuming the score is in the third cell of each row
+                    const scoreCell = studentRow.querySelector('.score');
+                    scoreCell.textContent = studentResult.total_score;
+                }
+            })
+        .catch(error => console.error('Error:', error));
+    });
+});
+</script>

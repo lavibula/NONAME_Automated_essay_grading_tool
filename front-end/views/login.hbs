@@ -1,0 +1,93 @@
+<div class="login-container">
+    <div class="login-box">
+        <form id="loginForm">
+            <h2 style="color: #064050">Đăng Nhập</h2>
+            <p id="errorMessage" style="color: rgb(113, 2, 2); display: none;">Tên tài khoản hoặc mật khẩu không đúng.</p>
+            <div class="form-group">
+                <label for="username">Tài khoản</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <a href="/forgot-password">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" style="margin-top: 180px;">Đăng nhập</button>
+        </form>
+        
+    </div>
+</div>
+
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => {
+        console.log(response);
+        if (response.ok) {
+            return response.json();  // Parses the body text as JSON
+        } else {
+            throw new Error('Something went wrong on api server!');
+        }
+    })
+    .then(data => {
+        window.localStorage.setItem('token', data.token);
+        getRole(data.token);
+        
+        //window.location.href ='/teachers/mylibrary/publictest';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Show error message
+        document.getElementById('errorMessage').style.display = 'block';
+    });
+});
+    function getRole(token){
+        fetch('/users/me', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response=>{
+            if (response.ok) {
+                return response.json();  // Parses the body text as JSON
+            } else {
+                throw new Error('Wrong token!');
+            }
+        })
+        .then(data =>{
+             switch(data.role) {
+                case 'Teacher':
+                    window.location.href = '/teachers/mylibrary/publictest';
+                    break;
+                case 'Student':
+                    window.location.href = '/students/mylibrary';
+                    break;
+                case 'Admin':
+                    window.location.href = '/mylibraryadmin';
+                    break;
+                case 'Group Leader':
+                    window.location.href = '/group-leaders/mylibraryleader';
+                    break;
+                default:
+                    console.error('Unknown role:', data);
+            }
+        })
+    }
+</script>
+

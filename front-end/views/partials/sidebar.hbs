@@ -1,0 +1,50 @@
+<div class="sidebar text-dark p-3">
+    <h4 class="text-left">NONAME</h4>
+    <p class="text-left">automated essay grading tool</p>
+    <div class="profile my-3 text-center">
+        
+        <p></p>
+        <h6 class="mb-1">{{username}}</h6>
+        
+        <span class="badge custom-badge">{{role}}</span>
+    </div>
+   
+    <ul class="nav flex-column justify-content-center ms-4">
+        <p></p>
+        <li class="nav-item">
+            <a id="myLibraryLink" class="nav-link text-dark" href="#">Thư viện của tôi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#">Cài đặt</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="/user-profile">Hồ sơ</a>
+        </li>
+        <li class="nav-item">
+            
+
+            <a class="nav-link text-dark" href="/" onclick="logout()">Đăng xuất</a>
+        </li>
+    </ul>
+
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userRole = "{{role}}"; // Role này được render từ server, hoặc bạn có thể lấy từ một API nếu nó không phải là thông tin nhạy cảm
+        var myLibraryLink = document.getElementById('myLibraryLink');
+
+        if (userRole === 'Giáo viên') {
+            myLibraryLink.href = '/teachers/mylibrary/publictest';
+        } else if (userRole === 'Học sinh') {
+            myLibraryLink.href = '/students/mylibrary';
+        } else if (userRole === 'Nhóm trưởng') {
+            myLibraryLink.href = '/mylibraryleader';
+        } else {
+            myLibraryLink.href = '/default-path'; // Đường dẫn mặc định nếu không phát hiện role
+        }
+    });
+
+    function logout(){
+         window.localStorage.removeItem('token');
+    }
+</script>
