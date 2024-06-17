@@ -4,6 +4,7 @@ const authMiddleware = require('../utils/auth');
 class TeacherController {
   async mylibrarypublic(req,res){
     const exams = await teacherService.getAllExams();
+    console.log(exams);
     res.render('mylibraryteacher',{
       style: 'mylibraryteacher.css',
       role: 'Giáo viên',
