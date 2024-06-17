@@ -48,7 +48,9 @@ class TeacherController {
 
   async createExam(req, res) {
     try {
-      const exam = await teacherService.createExam(req.body);
+      const teacherId = req.user.user_id;
+      const examData = { ...req.body, teacherId };
+      const exam = await teacherService.createExam(examData);
       res.status(201).json(exam);
     } catch (err) {
       res.status(400).json({ error: err.message });

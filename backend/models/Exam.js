@@ -8,9 +8,20 @@ class Exam {
   }
 
   static async create(exam) {
-    const query = `INSERT INTO Exam (exam_title, description, created_by) VALUES ($1, $2, $3) 
-                    RETURNING "exam_id", "exam_title", "description", "created_by"`;
-    const values = [exam.examTitle, exam.description, exam.createdBy];
+    
+    const query = `
+      INSERT INTO Exam (exam_title, description, duration, created_by, start_time, end_time)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      RETURNING exam_id, exam_title, description, duration, created_by, start_time, end_time
+    `;
+    const values = [
+      exam.examTitle,
+      exam.description,
+      exam.duration,
+      exam.createdBy,
+      exam.startTime,
+      exam.endTime
+    ];
     const result = await db.query(query, values);
     return new Exam(
       result.rows[0].exam_id,
