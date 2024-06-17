@@ -11,7 +11,11 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 
 console.log("dirname",__dirname);
+<<<<<<< Updated upstream
 const dir = "D:\\20232\\software engine\\NONAME_Automated_essay_grading_tool";
+=======
+const dir = "D:\\Empty\\NONAME_Automated_essay_grading_tool";
+>>>>>>> Stashed changes
 const app = express();
 app.use(express.static(path.join(dir, 'front-end', 'assets')));
 
