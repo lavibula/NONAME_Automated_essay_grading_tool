@@ -57,6 +57,8 @@
                                         Mô tả: {{this.description}}
                                         <br>
                                         Thời gian: {{this.duration}}
+                                        <br>
+                                        Ngày thi: {{formatDate this.start_time}} - {{formatDate this.end_time}}
                                     </p>
                                 </div>
                             </div>
@@ -88,7 +90,6 @@
         
         // Find all delete buttons
         const deleteButtons = document.querySelectorAll('.delete-button');
-
         // Add click event listener to each button
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {

@@ -57,13 +57,16 @@
                                         Mô tả: {{this.description}}
                                         <br>
                                         Thời gian: {{this.duration}}
+                                        <br>
+                                        Ngày thi: {{formatDate this.start_time}} - {{formatDate this.end_time}}
                                     </p>
                                 </div>
                             </div>
 
                             <div class="col-md-1 text-end">
                                 <div class="d-flex justify-content-between align-self-end">
-                                <button class="btn btn-secondary ms-2 exam-button" data-exam-id="{{this.exam_id}}">Chấm bài</button>
+                               <button class="btn btn-primary ms-2 exam-button" data-exam-id="{{this.exam_id}}">Chấm bài</button>
+
 
                                 </div>
                             </div>

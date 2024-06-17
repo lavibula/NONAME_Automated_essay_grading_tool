@@ -11,7 +11,7 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 
 console.log("dirname",__dirname);
-const dir = "C:\\Users\\Admin\\Downloads\\NONAME_Automated_essay_grading_tool";
+const dir = "D:\\20232\\software engine\\NONAME_Automated_essay_grading_tool";
 const app = express();
 app.use(express.static(path.join(dir, 'front-end', 'assets')));
 
@@ -32,6 +32,10 @@ app.engine('.hbs', engine({
     },
     json: function (context) {
       return JSON.stringify(context);
+    },
+    formatDate: function (dateString) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      return new Date(dateString).toLocaleDateString('vi-VN', options);
     }
   }
 }));
