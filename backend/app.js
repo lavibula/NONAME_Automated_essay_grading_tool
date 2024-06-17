@@ -11,7 +11,7 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 
 console.log("dirname",__dirname);
-const dir = "D:\\20232\\software engine\\NONAME_Automated_essay_grading_tool";
+const dir = "C:\\Users\\Admin\\Downloads\\NONAME_Automated_essay_grading_tool";
 const app = express();
 app.use(express.static(path.join(dir, 'front-end', 'assets')));
 
@@ -53,7 +53,7 @@ app.get('/mylibraryteacher',(req,res)=>{
 })
 
 app.use('/', userRoutes);
-app.use('/', groupLeaderRoutes);
+app.use('/group-leaders/', groupLeaderRoutes);
 app.use('/', teacherRoutes);
 app.use('/students', studentRoutes);
 
