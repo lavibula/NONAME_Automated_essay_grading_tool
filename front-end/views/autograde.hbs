@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-exam-id="{{exam.examId}}">
     <div class="table-container">
         <table>
             <thead>
@@ -10,47 +10,62 @@
             </thead>
             <tbody>
                 {{#each students}}
-                <tr>
-                    <td><a href="/essays/student/{{this.id}}/exam/{{this.examId}}">{{this.name}}</a></td>
-                    <td>{{this.sbd}}</td>
-                    <td>{{this.diem}}</td>
+                <tr id="{{this.student_id}}">
+                <td>
+                    <a href="/essays/student/{{this.student_id}}/exam/{{examId}}">{{this.student_id}}</a>
+                </td>
+                <td class="studenId">{{this.student_id}}</td>
+                <td class="score">{{this.diem}}</td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
     </div>
     <div class="info-box">
-        <h3>{{title}}</h3>
+        <h3>{{exam.examTitle}}</h3>
         <ul>
-            <li>Số câu hỏi: {{numberquestion}}</li>
-            <li>Môn học: {{subject}}</li>
-            <li>Thời gian thi: {{time}}</li>
-            <li>Ngày thi: {{date}}</li>
-            <li>Sĩ số: {{numberstudent}}</li>
+            <li>Mô tả: {{exam.description}}</li>
+            <li>Tác giả: {{exam.createdBy}}</li>
+            <li>Số câu hỏi: {{numberOfQuestions}}</li>
         </ul>
         <button class="button" id="auto-grade">Chấm tự động</button>
         <h4>Nhận xét:</h4>
         <textarea></textarea>
-        <button class="button" onclick="location.href='/manualmark'">Hoàn Thành</button>
+        <button class="button" onclick="location.href='/teachers/mylibrary/listofgrading'">Hoàn Thành</button>
 
     </div>
 </div>
 
 <script>
     document.getElementById('auto-grade').addEventListener('click', function() {
-        fetch('/examresultcriteria/result/' + examResultId, {
-            method: 'GET',
+        const container = document.querySelector('.container');
+        const examId = container.getAttribute('data-exam-id');
+        const token = window.localStorage.getItem('token');
+        fetch(`/teachers/exams/grade-all-students/${examId}`, {
+            method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + token // Add your token handling logic here
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            // Assuming `data` contains the score
-            document.querySelectorAll('tbody tr').forEach((row, index) => {
-                row.cells[2].innerText = data.scores[index];
-            });
+        .then(response=>{
+            if (response.ok) {
+                return response.json();  // Parses the body text as JSON
+            } else {
+                throw new Error('API call exception!');
+            }
         })
+        .then(data => {
+            console.log(data.results);
+            data.results.forEach((studentResult) => {
+                const studentRow = document.getElementById(studentResult.student_id);
+                if (studentRow) {
+                    // Assuming the score is in the third cell of each row
+                    const scoreCell = studentRow.querySelector('.score');
+                    scoreCell.textContent = studentResult.total_score;
+                }
+            })
         .catch(error => console.error('Error:', error));
     });
+});
 </script>

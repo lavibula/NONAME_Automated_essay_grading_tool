@@ -12,7 +12,7 @@
     <ul class="nav flex-column justify-content-center ms-4">
         <p></p>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="/mylibraryteacher">Thư viện của tôi</a>
+            <a id="myLibraryLink" class="nav-link text-dark" href="#">Thư viện của tôi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" href="#">Cài đặt</a>
@@ -21,8 +21,30 @@
             <a class="nav-link text-dark" href="/user-profile">Hồ sơ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" href="/">Đăng xuất</a>
+            
+
+            <a class="nav-link text-dark" href="/" onclick="logout()">Đăng xuất</a>
         </li>
     </ul>
 
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userRole = "{{role}}"; // Role này được render từ server, hoặc bạn có thể lấy từ một API nếu nó không phải là thông tin nhạy cảm
+        var myLibraryLink = document.getElementById('myLibraryLink');
+
+        if (userRole === 'Giáo viên') {
+            myLibraryLink.href = '/teachers/mylibrary/publictest';
+        } else if (userRole === 'Học sinh') {
+            myLibraryLink.href = '/students/mylibrary';
+        } else if (userRole === 'Nhóm trưởng') {
+            myLibraryLink.href = '/mylibraryleader';
+        } else {
+            myLibraryLink.href = '/default-path'; // Đường dẫn mặc định nếu không phát hiện role
+        }
+    });
+
+    function logout(){
+         window.localStorage.removeItem('token');
+    }
+</script>

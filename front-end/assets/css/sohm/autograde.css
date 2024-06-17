@@ -59,8 +59,9 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  width: 470px;
+  width: 70%;
   margin-right: 10px;
+  height: fit-content;
 }
 
 table {
@@ -86,16 +87,16 @@ td {
 
 
 .info-box {
-  /* flex: 1; */
+  flex: 1;
   background-color: #ccf1ff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  /* display: flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   position: sticky;
   top: 20px;
-  height: 510px;
+  height: fit-content;
 }
 .info-box h3 {
   margin-top: 0;

@@ -23,10 +23,27 @@ class TeacherController {
       role:'Giáo viên',
     })
   }
-  async gradingui(req,res){
-    res.render('autograde',{
-      style: 'sohm/autograde.css'
-    })
+  async gradingui(req, res) {
+      try {
+          const examId = req.params.examId; // or req.params.examId if passed as a route parameter
+          const students = await teacherService.getAllStudentsByExamId(examId);
+          const exam = await teacherService.getExamById(examId);
+          const numberOfQuestions = exam.questions.length;
+          console.log(students);
+          console.log(exam);
+          res.render('autograde', {
+              style: 'sohm/autograde.css',
+              role:'Giáo viên',
+              students: students, // Passing the fetched students to the template
+              examId: examId,
+              exam:exam,
+              numberOfQuestions:numberOfQuestions
+
+          });
+      } catch (error) {
+          console.error('Error fetching student data:', error);
+          res.status(500).send('Error fetching data');
+      }
   }
 
   async createExam(req, res) {
@@ -117,13 +134,13 @@ class TeacherController {
   async getAllStudentsByExamId(req, res) {
     try {
       const examId = req.params.id;
-      console.log(`Received examId: ${examId}`);
       const student = await teacherService.getAllStudentsByExamId(examId);
       res.status(200).json(student);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   }
+
 
   async autoGradeAllStudents(req, res) {
     try {

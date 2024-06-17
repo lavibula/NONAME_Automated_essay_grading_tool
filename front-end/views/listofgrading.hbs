@@ -56,7 +56,7 @@
                                         <br>
                                         Mô tả: {{this.description}}
                                         <br>
-                                        Thời gian: {{this.time}}
+                                        Tác giả: {{this.created_by}}
                                     </p>
                                 </div>
                             </div>
@@ -86,34 +86,13 @@
             button.addEventListener('click', function() {
                 const examId = this.getAttribute('data-exam-id');
                 const token = window.localStorage.getItem('token');  // Retrieve the token from local storage
-
+     
                 if (!token) {
                     console.error('No token found, please log in');
                     return;
                 }
-
-                // Use the token in the fetch request
-                fetch(`/essays/exams/${examId}`, {
-                    method: 'GET', // or 'POST' if you're posting data
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();  // Handle the response data
-                    }
-                    throw new Error('Something went wrong with the server!');
-                })
-                .then(data => {
-                    console.log(examId);
-                    console.log('Success:', data);
-                    //window.location.href = `/essays/exams/${examId}`;  // Redirect to the desired page
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                window.location.href = `/teachers/grading/${examId}`;
+                
             });
         });
     });

@@ -1,50 +1,5 @@
 
-/* SIDEBAR */
-.sidebar {
-    width: 230px; /* Set the width for the sidebar */
-    height: 100vh; /* Full height */
-    position: fixed; /* Fix the position */
-    top: 0;
-    left: 0;
-    background-color: #CFEFFF; /* Background color */
-    padding: 1rem; /* Uniform padding */
-    color: #064050; /* Text color */
-  }
-  
-  .sidebar h4 {
-    margin-bottom: 0;
-    color: #064050; /* Text color */
-  }
-  
-  .sidebar p {
-    margin-top: 0;
-    font-size: 0.9rem;
-    color: #064050; /* Text color */
-  }
-  
-  .sidebar .profile {
-    margin-top: 1rem;
-    border-top: 1px solid #95C8D8; /* Top border */
-    padding-top: 1rem; /* Padding above profile section */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center align items horizontally */
-    color: #064050; /* Text color */
-  }
-  
-  .sidebar .profile h6 {
-    margin: 0;
-    font-size: 1rem;
-    color: #064050; /* Text color */
-  }
-  
-  .sidebar .profile .custom-badge {
-    font-size: 0.8rem;
-    background-color: #A1E0F9; /* New background color */
-    color: #064050; /* Text color */
-  }
-  
-  
+
 
 
 
@@ -64,7 +19,7 @@
     background-color: #CFEFFF;
     border-radius: 8px;
     margin-right: 30px;
-    height: 450px;
+    height: fit-content;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;

@@ -19,5 +19,7 @@ router.get('/teachers/student-results/:studentId', authMiddleware, teacherContro
 router.get('/teachers/mylibrary/publictest',teacherController.mylibrarypublic);
 router.get('/teachers/mylibrary/listofgrading',teacherController.mylibrarygrading);
 router.get('/teachers/createtest',teacherController.createtestui);
-router.get('/teachers/grading',teacherController.gradingui);
+// In your route definitions file
+router.get('/teachers/grading/:examId', teacherController.gradingui);
+
 module.exports = router;

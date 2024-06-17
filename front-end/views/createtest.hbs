@@ -6,16 +6,16 @@
             <input type="text" id="title" >
 
         </div>
-        <div class="input-group">
+        {{!-- <div class="input-group">
             <label for="time">Thời gian:</label>
             <input type="text" id="time" >
 
-        </div>
-        <div class="input-group">
+        </div> --}}
+        {{!-- <div class="input-group">
             <label for="term">Môn học:</label>
             <input type="text" id="term" >
 
-        </div>
+        </div> --}}
         <div class="input-group">
             <label for="subject">Mô tả:</label>
             <input type="text" id="subject">
@@ -29,12 +29,12 @@
     </div>
     <div class="right-section">
         {{#each questions}}
-        <div class="question-card" id="{{id}}">
+        <div class="question-card" id="{{this.questionId}}">
             <div class="question-header">
-                {{title}}
+                {{this.questionId}}
             </div>
             <div class="question-info">
-                <p>{{content}}</p>
+                <p>{{this.questionContent}}</p>
                 <!-- Selected criteria will be displayed here -->
                 <div id="question-criteria-{{@index}}" class="selected-criteria"></div>
                 {{!-- select criteria --}}
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;  // Optionally, redirect to login page or handle accordingly
         }
 
-        fetch('/teachers/question-banks', {
+        fetch('/teachers/questionBanks', {
             method: 'GET',  // This is the default method, but it's good to be explicit
             headers: {
                 'Authorization': `Bearer ${token}`,  // Include the token in the Authorization header
@@ -175,14 +175,15 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .then(response => {
-            console.log(response);
             if (response.ok) {
                 return response.json();  // Only parse JSON if the request was successful
             } else {
                 throw new Error('Failed to fetch data');
             }
         })
-        .then(data => populateFolders(data))
+        .then(data => { 
+            populateFolders(data)
+        })
         .catch(error => console.error('Error fetching folders:', error));
     }
 
@@ -195,13 +196,13 @@ document.addEventListener("DOMContentLoaded", function() {
             folders.forEach((folder, index) => {
                 const folderItem = document.createElement('div');
                 folderItem.className = 'folder';
-                folderItem.setAttribute('data-folder-index', index);
+                folderItem.setAttribute('data-folder-index', folder.bank_id);
                 folderItem.innerHTML = `
                     <div class="folder-icon"></div>
                     <div class="folder-info">
-                    <div class="folder-name">${folder.name}</div>
+                    <div class="folder-name">${folder.bank_name}</div>
                     <div class="folder-details">
-                        ≡ ${folder.questionCount} câu hỏi 📚 ${folder.subject}
+                        ${folder.description} - Tác giả: ${folder.created_by}
                     </div>
                     </div>
                 `;
@@ -228,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 modalContainer.innerHTML = data;
                 const modal = document.getElementById('question-choice-modal');
                 const modal_name =modal.querySelector('.modal-title');
-                modal_name.textContent=folder.name;
+                modal_name.textContent=folder.bank_name;
                 const closeModal = modal.querySelector('.close-button');
                 closeModal.addEventListener('click', function() {
                     modal.style.display = 'none';
@@ -240,19 +241,33 @@ document.addEventListener("DOMContentLoaded", function() {
                     removeModalContent();
                     loadModalContent();
                 })
-                fetchQuestions();
+                fetchQuestions(folder.bank_id);
                 modal.style.display = 'block';
             });
     }
     
     // Function to fetch question in a specific folder
-    function fetchQuestions() {
-        fetch('/popup/pesudo_api2.json')  // Replace with your actual endpoint
-            .then(response => response.json())
-            .then(data => populateQuestions(data.questions))
-            .catch(error => console.error('Error fetching questions:', error));
+    function fetchQuestions(folderId) {
+        fetch(`/teachers/questionBank/${folderId}/questions`,{
+            method: 'GET',  // This is the default method, but it's good to be explicit
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Include the token in the Authorization header
+                'Content-Type': 'application/json'  // Ensuring the server knows the format being sent
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();  // Only parse JSON if the request was successful
+            } else {
+                throw new Error('Failed to fetch data');
+            }
+        })
+        .then(data => { 
+            console.log(data);
+            populateQuestions(data)
+        })
+        .catch(error => console.error('Error fetching folders:', error));
     }
-
     // Function to add question from fetched questions
     function populateQuestions(data) {
         const questionList = document.getElementById('questionList');
@@ -264,12 +279,11 @@ document.addEventListener("DOMContentLoaded", function() {
             questionItem.innerHTML = `
                 <div class="quesiton-icon"></div>
                 <div class="quesiton-info">
-                    <div class="quesiton-name">${question.title}</div>
+                    <div class="quesiton-name">${question.question_id}</div>
                     <div class="question-content">
-                    <span class="content-short" data-max-length="100">${question.content}</span>
-                    <span class="content-full">${question.content}</span>
+                    <span class="content-short" data-max-length="100">${question.question_content}</span>
+                    <span class="content-full">${question.question_content}</span>
                     </div>
-                    <div class="criteria-count">Number of criteria: ${question.criteriaCount}</div>
                 </div>
                 <button class="select-button">Select</button>
             `;
@@ -297,10 +311,10 @@ function addQuestionCard(question) {
     questionCard.id =question.id;
     questionCard.innerHTML = `
         <div class="question-header">
-            ${question.title}
+            Mã câu hỏi: ${question.question_id}
         </div>
         <div class="question-info">
-            <p>${question.content}</p>
+            <p>${question.question_content}</p>
             <div class="selected-criteria"></div>
             <li class="criterias">
                 <a href="javascript:void(0)" class="cribtn">Criteria</a>
