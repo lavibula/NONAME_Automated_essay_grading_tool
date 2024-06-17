@@ -22,4 +22,10 @@ router.get('/teachers/createtest',teacherController.createtestui);
 // In your route definitions file
 router.get('/teachers/grading/:examId', teacherController.gradingui);
 
+router.post('/teachers/createCriteria',  authMiddleware, teacherController.createCriteria);
+
+//step 1 show cho giáo viên xem các criteria của câu hỏi đó
+router.get('/teachers/questions/:questionId/criteria', authMiddleware, teacherController.getCriteriaByQuestionId); 
+//yêu cầu giáo viên update khi nhìn thấy 2 criteria detail trở lên phải gọi hàm này, để giáo viên đổi 1 criteria id thì cái còn lại sẽ tự update
+router.put('/teachers/criteria-details/:detailId/weight', authMiddleware, teacherController.updateCriteriaDetailWeight); 
 module.exports = router;

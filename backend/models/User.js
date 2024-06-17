@@ -30,22 +30,22 @@ class User {
   }
 
   static async getById(userId) {
-    const query = 'SELECT * FROM Users WHERE user_id = $1';
+    const query = 'SELECT u.user_id, u.username, u.role, u.fullName, u.birthday, u.gender FROM Users u WHERE user_id = $1';
     const values = [userId];
     const result = await db.query(query, values);
     if (result.rows.length > 0) {
-      return new User(
-        result.rows[0].user_id,
-        result.rows[0].username,
-        result.rows[0].password,
-        result.rows[0].role,
-        result.rows[0].fullName,
-        result.rows[0].birthday,
-        result.rows[0].gender
-      );
+      return {
+        user_id: result.rows[0].user_id,
+        username: result.rows[0].username,
+        role: result.rows[0].role,
+        fullName: result.rows[0].fullname,
+        birthday: result.rows[0].birthday,
+        gender: result.rows[0].gender
+      };
     }
     return null;
   }
+  
 
   static async getByUsername(username) {
     const query = 'SELECT * FROM Users WHERE "username" = $1';

@@ -3,6 +3,7 @@ const User = require('./User');
 const Exam = require('./Exam');
 const ExamQuestion = require('./ExamQuestion');
 const CriteriaDetail = require('./CriteriaDetail');
+const Criteria = require('./Criteria');
 const Question = require('./Question');
 const Essay = require('./Essay');
 const ExamResult = require('./ExamResult');
@@ -14,6 +15,11 @@ class Teacher extends User {
 
     return createdExam;
   }
+
+  static async createCriteria(criteriaData) {
+    return await Criteria.create(criteriaData);
+  }
+
   static async addQuestionToExam(examId, questionId, max_score) {
     const examQuestion = {
       examId: examId,
@@ -21,14 +27,47 @@ class Teacher extends User {
       maxScore: max_score
     };
     await ExamQuestion.create(examQuestion);
+
+    const criteriaDetails = await CriteriaDetail.getByQuestionId(questionId);
+
+    if (criteriaDetails.length === 1) {
+      const criteriaData = {
+        criteriaId: criteriaDetails[0].criteriaId,
+        criteriaName: Criteria.getById(criteriaDetails[0].criteriaId),
+        weight: 1
+      };
+      await this.createCriteria(criteriaData);
+    } else if (criteriaDetails.length > 1) {
+      console.log('Please set weight for each criteria.');
+    }
   }
+
   static async getExamById(examId) {
     const exam = await Exam.getById(examId);
-    if (exam) {
-      const examQuestions = await ExamQuestion.getByExamId(examId);
-      const questions = await Promise.all(examQuestions.map(examQuestion => Question.getById(examQuestion.questionId)));
-      exam.questions = questions;
+    if (!exam) {
+      return null; 
     }
+
+    const createdByUser = await User.getById(exam.createdBy);
+    console.log(createdByUser);
+    const createdByFullname = createdByUser.fullName;
+
+    const examQuestions = await ExamQuestion.getByExamId(examId);
+
+    const questionsPromises = examQuestions.map(async (examQuestion) => {
+      const question = await Question.getById(examQuestion.questionId);
+      return {
+        examquestionId: examQuestion.examquestionId, 
+        questionId: examQuestion.questionId,
+        question: question.questionContent 
+      };
+    });
+
+    const questions = await Promise.all(questionsPromises);
+
+    exam.questions = questions;
+    exam.createdBy = createdByFullname;
+
     return exam;
   }
 
@@ -91,9 +130,11 @@ class Teacher extends User {
 
   //hiển thị danh sách sinh viên theo examid
   static async getAllStudentsByExamId(examId) {
-    const query = `SELECT DISTINCT(e.student_id)
-                    FROM ExamQuestion eq
-                    JOIN Essay e ON eq.examquestion_id = e.examquestion_id WHERE exam_id = $1`;
+    const query = `SELECT DISTINCT(e.student_id), u.fullname
+                   FROM ExamQuestion eq
+                   JOIN Essay e ON eq.examquestion_id = e.examquestion_id
+                   JOIN Users u ON u.user_id = e.student_id
+                   WHERE eq.exam_id = $1`;
     const values = [examId];
     const result = await db.query(query, values);
     return result.rows;
