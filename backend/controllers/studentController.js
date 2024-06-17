@@ -42,6 +42,21 @@ class StudentController {
       res.status(500).json({ error: err.message });
     }
   }
+  async enrollStudent(req, res) {
+    try {
+      const { examId } = req.body; 
+      const studentId = req.user.user_id; 
+      
+      const enrollment = await studentService.enrollStudent(studentId, examId);
+
+      const detailEnrollment = await studentService.getDetailEnrollment(enrollment.enrollment_id);
+
+      res.status(201).json(detailEnrollment);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
 }
 
 module.exports = new StudentController();
