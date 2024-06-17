@@ -4,9 +4,9 @@ const authMiddleware = require('../utils/auth');
 class TeacherController {
   async createExam(req, res) {
     try {
-      const teacherId = req.user.user_id;
-      const examData = { ...req.body, teacherId };
-      const exam = await teacherService.createExam(examData);
+      req.body.createdBy = req.user.user_id;
+      console.log(req.body);
+      const exam = await teacherService.createExam(req.body);
       res.status(201).json(exam);
     } catch (err) {
       res.status(400).json({ error: err.message });
