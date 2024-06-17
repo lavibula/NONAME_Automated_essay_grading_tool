@@ -32,6 +32,16 @@ class StudentController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  async getUnsubmittedExams(req, res) {
+    try {
+      const studentId = req.user.user_id; 
+      const unsubmittedExams = await studentService.getUnsubmittedExams(studentId);
+      res.status(200).json(unsubmittedExams);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
 
 module.exports = new StudentController();

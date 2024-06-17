@@ -22,6 +22,19 @@ class Student extends User {
     const result = await db.query(query, values);
     return result.rows;
   }
+
+  static async getUnsubmittedExams(studentId) {
+    const query = `
+      SELECT exam_id, exam_title, description, start_time, end_time
+      FROM Exam
+      WHERE exam_id IN (SELECT exam_id
+      FROM Enrollment
+      WHERE student_id = $1 AND has_submitted = FALSE)
+    `;
+    const values = [studentId];
+    const result = await db.query(query, values);
+    return result.rows;
+  }
 }
 
 

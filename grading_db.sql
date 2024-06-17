@@ -1,3 +1,39 @@
+DROP TABLE IF EXISTS ExamResultCriteria;
+DROP TABLE IF EXISTS ExamResult;
+DROP TABLE IF EXISTS Essay;
+DROP TABLE IF EXISTS ExamQuestion;
+DROP TABLE IF EXISTS Enrollment;
+DROP TABLE IF EXISTS Exam;
+DROP TABLE IF EXISTS CriteriaDetail;
+DROP TABLE IF EXISTS Criteria;
+DROP TABLE IF EXISTS Question;
+DROP TABLE IF EXISTS QuestionBank;
+DROP TABLE IF EXISTS Users;
+
+DROP SEQUENCE IF EXISTS examresultcriteria_id_seq;
+DROP SEQUENCE IF EXISTS examresult_id_seq;
+DROP SEQUENCE IF EXISTS essay_id_seq;
+DROP SEQUENCE IF EXISTS examquestion_id_seq;
+DROP SEQUENCE IF EXISTS exam_id_seq;
+DROP SEQUENCE IF EXISTS criteriadetail_id_seq;
+DROP SEQUENCE IF EXISTS criteria_id_seq;
+DROP SEQUENCE IF EXISTS question_id_seq;
+DROP SEQUENCE IF EXISTS questionbank_id_seq;
+DROP SEQUENCE IF EXISTS user_id_seq;
+
+DROP FUNCTION IF EXISTS update_enrollment_after_essay() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_exam_result_criteria() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_exam_result() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_essay() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_exam_question() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_exam() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_criteria_detailed() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_question() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_question_bank() CASCADE;
+DROP FUNCTION IF EXISTS before_insert_users() CASCADE;
+
+
+
 -- Creating sequences for generating IDs
 CREATE SEQUENCE user_id_seq;
 CREATE SEQUENCE questionbank_id_seq;
@@ -125,6 +161,8 @@ CREATE TABLE Exam (
     exam_id VARCHAR(10) PRIMARY KEY,
     exam_title VARCHAR(255) NOT NULL,
     description TEXT,
+	start_time TIMESTAMP, -- Thời gian bắt đầu bài kiểm tra
+    end_time TIMESTAMP,   -- Thời gian kết thúc bài kiểm tra
     created_by VARCHAR(10),
     FOREIGN KEY (created_by) REFERENCES Users(user_id)
 );
@@ -240,6 +278,42 @@ BEFORE INSERT ON ExamResultCriteria
 FOR EACH ROW
 EXECUTE FUNCTION before_insert_exam_result_criteria();
 
+CREATE TABLE Enrollment (
+    enrollment_id SERIAL PRIMARY KEY,
+    exam_id VARCHAR(10),
+    student_id VARCHAR(10),
+    has_submitted BOOLEAN DEFAULT FALSE,
+    enrolled_at TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_exam FOREIGN KEY (exam_id) REFERENCES Exam(exam_id),
+    CONSTRAINT fk_student FOREIGN KEY (student_id) REFERENCES Users(user_id),
+    UNIQUE (exam_id, student_id) -- Đảm bảo mỗi học sinh chỉ đăng ký một lần vào mỗi bài kiểm tra
+);
+
+CREATE OR REPLACE FUNCTION update_enrollment_after_essay()
+RETURNS TRIGGER AS $$
+DECLARE
+    exam_id_var VARCHAR(10);
+BEGIN
+    -- Lấy exam_id từ bảng ExamQuestion dựa trên examquestion_id từ bảng Essay
+    SELECT eq.exam_id INTO exam_id_var
+    FROM ExamQuestion eq
+    WHERE eq.examquestion_id = NEW.examquestion_id;
+
+    -- Cập nhật trạng thái has_enrolment trong bảng Enrollment
+    UPDATE Enrollment
+    SET has_submitted = TRUE
+    WHERE student_id = NEW.student_id AND exam_id = exam_id_var;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_insert_essay
+AFTER INSERT ON Essay
+FOR EACH ROW
+EXECUTE FUNCTION update_enrollment_after_essay();
+
+
 INSERT INTO Users (username, password, role, fullname, birthday, gender) VALUES
 ('admin@example.com', '$2b$10$y9X/00JNugJAwOD2Gi49FOdYl960UB4ILjPKsgxNBJZXnHnF1evZ2', 'Admin', 'Admin User', '1990-01-01', 'Male'),
 ('group_leader@example.com', '$2b$10$TVRzCrQl72FUHdeZzQtR6OaFevhST20UjzNST.LISKPG9FtbhOk02', 'Group Leader', 'Group Leader User', '1992-05-15', 'Female'),
@@ -265,15 +339,20 @@ INSERT INTO CriteriaDetail (question_id, criteria_id, wordcount, contain_phrase,
 ('Q00003', 'C001', NULL, 'bi thảm, tội lỗi', NULL),
 ('Q00004', 'C003', 100, NULL, NULL);
 
-INSERT INTO Exam (exam_title, description, created_by) VALUES
-('English Exam 1', 'First English grammar exam', 'U00003'),
-('Literature Exam 1', 'First literature analysis exam', 'U00004');
+-- Sample data for Exam table
+INSERT INTO Exam (exam_title, description, created_by, start_time, end_time) VALUES
+('English Exam 1', 'First English grammar exam', 'U00003', '2024-06-17 09:00:00', '2024-06-17 11:00:00'),
+('Literature Exam 1', 'First literature analysis exam', 'U00004', '2024-06-18 13:00:00', '2024-06-18 15:00:00');
 
 INSERT INTO ExamQuestion (exam_id, question_id, max_score) VALUES
 ('E00001', 'Q00001', 5.0),
 ('E00001', 'Q00002', 5.0),
 ('E00002', 'Q00003', 6.0),
 ('E00002', 'Q00004', 4.0);
+
+INSERT INTO Enrollment (exam_id, student_id) VALUES ('E00001', 'U00005');
+INSERT INTO Enrollment (exam_id, student_id) VALUES ('E00002', 'U00006');
+INSERT INTO Enrollment (exam_id, student_id) VALUES ('E00001', 'U00006');
 
 INSERT INTO Essay (examquestion_id, student_id, essay_content, submit_time) VALUES
 ('EQ00001', 'U00005', 'I went to school every day.', NOW()),

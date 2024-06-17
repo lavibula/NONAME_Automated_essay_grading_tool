@@ -11,6 +11,10 @@ class StudentService {
   async getAllExams(studentId) {
     return await Student.getAllExams(studentId);
   }
+
+  async getUnsubmittedExams(studentId) {
+    return await Student.getUnsubmittedExams(studentId);
+  }
 }
 
 module.exports = new StudentService();
