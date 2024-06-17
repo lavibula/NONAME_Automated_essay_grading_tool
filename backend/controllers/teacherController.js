@@ -5,7 +5,6 @@ class TeacherController {
   async createExam(req, res) {
     try {
       req.body.createdBy = req.user.user_id;
-      console.log(req.body);
       const exam = await teacherService.createExam(req.body);
       res.status(201).json(exam);
     } catch (err) {
