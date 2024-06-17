@@ -24,11 +24,25 @@ class Teacher extends User {
   }
   static async getExamById(examId) {
     const exam = await Exam.getById(examId);
-    if (exam) {
-      const examQuestions = await ExamQuestion.getByExamId(examId);
-      const questions = await Promise.all(examQuestions.map(examQuestion => Question.getById(examQuestion.questionId)));
-      exam.questions = questions;
+    if (!exam) {
+      return null; 
     }
+
+    const examQuestions = await ExamQuestion.getByExamId(examId);
+
+    const questionsPromises = examQuestions.map(async (examQuestion) => {
+      const question = await Question.getById(examQuestion.questionId);
+      return {
+        examquestionId: examQuestion.examquestionId, 
+        questionId: examQuestion.questionId,
+        question: question.questionContent 
+      };
+    });
+
+    const questions = await Promise.all(questionsPromises);
+
+    exam.questions = questions;
+
     return exam;
   }
 
