@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="time-remaining">Thời gian còn lại: 15 phút</div>
+    <div class="time-remaining">Thời gian còn lại: <span id="time">0:10</span></div>
 </header>
 <form id="examForm" class="main-content">
     <div class="exam-info">
@@ -112,4 +112,27 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); // Prevent the default form submission
     });
 });
+    const timeElement = document.getElementById('time');
+    let time = 5; // 15 minutes in seconds
+
+     function updateTimer() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        timeElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        time--;
+
+        if (time < 0) {
+            clearInterval(timerInterval);
+            // Display alert and submit the form 3 seconds later
+            alert('Thời gian đã hết!');
+            setTimeout(function () {
+                examForm.submit();
+            }, 3000);
+            window.location.href="../mylibrary"
+            window.localStorage.setItem('time', time);
+        }
+    }
+    
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
 </script>
