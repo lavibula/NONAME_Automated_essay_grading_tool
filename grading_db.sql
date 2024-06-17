@@ -161,6 +161,7 @@ CREATE TABLE Exam (
     exam_id VARCHAR(10) PRIMARY KEY,
     exam_title VARCHAR(255) NOT NULL,
     description TEXT,
+	duration INT,
 	start_time TIMESTAMP, -- Thời gian bắt đầu bài kiểm tra
     end_time TIMESTAMP,   -- Thời gian kết thúc bài kiểm tra
     created_by VARCHAR(10),
@@ -340,9 +341,9 @@ INSERT INTO CriteriaDetail (question_id, criteria_id, wordcount, contain_phrase,
 ('Q00004', 'C003', 100, NULL, NULL);
 
 -- Sample data for Exam table
-INSERT INTO Exam (exam_title, description, created_by, start_time, end_time) VALUES
-('English Exam 1', 'First English grammar exam', 'U00003', '2024-06-17 09:00:00', '2024-06-17 11:00:00'),
-('Literature Exam 1', 'First literature analysis exam', 'U00004', '2024-06-18 13:00:00', '2024-06-18 15:00:00');
+INSERT INTO Exam (exam_title, description, duration, created_by, start_time, end_time) VALUES
+('English Exam 1', 'First English grammar exam', 90,'U00003', '2024-06-17 09:00:00', '2024-06-17 11:00:00'),
+('Literature Exam 1', 'First literature analysis exam', 90, 'U00004', '2024-06-18 13:00:00', '2024-06-18 15:00:00');
 
 INSERT INTO ExamQuestion (exam_id, question_id, max_score) VALUES
 ('E00001', 'Q00001', 5.0),
