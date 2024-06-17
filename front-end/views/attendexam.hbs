@@ -1,32 +1,30 @@
 <header class="header">
-    <div class="time-remaining">Thời gian còn lại: <span id="time">0:10</span></div>
+    <div class="time-remaining">Thời gian còn lại: <span id="time">0:10</span> </div>
 </header>
 <form id="examForm" class="main-content">
     <div class="exam-info">
-        <h2>{{exam.examTitle}}</h2>
+        <h3 style="font-weight: bold; margin-bottom: 20px">{{exam.examTitle}}</h3>
         <p>Mô tả: {{exam.description}}</p>
-        <p>Thời gian thi: 90 phút</p>
-        <p>Ngày thi: 20/06/2024</p>
+        <p>Thời gian thi: {{exam.duration}} phút</p>
+        <p>Ngày thi: {{exam.startTime}}</p>
         <div class="question-buttons">
             {{#each exam.questions}}
-            <button type="button" class="question-btn" data-question-id="{{this.questionId}}" data-question="{{@index}}" data-content="{{this.questionContent}}">
-                Câu {{incrementIndex @index}}
-            </button>
+                <button type="button" class="question-btn" data-examquestion-id="{{this.examquestionId}}" data-question-id="{{this.questionId}}" data-question="{{@index}}" data-content="{{this.question}}">
+                    Câu {{incrementIndex @index}}
+                </button>
             {{/each}}
         </div>
         
-            <button type="button" id="saveButton" class="finish-btn">Lưu</button>
-            <a href="../mylibrary">
-                <button type="button" id="completeButton" class="finish-btn">Hoàn thành</button>
-
-            </a>
-
+        <button type="button" id="saveButton" class="finish-btn">Lưu</button>
+        <a href="../mylibrary">
+            <button type="button" id="completeButton" class="finish-btn">Hoàn thành</button>
+        </a>
     </div>
 
     <div class="question-answer-section">
         <div class="question">
             <h3>Câu 1</h3>
-            <p>{{exam.questions.[0].questionContent}}</p>
+            <p>{{exam.questions.[0].question}}</p>
         </div>
         <div class="answer">
             <h3>Bài làm</h3>
@@ -35,13 +33,12 @@
     </div>
 </form>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
+
+<script>document.addEventListener('DOMContentLoaded', function () {
     const questionButtons = document.querySelectorAll('.question-btn');
     const questionSection = document.querySelector('.question');
-    const textarea = document.querySelector('#bailam');
+    const textarea = document.getElementById('bailam');
     const saveButton = document.getElementById('saveButton');
-    const completeButton = document.getElementById('completeButton');
     const examForm = document.getElementById('examForm');
 
     // Function to increment index by 1
@@ -51,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Biến lưu trữ nội dung của mỗi bài làm
     let answers = {};
-    let currentQuestionId = null;
+    let currentExamQuestionId = null;
     let currentQuestionNumber = 1;
 
     questionButtons.forEach(button => {
@@ -61,9 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         button.addEventListener('click', function () {
             // Lưu nội dung hiện tại của textarea vào biến tương ứng
-            const currentQuestion = document.querySelector('.question h3').textContent;
-            currentQuestionNumber = currentQuestion.split(' ')[1];
-            currentQuestionId = button.getAttribute('data-question-id');
             answers[`bailam${currentQuestionNumber}`] = textarea.value;
 
             // Cập nhật nội dung câu hỏi và textarea dựa trên nút được nhấn
@@ -75,6 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p>${questionContent}</p>
             `;
             textarea.value = answers[`bailam${questionNumber}`] || '';
+
+            // Update current question details
+            currentExamQuestionId = this.getAttribute('data-examquestion-id');
+            currentQuestionNumber = questionNumber;
         });
     });
 
@@ -84,13 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Submit the individual question
         const formData = {
-            examquestionId: currentQuestionId.replace('Q', 'EQ'),
+            examquestionId: currentExamQuestionId,
             studentId: 'U00005', // Replace with the actual student ID from session or context
             essayContent: answers[`bailam${currentQuestionNumber}`],
             submitTime: new Date().toISOString()
         };
-
-        fetch(`/students/essays/${currentQuestionId}`, {
+        console.log(formData);
+        fetch(`/students/essays/${currentExamQuestionId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -106,14 +104,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    
-
     examForm.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
     });
 });
-    const timeElement = document.getElementById('time');
-    let time = 5; // 15 minutes in seconds
+
+const timeElement = document.getElementById('time');
+    let time = 60; // 15 minutes in seconds
 
      function updateTimer() {
         const minutes = Math.floor(time / 60);
@@ -135,4 +132,5 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const timerInterval = setInterval(updateTimer, 1000);
     updateTimer();
+
 </script>

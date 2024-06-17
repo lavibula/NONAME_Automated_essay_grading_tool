@@ -35,12 +35,30 @@ class StudentController {
   //     res.status(400).json({ error: err.message });
   //   }
   // }
+  // async submitEssay(req, res) {
+  //   try {
+  //     const studentId = req.user.user_id;
+  //     const essayData = { ...req.body, studentId };
+  //     const essay = await studentService.submitEssay(essayData);
+  //     res.status(201).json(essay);
+  //   } catch (err) {
+  //     res.status(400).json({ error: err.message });
+  //   }
+  // }
+
   async submitEssay(req, res) {
     try {
-      const studentId = req.user.user_id;
-      const essayData = { ...req.body, studentId };
-      const essay = await studentService.submitEssay(essayData);
-      res.status(201).json(essay);
+      const { question_id } = req.params;
+      const essay = req.body;
+      console.log(essay);
+      // If question_id is provided, assume it's a single question submission
+      // if (question_id) {
+      //   essay.examquestionId = question_id;
+      // }
+      console.log(essay);
+
+      const result = await studentService.submitEssay(essay);
+      res.status(201).json(result);
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
