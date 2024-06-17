@@ -4,9 +4,8 @@ const authMiddleware = require('../utils/auth');
 class StudentController {
   async submitEssay(req, res) {
     try {
-      const studentId = req.user.user_id;
-      const essayData = { ...req.body, studentId };
-      const essay = await studentService.submitEssay(essayData);
+      req.body.studentId = req.user.user_id;
+      const essay = await studentService.submitEssay(req.body);
       res.status(201).json(essay);
     } catch (err) {
       res.status(400).json({ error: err.message });
