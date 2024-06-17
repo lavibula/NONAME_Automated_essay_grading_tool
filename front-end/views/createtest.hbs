@@ -6,16 +6,16 @@
             <input type="text" id="title" >
 
         </div>
-        {{!-- <div class="input-group">
-            <label for="time">Thời gian:</label>
+        <div class="input-group">
+            <label for="time">Ngày thi:</label>
             <input type="text" id="time" >
 
-        </div> --}}
-        {{!-- <div class="input-group">
-            <label for="term">Môn học:</label>
+        </div>
+        <div class="input-group">
+            <label for="term">Thời gian thi:</label>
             <input type="text" id="term" >
 
-        </div> --}}
+        </div>
         <div class="input-group">
             <label for="subject">Mô tả:</label>
             <input type="text" id="subject">
@@ -263,7 +263,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .then(data => { 
-            console.log(data);
             populateQuestions(data)
         })
         .catch(error => console.error('Error fetching folders:', error));
@@ -301,14 +300,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     }
+    async function fetchCriteria(questionId) {
+        try {
+            const response = await fetch(`/teachers/questions/${questionId}/criteria`, {
+                method: 'GET',  // This is the default method, but it's good to be explicit
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // Include the token in the Authorization header
+                    'Content-Type': 'application/json'  // Ensuring the server knows the format being sent
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+
+            const data = await response.json();
+            return data;
+
+        } catch (error) {
+            console.error('Error fetching criteria:', error);
+            throw error; // Re-throwing the error to be handled by the caller
+        }
+    }
 
     // Function to add a question card
-function addQuestionCard(question) {
+async function addQuestionCard(question) {
     console.log('question choice:', question);
+    const criteriaData = await fetchCriteria(question.question_id);
+    console.log(criteriaData);  // Now criteriaData contains the fetched data
     const rightSection = document.querySelector('.right-section');
     const questionCard = document.createElement('div');
     questionCard.className = 'question-card';
-    questionCard.id =question.id;
+    questionCard.id =question.question_id;
     questionCard.innerHTML = `
         <div class="question-header">
             Mã câu hỏi: ${question.question_id}
@@ -334,13 +357,13 @@ function addQuestionCard(question) {
     const criteriaContent = questionCard.querySelector('.criterias-content');
     const selectedCriteria = questionCard.querySelector('.selected-criteria');
 
-    question.criteria.forEach((criterion, index) => {
+    criteriaData.forEach((criterion, index) => {
         const criteriaElement = document.createElement('a');
         criteriaElement.href = 'javascript:void(0)';
         criteriaElement.className = 'criterias-element';
         criteriaElement.id = `question-criteria-${index}`;
-        criteriaElement.dataset.criteria = criterion;
-        criteriaElement.textContent = criterion;
+        criteriaElement.dataset.criteria = criterion.detail;
+        criteriaElement.textContent = criterion.criteriaName;
         criteriaContent.appendChild(criteriaElement);
 
         // Add event listener to handle criteria selection
@@ -348,8 +371,9 @@ function addQuestionCard(question) {
             selectedCriteria.innerHTML = '';
             const criteriaItem = document.createElement('span');
             criteriaItem.className = 'selected-criteria-item';
-            criteriaItem.textContent = criterion;
-            criteriaItem.setAttribute('data-id', index); // Assuming index as the unique identifier
+            console.log(criterion.detail);
+            criteriaItem.textContent = criterion.criteriaName;
+            criteriaItem.setAttribute('data-id', criterion.detail.criteriaId); // Assuming index as the unique identifier
             selectedCriteria.appendChild(criteriaItem);
         });
     });
@@ -394,10 +418,16 @@ function addQuestionCard(question) {
 
         saveButton.addEventListener('click', () => {
             // Extract values from input fields
-            const title = document.getElementById('title').value;
+            const exam_title = document.getElementById('title').value;
             const time = document.getElementById('time').value;
-            const term = document.getElementById('term').value;
-            const subject = document.getElementById('subject').value;
+            const duration = document.getElementById('term').value;
+            const description = document.getElementById('subject').value;
+            // Split the string by comma to separate the start and end times
+            const times = time.split(',');
+
+            // Trim any whitespace that might be around the times
+            const start_time = times[0].trim();
+            const end_time = times[1].trim();
 
             // Extract questions and their criteria
             const questions = [];
@@ -406,31 +436,33 @@ function addQuestionCard(question) {
                 const criteriaElements = card.querySelectorAll('.selected-criteria span');
                 const criteria = Array.from(criteriaElements).map(el => el.textContent);
                 
-                questions.push({ id: questionId, criteria });
+                questions.push({ id: questionId});
             });
 
             // Example payload to send to the server
             const payload = {
-                title,
-                time,
-                term,
-                subject,
-                questions
+                exam_title,
+                description,
+                duration,
+                start_time,
+                end_time
+  
             };
 
             console.log('Payload:', payload);
-
+            
             // Make a POST request to the server (uncomment and adjust the URL as needed)
-            // fetch('/api/your-endpoint', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(payload)
-            // })
-            // .then(response => response.json())
-            // .then(data => console.log('Success:', data))
-            // .catch(error => console.error('Error:', error));
+            fetch('/teachers/exams', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // Include the token in the Authorization header
+                    'Content-Type': 'application/json'  // Ensuring the server knows the format being sent
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
         });
 
         cancelButton.addEventListener('click', () => {

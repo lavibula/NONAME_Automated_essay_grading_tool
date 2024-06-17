@@ -64,7 +64,6 @@ class TeacherController {
       res.status(500).json({ error: err.message });
     }
   }
-
   async getCriteriaByQuestionId(req, res) {
     try {
       const questionId = req.params.questionId;
