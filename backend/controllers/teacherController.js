@@ -98,17 +98,37 @@ class TeacherController {
     }
   }
 
-  async autoGradeAllStudents(req, res) {
+  async  autoGradeAllStudents(req, res) {
     try {
       const { examId } = req.params;
-      const gradingLog = await teacherService.autoGradeAllStudents(examId);
+  
+      const students = await teacherService.getAllStudentsByExamId(examId);
+  
+      if (students.length === 0) {
+        return res.status(404).json({ message: `No students found for exam ${examId}.` });
+      }
+  
+      const gradingLog = [];
+      for (const student of students) {
+        const studentId = student.student_id;
+        try {
+          await teacherService.gradeScore(examId, studentId);
+          gradingLog.push(`Graded exam for student ${studentId} in exam ${examId}.`);
+        } catch (error) {
+          console.error(`Failed to grade exam for student ${studentId} in exam ${examId}: ${error.message}`);
+          gradingLog.push(`Failed to grade exam for student ${studentId} in exam ${examId}: ${error.message}`);
+        }
+      }
+  
       const results = await teacherService.getResultByExamId(examId);
+  
       res.status(200).json({
         message: 'Automatic grading completed successfully.',
         log: gradingLog,
         results: results
       });
     } catch (err) {
+      console.error(`Error while grading students for exam ${examId}: ${err.message}`);
       res.status(500).json({ error: err.message });
     }
   }

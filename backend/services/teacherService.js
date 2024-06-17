@@ -44,18 +44,21 @@ class TeacherService {
 
   async autoGradeAllStudents(examId) {
     const students = await Teacher.getAllStudentsByExamId(examId);
-
-    for (const student of students) {
-      const studentId = student.student_id;
-      try {
-        await Teacher.gradeScore(examId, studentId);
-        console.log(`Graded exam for student ${studentId} in exam ${examId}.`);
-      } catch (error) {
-        console.error(`Failed to grade exam for student ${studentId} in exam ${examId}: ${error.message}`);
+    if(students != null) {
+      for (const student of students) {
+        const studentId = student.student_id;
+        try {
+          await Teacher.gradeScore(examId, studentId);
+          console.log(`Graded exam for student ${studentId} in exam ${examId}.`);
+        } catch (error) {
+          console.error(`Failed to grade exam for student ${studentId} in exam ${examId}: ${error.message}`);
+        }
       }
+      console.log(`Automatic grading completed for exam ${examId}.`);
     }
-
-    console.log(`Automatic grading completed for exam ${examId}.`);
+    else{
+      console.log(`No students found for exam ${examId}.`);
+    }
   }
 
   async getResultByExamId(examId) {
