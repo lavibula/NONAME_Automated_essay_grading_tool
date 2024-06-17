@@ -25,7 +25,7 @@ class Student extends User {
 
   static async getUnsubmittedExams(studentId) {
     const query = `
-      SELECT exam_id, exam_title, description, start_time, end_time
+      SELECT exam_id, exam_title, description, duration, start_time, end_time
       FROM Exam
       WHERE exam_id IN (SELECT exam_id
       FROM Enrollment
