@@ -27,19 +27,6 @@ class Teacher extends User {
       maxScore: max_score
     };
     await ExamQuestion.create(examQuestion);
-
-    const criteriaDetails = await CriteriaDetail.getByQuestionId(questionId);
-
-    if (criteriaDetails.length === 1) {
-      const criteriaData = {
-        criteriaId: criteriaDetails[0].criteriaId,
-        criteriaName: Criteria.getById(criteriaDetails[0].criteriaId),
-        weight: 1
-      };
-      await this.createCriteria(criteriaData);
-    } else if (criteriaDetails.length > 1) {
-      console.log('Please set weight for each criteria.');
-    }
   }
 
   static async getExamById(examId) {
