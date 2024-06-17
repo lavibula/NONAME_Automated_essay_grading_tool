@@ -30,8 +30,6 @@ class TeacherController {
           const students = await teacherService.getAllStudentsByExamId(examId);
           const exam = await teacherService.getExamById(examId);
           const numberOfQuestions = exam.questions.length;
-          console.log(students);
-          console.log(exam);
           res.render('autograde', {
               style: 'sohm/autograde.css',
               role:'Giáo viên',
