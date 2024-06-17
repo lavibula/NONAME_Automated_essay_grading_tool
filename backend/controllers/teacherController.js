@@ -11,6 +11,7 @@ class TeacherController {
     })
   }async mylibrarygrading(req,res){
     const exams = await teacherService.getAllExams();
+    
     res.render('listofgrading',{
       style: 'mylibraryteacher.css',
       role: 'Giáo viên',
@@ -48,9 +49,8 @@ class TeacherController {
 
   async createExam(req, res) {
     try {
-      const teacherId = req.user.user_id;
-      const examData = { ...req.body, teacherId };
-      const exam = await teacherService.createExam(examData);
+      req.body.createdBy = req.user.user_id;
+      const exam = await teacherService.createExam(req.body);
       res.status(201).json(exam);
     } catch (err) {
       res.status(400).json({ error: err.message });
