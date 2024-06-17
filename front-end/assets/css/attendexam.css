@@ -124,3 +124,6 @@ body {
     resize: none; /* Prevent resizing */
     margin-bottom: 20px;
 }
+#bailam{
+    height: 500px;
+}

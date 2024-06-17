@@ -18,7 +18,7 @@ class StudentController {
 
   async mylibrarystudent(req,res){
     const exams = await teacherService.getAllExams();
-    // console.log(exams);
+    console.log(exams);
     res.status(200).render('mylibrarystudent',{
       style: 'mylibrarystudent.css',
       role: 'Học sinh',

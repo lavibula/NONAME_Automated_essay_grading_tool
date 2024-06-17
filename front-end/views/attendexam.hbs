@@ -6,7 +6,7 @@
         <h3 style="font-weight: bold; margin-bottom: 20px">{{exam.examTitle}}</h3>
         <p>Mô tả: {{exam.description}}</p>
         <p>Thời gian thi: {{exam.duration}} phút</p>
-        <p>Ngày thi: {{exam.startTime}}</p>
+        <p>Ngày thi: {{formatDate exam.startTime}}</p>
         <div class="question-buttons">
             {{#each exam.questions}}
                 <button type="button" class="question-btn" data-examquestion-id="{{this.examquestionId}}" data-question-id="{{this.questionId}}" data-question="{{@index}}" data-content="{{this.question}}">
