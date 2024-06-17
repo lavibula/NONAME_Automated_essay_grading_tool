@@ -16,4 +16,10 @@ router.get('/teachers/exams-enroll/:id', authMiddleware, teacherController.getAl
 router.post('/teachers/exams/grade-all-students/:examId', authMiddleware, teacherController.autoGradeAllStudents); //automatically grade all students by exam_id
 router.get('/teachers/exam-results/:examId', authMiddleware, teacherController.getResultByExamId);
 router.get('/teachers/student-results/:studentId', authMiddleware, teacherController.getResultByStudentId);
+router.post('/teachers/createCriteria',  authMiddleware, teacherController.createCriteria);
+
+//step 1 show cho giáo viên xem các criteria của câu hỏi đó
+router.get('/teachers/questions/:questionId/criteria', authMiddleware, teacherController.getCriteriaByQuestionId); 
+//yêu cầu giáo viên update khi nhìn thấy 2 criteria detail trở lên phải gọi hàm này, để giáo viên đổi 1 criteria id thì cái còn lại sẽ tự update
+router.put('/teachers/criteria-details/:detailId/weight', authMiddleware, teacherController.updateCriteriaDetailWeight); 
 module.exports = router;

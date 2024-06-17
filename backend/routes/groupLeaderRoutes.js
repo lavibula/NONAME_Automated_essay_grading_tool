@@ -9,5 +9,10 @@ router.get('/group-leaders/question-banks/:id', authMiddleware, groupLeaderContr
 router.put('/group-leaders/question-banks/:id', authMiddleware, groupLeaderController.updateQuestionBank);
 router.delete('/group-leaders/question-banks/:id', authMiddleware, groupLeaderController.deleteQuestionBank);
 router.get('/group-leaders/question-banks', authMiddleware, groupLeaderController.getAllQuestionBanks);
+router.post('/group-leaders/createCriteriaDetail', authMiddleware, groupLeaderController.createCriteriaDetail);
+router.get('/group-leaders/criteria-details/:detailId', authMiddleware, groupLeaderController.getCriteriaDetailById);
+router.get('/group-leaders/criteria-details', authMiddleware, groupLeaderController.getAllCriteriaDetails);
+router.put('/group-leaders/criteria-details/:detailId', authMiddleware, groupLeaderController.updateCriteriaDetail);
+router.delete('/group-leaders/criteria-details/:detailId', authMiddleware, groupLeaderController.deleteCriteriaDetail);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const groupLeaderService = require('../services/groupLeaderService');
 const authMiddleware = require('../utils/auth');
+const CriteriaDetail = require('../models/CriteriaDetail');
 
 class GroupLeaderController {
   async createQuestionBank(req, res) {
@@ -50,6 +51,62 @@ class GroupLeaderController {
     try {
       const questionBanks = await groupLeaderService.getAllQuestionBanks();
       res.status(200).json(questionBanks);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+   async createCriteriaDetail(req, res) {
+    try {
+      const criteriaDetailData = req.body;
+      const createdCriteriaDetail = await groupLeaderService.createCriteriaDetail(criteriaDetailData);
+      res.status(201).json(createdCriteriaDetail);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getCriteriaDetailById(req, res) {
+    const { detailId } = req.params;
+    try {
+      const criteriaDetail = await CriteriaDetail.getById(detailId);
+      if (!criteriaDetail) {
+        return res.status(404).json({ error: `Criteria detail with ID ${detailId} not found.` });
+      }
+      res.status(200).json(criteriaDetail);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getAllCriteriaDetails(req, res) {
+    try {
+      const criteriaDetails = await CriteriaDetail.getAll();
+      res.status(200).json(criteriaDetails);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async updateCriteriaDetail(req, res) {
+    const { detailId } = req.params;
+    const updatedCriteriaDetail = req.body; 
+    try {
+      const result = await CriteriaDetail.update(detailId, updatedCriteriaDetail);
+      if (!result) {
+        return res.status(404).json({ error: `Criteria detail with ID ${detailId} not found.` });
+      }
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async  deleteCriteriaDetail(req, res) {
+    const { detailId } = req.params;
+    try {
+      await CriteriaDetail.delete(detailId);
+      res.status(204).end();
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

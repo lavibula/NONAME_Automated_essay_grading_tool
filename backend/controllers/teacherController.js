@@ -11,6 +11,42 @@ class TeacherController {
     }
   }
 
+   async createCriteria(req, res) {
+    try {
+      const criteriaData = req.body;
+      const createdCriteria = await teacherService.createCriteria(criteriaData);
+      res.status(201).json(createdCriteria);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async getCriteriaByQuestionId(req, res) {
+    try {
+      const questionId = req.params.questionId;
+      const criteria = await teacherService.getCriteriaByQuestionId(questionId);
+      if (!criteria) {
+        return res.status(404).json({ error: 'Criteria not found for this question.' });
+      }
+      res.status(200).json(criteria);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
+  async updateCriteriaDetailWeight(req, res) {
+    const detailId = req.params.detailId;
+    const { weight } = req.body;
+    try {
+      const updatedDetail = await teacherService.updateCriteriaDetailWeight(detailId, weight);
+      res.status(200).json(updatedDetail);
+    } catch (error) {
+      console.error('Error updating criteria detail weight:', error);
+      res.status(500).json({ error: 'Failed to update criteria detail weight.' });
+    }
+  }
+
+
   async getExamById(req, res) {
     try {
       const exam = await teacherService.getExamById(req.params.id);

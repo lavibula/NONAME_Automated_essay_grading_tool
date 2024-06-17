@@ -1,13 +1,14 @@
 const db = require('../config/database');
 
 class CriteriaDetail {
-  constructor(detailId, questionId, criteriaId, wordcount, containPhrase, threshold) {
+  constructor(detailId, questionId, criteriaId, wordcount, containPhrase, threshold, weight) {
     this.detailId = detailId;
     this.questionId = questionId;
     this.criteriaId = criteriaId;
     this.wordcount = wordcount;
     this.containPhrase = containPhrase;
     this.threshold = threshold;
+    this.weight = weight;
   }
 
   static async create(criteriaDetail) {
@@ -20,7 +21,8 @@ class CriteriaDetail {
       result.rows[0].criteria_id,
       result.rows[0].wordcount,
       result.rows[0].contain_phrase,
-      result.rows[0].threshold
+      result.rows[0].threshold,
+      result.rows[0].weight
     );
   }
 
@@ -35,7 +37,8 @@ class CriteriaDetail {
         result.rows[0].criteria_id,
         result.rows[0].wordcount,
         result.rows[0].contain_phrase,
-        result.rows[0].threshold
+        result.rows[0].threshold,
+        result.rows[0].weight
       );
     }
     return null;
@@ -51,7 +54,8 @@ class CriteriaDetail {
       row.criteria_id,
       row.wordcount,
       row.contain_phrase,
-      row.threshold
+      row.threshold,
+      row.weight
     ));
   }
 
@@ -66,8 +70,20 @@ class CriteriaDetail {
         result.rows[0].criteria_id,
         result.rows[0].wordcount,
         result.rows[0].contain_phrase,
-        result.rows[0].threshold
+        result.rows[0].threshold,
+        result.rows[0].weight
       );
+    }
+    return null;
+  }
+
+  static async updateWeight(detailId, weight) {
+    const query = 'UPDATE CriteriaDetail SET "weight" = $1 WHERE "detail_id" = $2 RETURNING *';
+    const values = [weight, detailId];
+    const result = await db.query(query, values);
+    if (result.rows.length > 0) {
+      const { detail_id, question_id, criteria_id, wordcount, contain_phrase, threshold, weight } = result.rows[0];
+      return new CriteriaDetail(detail_id, question_id, criteria_id, wordcount, contain_phrase, threshold, weight);
     }
     return null;
   }
