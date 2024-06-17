@@ -4,9 +4,10 @@ const authMiddleware = require('../utils/auth');
 
 const router = express.Router();
 
-router.post('/students/essays', authMiddleware, studentController.submitEssay);
-router.get('/students/exams/:id/results', authMiddleware, studentController.getExamResults);
-router.get('/students/exams', authMiddleware, studentController.getAllExams);
-router.get('/attendexam',studentController.attendexam);
+router.post('/essays/:question_id', studentController.submitEssay);
+// router.post('/essays', authMiddleware, studentController.submitEssay);
+router.get('/exams/:id/results', authMiddleware, studentController.getExamResults);
+router.get('/mylibrary/:exam_id',studentController.attendexam);
 router.get('/mylibrary',studentController.mylibrarystudent);
+
 module.exports = router;

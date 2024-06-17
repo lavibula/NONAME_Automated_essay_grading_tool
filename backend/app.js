@@ -11,7 +11,7 @@ const { engine } = require('express-handlebars');
 const path = require('path');
 
 console.log("dirname",__dirname);
-const dir = "D:\\20232\\software engine\\NONAME_Automated_essay_grading_tool";
+const dir = "D:\\Empty\\NONAME_Automated_essay_grading_tool";
 const app = express();
 app.use(express.static(path.join(dir, 'front-end', 'assets')));
 
@@ -27,11 +27,15 @@ app.engine('.hbs', engine({
   layoutsDir: path.join(dir, 'front-end', 'views', 'layouts'),
   extname: '.hbs',
   helpers: {
-      json: function (context) {
-          return JSON.stringify(context);
-      }
+    incrementIndex: function (index) {
+      return index + 1;
+    },
+    json: function (context) {
+      return JSON.stringify(context);
+    }
   }
 }));
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(dir, 'front-end', 'views'));
 
@@ -51,7 +55,7 @@ app.get('/mylibraryteacher',(req,res)=>{
 app.use('/', userRoutes);
 app.use('/', groupLeaderRoutes);
 app.use('/', teacherRoutes);
-app.use('/', studentRoutes);
+app.use('/students', studentRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server is listening on port ${config.port}`);

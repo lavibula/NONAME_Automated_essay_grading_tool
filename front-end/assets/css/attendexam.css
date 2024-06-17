@@ -44,13 +44,15 @@ body {
 }
 
 .exam-info {
-    flex: 1;
+    /* flex: 1; */
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     margin-right: 20px;
-    height: 410px;
+    height: 390px;
+    width: 20rem;
 }
+
 
 .exam-info h2 {
     margin-bottom: 20px;

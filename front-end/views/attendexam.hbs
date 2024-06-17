@@ -1,32 +1,32 @@
-
 <header class="header">
     <div class="time-remaining">Thời gian còn lại: 15 phút</div>
 </header>
-<form id="examForm" class="main-content" method="post" action="/attendexam">
+<form id="examForm" class="main-content">
     <div class="exam-info">
-        <h2>Đề thi giữa kì ABC</h2>
-        <p>Số câu hỏi: 50</p>
-        <p>Môn học: Toán</p>
+        <h2>{{exam.examTitle}}</h2>
+        <p>Mô tả: {{exam.description}}</p>
         <p>Thời gian thi: 90 phút</p>
-        <p>Ngày thi: 15/06/2024</p>
-        {{!-- <div class="question-buttons">
-            <button type="button" class="question-btn">Câu 1</button>
-            <button type="button" class="question-btn">Câu 2</button>
-            <button type="button" class="question-btn">Câu 3</button>
-        </div> --}}
+        <p>Ngày thi: 20/06/2024</p>
         <div class="question-buttons">
-            <button type="button" class="question-btn" data-question="1" data-content="Nội dung câu hỏi 1">Câu 1</button>
-            <button type="button" class="question-btn" data-question="2" data-content="Nội dung câu hỏi 2">Câu 2</button>
-            <button type="button" class="question-btn" data-question="3" data-content="Nội dung câu hỏi 3">Câu 3</button>
+            {{#each exam.questions}}
+            <button type="button" class="question-btn" data-question-id="{{this.questionId}}" data-question="{{@index}}" data-content="{{this.questionContent}}">
+                Câu {{incrementIndex @index}}
+            </button>
+            {{/each}}
         </div>
+        
+            <button type="button" id="saveButton" class="finish-btn">Lưu</button>
+            <a href="../mylibrary">
+                <button type="button" id="completeButton" class="finish-btn">Hoàn thành</button>
 
-        <button type="submit" id="submitButton" class="finish-btn">Hoàn thành</button>
+            </a>
+
     </div>
 
     <div class="question-answer-section">
         <div class="question">
             <h3>Câu 1</h3>
-            <p>Cuộc sống riêng không biết đến điều gì xảy ra ngoài ngưỡng cửa nhà mình là một cuộc sống nghèo nàn, dù nó có đầy đủ tiện nghi đến đâu đi nữa. Nó giống như một mảnh vườn được chăm sóc cẩn thận, đầy hoa thơm sạch sẽ và gọn gàng.</p>
+            <p>{{exam.questions.[0].questionContent}}</p>
         </div>
         <div class="answer">
             <h3>Bài làm</h3>
@@ -36,53 +36,80 @@
 </form>
 
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const questionButtons = document.querySelectorAll('.question-btn');
-            const questionSection = document.querySelector('.question');
-            const textarea = document.querySelector('#bailam');
+document.addEventListener('DOMContentLoaded', function () {
+    const questionButtons = document.querySelectorAll('.question-btn');
+    const questionSection = document.querySelector('.question');
+    const textarea = document.querySelector('#bailam');
+    const saveButton = document.getElementById('saveButton');
+    const completeButton = document.getElementById('completeButton');
+    const examForm = document.getElementById('examForm');
 
-            // Biến lưu trữ nội dung của mỗi bài làm
-            let answers = {
-                bailam1: '',
-                bailam2: '',
-                bailam3: ''
-            };
+    // Function to increment index by 1
+    function incrementIndex(index) {
+        return parseInt(index) + 1;
+    }
 
-            questionButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Lưu nội dung hiện tại của textarea vào biến tương ứng
-                    const currentQuestion = document.querySelector('.question h3').textContent;
-                    const questionNumber = currentQuestion.split(' ')[1];
-                    answers[`bailam${questionNumber}`] = textarea.value;
+    // Biến lưu trữ nội dung của mỗi bài làm
+    let answers = {};
+    let currentQuestionId = null;
+    let currentQuestionNumber = 1;
 
-                    // Cập nhật nội dung câu hỏi và textarea dựa trên nút được nhấn
-                    const questionContent = this.getAttribute('data-content');
-                    const questionTitle = `Câu ${this.getAttribute('data-question')}`;
-                    
-                    questionSection.innerHTML = `
-                        <h3>${questionTitle}</h3>
-                        <p>${questionContent}</p>
-                    `;
-                    textarea.value = answers[`bailam${this.getAttribute('data-question')}`];
-                });
-            });
+    questionButtons.forEach(button => {
+        const questionIndex = button.getAttribute('data-question');
+        const questionNumber = incrementIndex(questionIndex);
+        button.textContent = `Câu ${questionNumber}`;
 
-            document.getElementById('examForm').addEventListener('submit', function (event) {
-                // Lưu nội dung hiện tại của textarea vào biến tương ứng trước khi submit
-                const currentQuestion = document.querySelector('.question h3').textContent;
-                const questionNumber = currentQuestion.split(' ')[1];
-                answers[`bailam${questionNumber}`] = textarea.value;
+        button.addEventListener('click', function () {
+            // Lưu nội dung hiện tại của textarea vào biến tương ứng
+            const currentQuestion = document.querySelector('.question h3').textContent;
+            currentQuestionNumber = currentQuestion.split(' ')[1];
+            currentQuestionId = button.getAttribute('data-question-id');
+            answers[`bailam${currentQuestionNumber}`] = textarea.value;
 
-                // Chuyển các bài làm thành các trường ẩn trong form để gửi đi
-                for (let key in answers) {
-                    if (answers.hasOwnProperty(key)) {
-                        let hiddenField = document.createElement('input');
-                        hiddenField.type = 'hidden';
-                        hiddenField.name = key;
-                        hiddenField.value = answers[key];
-                        this.appendChild(hiddenField);
-                    }
-                }
-            });
+            // Cập nhật nội dung câu hỏi và textarea dựa trên nút được nhấn
+            const questionContent = this.getAttribute('data-content');
+            const questionTitle = `Câu ${questionNumber}`;
+
+            questionSection.innerHTML = `
+                <h3>${questionTitle}</h3>
+                <p>${questionContent}</p>
+            `;
+            textarea.value = answers[`bailam${questionNumber}`] || '';
         });
-    </script>
+    });
+
+    saveButton.addEventListener('click', function () {
+        // Save the current answer
+        answers[`bailam${currentQuestionNumber}`] = textarea.value;
+
+        // Submit the individual question
+        const formData = {
+            examquestionId: currentQuestionId.replace('Q', 'EQ'),
+            studentId: 'U00005', // Replace with the actual student ID from session or context
+            essayContent: answers[`bailam${currentQuestionNumber}`],
+            submitTime: new Date().toISOString()
+        };
+
+        fetch(`/students/essays/${currentQuestionId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Question saved successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error saving question:', error);
+        });
+    });
+
+    
+
+    examForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+    });
+});
+</script>

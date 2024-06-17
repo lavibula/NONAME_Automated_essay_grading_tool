@@ -31,7 +31,7 @@
     <div class="col-md-9 right-section">
         <div class="container mt-4">
             <div class="row">
-                {{!-- {{#each thu_muc_cau_hoi_s}} --}}
+                {{#each thu_muc_cau_hoi_s}}
                 <div class="col-12">
                     <div class="card mb-6 card-course-item">
                         <div class="row g-2 align-items-center">
@@ -47,20 +47,20 @@
                             <div class="col-md-5">
                                 <div class="card-body">
                                 {{!-- <a href="/thu-muc-cau-hoi/{{this.slug}}" style="text-decoration: none;"> --}}
-                                    <h5 class="card-title">Đề thi giữa kỳ ABC</h5>
+                                    <h5 class="card-title">{{this.exam_title}}</h5>
                                 {{!-- </a> --}}
                                 <p class="card-text">
-                                    Môn học: Toán
+                                    Mô tả: {{this.description}}
+                                    {{!-- <br> --}}
+                                    {{!-- Số câu hỏi: 3 --}}
                                     <br>
-                                    Số câu hỏi: 3
-                                    <br>
-                                    Thời gian: 15h 20/05/2024
+                                    Thời gian: 15h 20/06/2024
                                 </p>
                                 
                             </div>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="/students/attendexam">
+                                <a href="/students/mylibrary/{{this.exam_id}}">
 
                                     <button class="btn btn-primary">Tham gia</button>
                                 </a>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                {{!-- {{/each}} --}}
+                {{/each}}
             
             
             
