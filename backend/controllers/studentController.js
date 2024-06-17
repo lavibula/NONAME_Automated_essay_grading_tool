@@ -35,11 +35,24 @@ class StudentController {
   //     res.status(400).json({ error: err.message });
   //   }
   // }
+
   // async submitEssay(req, res) {
   //   try {
   //     const studentId = req.user.user_id;
   //     const essayData = { ...req.body, studentId };
   //     const essay = await studentService.submitEssay(essayData);
+  //     res.status(201).json(essay);
+  //   } catch (err) {
+  //     res.status(400).json({ error: err.message });
+  //   }
+  // }
+
+  // async submitEssay(req, res) {
+  //   try {
+  //     console.log(req.user.user_id);
+  //     req.body.studentId = req.user.user_id;
+  //     const essay = await studentService.submitEssay(req.body);
+  //     console.log(req.body);
   //     res.status(201).json(essay);
   //   } catch (err) {
   //     res.status(400).json({ error: err.message });
