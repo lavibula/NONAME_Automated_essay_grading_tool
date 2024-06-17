@@ -10,7 +10,7 @@ async function testGradeScore() {
 
   // Chấm điểm tổng kết cho học sinh
   const examId = 'E00001';
-  const student = await Teacher.getAllStudentsByExamId(examId);
+  const student = await Teacher.getExamById(examId);
   console.log(student);
 }
 
