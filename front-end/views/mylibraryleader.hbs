@@ -38,9 +38,9 @@
     <div class="col-md-9 right-section">
         <div class="container mt-4">
             <div class="row">
-                {{!-- {{#each thu_muc_cau_hoi_s}} --}}
+                {{#each thu_muc_cau_hoi_s}} 
                 {{!-- {{#eachInRange 4}} --}}
-                <div class="col-12">
+                <div class="col-12" data-id="{{this.bank_id}}">
                     <div class="card mb-6 card-course-item">
                         <div class="row g-2 align-items-center">
 
@@ -53,13 +53,10 @@
                             <div class="col-md-5">
                                 <div class="card-body">
                                 {{!-- <a href="/thu-muc-cau-hoi/{{this.slug}}" style="text-decoration: none;"> --}}
-                                    <h5 class="card-title"> Thư mục câu hỏi A</h5>
+                                    <h5 class="card-title"> {{this.bank_name}}</h5>
                                 {{!-- </a> --}}
                                 <p class="card-text">
-                                    Môn học: Toán
-                                    <br>
-                                    Số câu hỏi: 3
-                                    <br>
+                                    Mô tả: {{this.description}}
                                 </p>
                                
                                 
@@ -79,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                {{!-- {{/each}} --}}
+                {{/each}}
                 {{!-- {{/eachInRange}} --}}
             
             

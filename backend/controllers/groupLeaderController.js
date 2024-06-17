@@ -4,9 +4,11 @@ const CriteriaDetail = require('../models/CriteriaDetail');
 
 class GroupLeaderController {
   async mylibrarypublic(req,res){
+    const questionbank=await groupLeaderService.getAllQuestionBanks();
     res.render('mylibraryleader',{
       style: 'mylibraryleader.css',
-      role: 'Nhóm trưởng'
+      role: 'Nhóm trưởng',
+      thu_muc_cau_hoi_s:questionbank
     })
   }
   async createquestion(req,res){
