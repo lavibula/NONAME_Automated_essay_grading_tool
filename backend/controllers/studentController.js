@@ -14,7 +14,7 @@ class StudentController {
 
   async getExamResults(req, res) {
     try {
-      const studentId = req.user.user_id; // Lấy ID của học sinh từ token
+      const studentId = req.user.user_id; 
       const examId = req.params.id;
       const examResults = await studentService.getExamResults(studentId, examId);
       console.log(studentId);
