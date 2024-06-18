@@ -15,7 +15,7 @@
                     <a href="/essays/student/{{this.student_id}}/exam/{{examId}}">{{this.fullname}}</a>
                 </td>
                 <td class="studenId">{{this.student_id}}</td>
-                <td class="score">{{this.diem}}</td>
+                <td class="score">{{this.result}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -63,6 +63,7 @@
                     // Assuming the score is in the third cell of each row
                     const scoreCell = studentRow.querySelector('.score');
                     scoreCell.textContent = studentResult.total_score;
+                    console.log(studentResult);
                 }
             })
         .catch(error => console.error('Error:', error));

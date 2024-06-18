@@ -29,15 +29,17 @@ class TeacherController {
           const examId = req.params.examId; // or req.params.examId if passed as a route parameter
           const students = await teacherService.getAllStudentsByExamId(examId);
           const exam = await teacherService.getExamById(examId);
+          const result = await teacherService.getResultByExamId(examId); 
           const numberOfQuestions = exam.questions.length;
+          // students.score = results.total_score;
           res.render('autograde', {
               style: 'sohm/autograde.css',
               role:'Giáo viên',
               students: students, // Passing the fetched students to the template
               examId: examId,
               exam:exam,
-              numberOfQuestions:numberOfQuestions
-
+              numberOfQuestions:numberOfQuestions,
+              score: result
           });
       } catch (error) {
           console.error('Error fetching student data:', error);
