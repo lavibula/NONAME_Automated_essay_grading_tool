@@ -32,13 +32,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         var userRole = "{{role}}"; // Role này được render từ server, hoặc bạn có thể lấy từ một API nếu nó không phải là thông tin nhạy cảm
         var myLibraryLink = document.getElementById('myLibraryLink');
-
+        console.log(userRole);
         if (userRole === 'Giáo viên') {
             myLibraryLink.href = '/teachers/mylibrary/publictest';
         } else if (userRole === 'Học sinh') {
             myLibraryLink.href = '/students/mylibrary';
-        } else if (userRole === 'Nhóm trưởng') {
-            myLibraryLink.href = '/mylibraryleader';
+        } else if (userRole === 'Nhóm trưởng') {
+            myLibraryLink.href = '/group-leaders/mylibraryleader';
         } else {
             myLibraryLink.href = '/default-path'; // Đường dẫn mặc định nếu không phát hiện role
         }
