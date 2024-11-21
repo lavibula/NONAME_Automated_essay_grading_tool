@@ -1,0 +1,263 @@
+.studentsidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #CFEFFF;
+    padding: 1rem;
+    color: #064050;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ddd; /* Add a light right border */
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Add a light shadow */
+}
+
+
+.text-left {
+    font-weight: bold;
+    text-align: left;
+}
+
+.studentsidebar h2 {
+    margin-bottom: 10px;
+    color: #064050;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.student-list {
+    list-style-type: none;
+    padding: 0;
+    flex-grow: 1; /* Allow the list to grow and take up remaining space */
+    overflow-y: scroll; /* Enable scrolling for the student list */
+    width: 100%; /* Ensure student list takes full width */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.student-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.student-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-item + hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 0;
+}
+
+.student-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.student-score {
+    background-color: #dcdcdc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.complete-all-button {
+    background-color: #427BA1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.complete-all-button:hover {
+    background-color: #034694;
+    transform: scale(1.05);
+}
+
+.complete-all-button:active {
+    background-color: #080d47;
+    transform: scale(0.95);
+}
+
+
+.header {
+    width: calc(100% - 250px); /* Subtract sidebar width */
+    background-color: #CFEFFF;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 250px; /* Offset by sidebar width */
+    z-index: 1000; /* Ensure the header is above other content */
+    border-bottom: 1px solid #ddd; /* Add a light bottom border */
+
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 1rem; /* Add padding to separate the line */
+}
+
+.header-right::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 100%;
+    background-color: #064050;
+}
+
+.save-essay-result {
+    background-color: #427BA1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-left: 20px;
+    margin-right: 40px;
+    align-self: center;
+    
+}
+
+.save-essay-result:hover {
+    background-color: #427BA1;
+    transform: scale(1.05);
+}
+
+.save-essay-result:active {
+    background-color: #080d47;
+    transform: scale(0.95);
+}
+
+
+.student-name-header, .student-score-header, .automated-name-header, .automated-score-header {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #064050;
+}
+
+.student-score-header, .automated-score-header {
+    background-color: #f4f0ec;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+    color: #064050;
+}
+
+.main-content {
+    margin-top: 80px; /* Adjust based on header height */
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.essay-box {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.question-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #064050;
+    margin-bottom: 0.5rem;
+}
+
+.essay-content {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid black;
+}
+
+
+.score-region {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.score-box {
+    /* background-color: white;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px; */
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+}
+
+.essay-score-label {
+    font-weight: bold;
+    color: #064050;
+    margin-right: 0.5rem;
+}
+
+.essay-score-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    padding: 0.25rem 0.5rem;
+    color: #064050;
+}
+
+.essay-auto-label {
+    font-weight: bold;
+    color: #064050;
+    margin-right: 0.5rem;
+}
+.essay-auto-score {
+    background-color: #f4f0ec;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    font-size: 1.2rem;
+    display: inline-block;
+    color: #064050;
+}
